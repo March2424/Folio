@@ -1,6 +1,6 @@
 > **已停用的独立后端实验。** 当前 Android App 的 Agent 已改为端内 Java 模块，直接使用客户端填写的模型 API Key 和模型名称。无需运行本目录、无需填写后端地址或 Agent Token。当前使用说明见项目根目录 `AGENT_README.md`。以下保留历史说明及数据，供参考。
 
-# 不想忘记 · Memory Agent V1
+# Memory Agent V1
 
 Java 17+ / Spring Boot 3.5.16 / H2 文件数据库。独立 Maven 工程，不加入 Android Gradle 构建，不把服务器放进 APK。
 
