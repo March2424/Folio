@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Dontwannaforget" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:fontFamily">@font/memory_regular</item>
+        <item name="fontFamily">@font/memory_regular</item>
+        <item name="colorPrimary">@color/wine</item>
+        <item name="android:windowBackground">@color/desk</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme.Dontwannaforget" parent="Base.Theme.Dontwannaforget" />
+</resources>

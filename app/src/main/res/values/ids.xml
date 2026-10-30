@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="book_reading_paper" type="id" />
+    <item name="book_reading_content" type="id" />
+    <item name="book_reading_images" type="id" />
+    <item name="book_reading_title" type="id" />
+    <item name="book_reading_quote" type="id" />
+    <item name="book_reading_thought" type="id" />
+    <item name="book_edit_entry" type="id" />
+    <item name="music_edit_entry" type="id" />
+</resources>

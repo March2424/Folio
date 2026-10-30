@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Model API keys are encrypted with a device-bound Android Keystore key. -->
+    <exclude domain="sharedpref" path="agent_connection.xml"/>
+        <exclude domain="sharedpref" path="llm_settings.xml"/>
+</full-backup-content>

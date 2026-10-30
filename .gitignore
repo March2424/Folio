@@ -1,0 +1,39 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Private agent data and credentials
+/backend/target/
+/backend/data/
+/backend/.env
+/backend/.tools/
+
+# Local environment credentials (keep only empty templates in source control)
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# IDE state, distributable builds, and private signing files
+/.idea/
+.kotlin/
+*.apk
+*.aab
+*.jks
+*.keystore
+*.p12
+*.pfx
+key.properties
+keystore.properties

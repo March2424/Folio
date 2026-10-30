@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BottomTextNavigation">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#B5B8BD</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+    <style name="Theme.Dontwannaforget.ModuleSheet.Base" parent="Theme.Material3.Dark.BottomSheetDialog">
+        <item name="colorSurface">#151719</item>
+        <item name="colorOnSurface">#E4E6E9</item>
+        <item name="colorPrimary">#E4E6E9</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.Dontwannaforget.ModuleSheet" parent="Theme.Dontwannaforget.ModuleSheet.Base" />
+
+    <style name="NavItem">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/ink_sub</item>
+    </style>
+</resources>

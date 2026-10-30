@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="desk">#FFF6F3EC</color>
+    <color name="paper">#FFFCFAF5</color>
+    <color name="ink">#FF2B2623</color>
+    <color name="ink_sub">#FF8A817A</color>
+    <color name="wine">#FF9E3B36</color>
+    <color name="wine_dark">#FF6E2723</color>
+</resources>

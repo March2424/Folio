@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name" translatable="false">dontwannaforget</string>
+    <string name="agent_api_key_removed">API Key 已移除，手機中的記憶仍保留</string>
+</resources>

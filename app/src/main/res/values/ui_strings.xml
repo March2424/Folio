@@ -1,0 +1,634 @@
+<resources>
+<string name="ui_000" formatted="false">"不想忘記的聲音"</string>
+<string name="ui_001" formatted="false">"隨手字跡"</string>
+<string name="ui_002" formatted="false">"襯線手記"</string>
+<string name="ui_003" formatted="false">"打字機"</string>
+<string name="ui_004" formatted="false">"斜體書信"</string>
+<string name="ui_005" formatted="false">"記憶碎片"</string>
+<string name="ui_006" formatted="false">"走過一段安靜的路，\n把風和光留在白紙上。"</string>
+<string name="ui_007" formatted="false">"字型載入失敗,請選擇有效的 .ttf 或 .otf 字型檔案"</string>
+<string name="ui_008" formatted="false">"字型已匯入並應用"</string>
+<string name="ui_009" formatted="false">"從相簿選擇圖片"</string>
+<string name="ui_010" formatted="false">"拍照"</string>
+<string name="ui_011" formatted="false">"無法啟動相機,請從相簿選圖"</string>
+<string name="ui_012" formatted="false">"點選輸入足跡地點(如: 長洲島 / 銀閣寺)"</string>
+<string name="ui_013" formatted="false">"城市或天氣備註(如: 香港 · 海風晴朗)"</string>
+<string name="ui_014" formatted="false">"畫布 "</string>
+<string name="ui_015" formatted="false">"+ 新增一頁畫布"</string>
+<string name="ui_016" formatted="false">"記錄下一刻的風景"</string>
+<string name="ui_017" formatted="false">"刪除當前頁"</string>
+<string name="ui_018" formatted="false">"上傳圖片"</string>
+<string name="ui_019" formatted="false">"縮\n放"</string>
+<string name="ui_020" formatted="false">"↻ 旋轉"</string>
+<string name="ui_021" formatted="false">"復位"</string>
+<string name="ui_022" formatted="false">"文字編輯"</string>
+<string name="ui_023" formatted="false">"文字 1 ▾"</string>
+<string name="ui_024" formatted="false">"+ 新增文字"</string>
+<string name="ui_025" formatted="false">"刪除"</string>
+<string name="ui_026" formatted="false">"輸入這段文字…"</string>
+<string name="ui_027" formatted="false">"字型"</string>
+<string name="ui_028" formatted="false">"字號"</string>
+<string name="ui_029" formatted="false">"+ 上傳字型(.ttf/.otf)"</string>
+<string name="ui_030" formatted="false">"文字 "</string>
+<string name="ui_031" formatted="false">"單張畫布最多新增 10 個文字框"</string>
+<string name="ui_032" formatted="false">"儲存圖片"</string>
+<string name="ui_033" formatted="false">"釋出筆記"</string>
+<string name="ui_034" formatted="false">"已儲存高畫質手賬圖到系統相簿"</string>
+<string name="ui_035" formatted="false">"儲存圖片失敗: "</string>
+<string name="ui_036" formatted="false">"足跡手記"</string>
+<string name="ui_037" formatted="false">"紙上手記"</string>
+<string name="ui_038" formatted="false">"正在釋出..."</string>
+<string name="ui_039" formatted="false">"儲存失敗,請檢查圖片後重試"</string>
+<string name="ui_040" formatted="false">"足跡手賬已釋出"</string>
+<string name="ui_041" formatted="false">"那些不想忘記的瞬間，\n都輕輕停在這裡。"</string>
+<string name="ui_042" formatted="false">"沿途足跡"</string>
+<string name="ui_043" formatted="false">"HH:mm|文字"</string>
+<string name="ui_044" formatted="false">"把沿途的風與光留在紙頁上。"</string>
+<string name="ui_045" formatted="false">"輕點輸入文字..."</string>
+<string name="ui_046" formatted="false">"上傳圖片後可自由拖動與縮放"</string>
+<string name="ui_047" formatted="false">"書封或心情照片"</string>
+<string name="ui_048" formatted="false">"附圖 "</string>
+<string name="ui_049" formatted="false">"正在載入圖片"</string>
+<string name="ui_050" formatted="false">"圖片暫時無法顯示，輕點重試"</string>
+<string name="ui_051" formatted="false">"桌面"</string>
+<string name="ui_052" formatted="false">"日期/隨機"</string>
+<string name="ui_053" formatted="false">"票根/封面"</string>
+<string name="ui_054" formatted="false">"隨機"</string>
+<string name="ui_055" formatted="false">"展開 ›"</string>
+<string name="ui_056" formatted="false">"圖片匯入失敗"</string>
+<string name="ui_057" formatted="false">"錄音檔案匯入失敗"</string>
+<string name="ui_058" formatted="false">"本地上傳錄音"</string>
+<string name="ui_059" formatted="false">"已更新錄音檔案"</string>
+<string name="ui_060" formatted="false">"‹ 返回"</string>
+<string name="ui_061" formatted="false">"+ 掃描/上傳  "</string>
+<string name="ui_062" formatted="false">"✎ 修改便籤與票根"</string>
+<string name="ui_063" formatted="false">"+ 更換封面"</string>
+<string name="ui_064" formatted="false">"輕點卡片翻面：正面(便籤/海報) ⇄ 背面(電影院票根)"</string>
+<string name="ui_065" formatted="false">"票根原件(點選放大)"</string>
+<string name="ui_066" formatted="false">"原圖(點選放大)"</string>
+<string name="ui_067" formatted="false">"修改摘抄與便籤樣式"</string>
+<string name="ui_068" formatted="false">"修改旋律與卡片樣式"</string>
+<string name="ui_069" formatted="false">"聽歌隨感 / 此刻心情"</string>
+<string name="ui_070" formatted="false">"檢視未模糊的封面 / 心情原圖  ›"</string>
+<string name="ui_071" formatted="false">"+ 更換錄音"</string>
+<string name="ui_072" formatted="false">"+ 更換畫面"</string>
+<string name="ui_073" formatted="false">"“生活中總有些聲音是你不想忘記的。”"</string>
+<string name="ui_074" formatted="false">"現場採集錄音"</string>
+<string name="ui_075" formatted="false">"📁 上傳/更換本地錄音檔案"</string>
+<string name="ui_076" formatted="false">"🖼 更換當時的畫面照片"</string>
+<string name="ui_077" formatted="false">"🎙 新增一段聲音記錄"</string>
+<string name="ui_078" formatted="false">"錄音檔案無法播放，你可以點選右上角重新上傳錄音"</string>
+<string name="ui_079" formatted="false">"✎ 編輯紙質手賬"</string>
+<string name="ui_080" formatted="false">"  (輕點下方紙頁可編輯文字與圖片)"</string>
+<string name="ui_081" formatted="false">"足跡紙頁 "</string>
+<string name="ui_082" formatted="false">"全部"</string>
+<string name="ui_083" formatted="false">"票根"</string>
+<string name="ui_084" formatted="false">"日常留聲"</string>
+<string name="ui_085" formatted="false">"閱讀手記"</string>
+<string name="ui_086" formatted="false">"旋律"</string>
+<string name="ui_087" formatted="false">"寫一封信"</string>
+<string name="ui_088" formatted="false">"記憶冊"</string>
+<string name="ui_089" formatted="false">"建立"</string>
+<string name="ui_090" formatted="false">"電影票根 (便籤/海報排版 + 掃描票根)"</string>
+<string name="ui_091" formatted="false">"日常留聲 (現場錄音 / 上傳音訊)"</string>
+<string name="ui_092" formatted="false">"閱讀手記 (摘抄便籤 / 書封與心情照片)"</string>
+<string name="ui_093" formatted="false">"旋律 (歌詞卡片)"</string>
+<string name="ui_094" formatted="false">"沿途足跡 (紙質圖文手賬)"</string>
+<string name="ui_095" formatted="false">"寫一封信 (打字機與信封)"</string>
+<string name="ui_096" formatted="false">"留下新記憶"</string>
+<string name="ui_097" formatted="false">"功能"</string>
+<string name="ui_098" formatted="false">"與記憶對話"</string>
+<string name="ui_099" formatted="false">"裝入信封 ›"</string>
+<string name="ui_100" formatted="false">"中"</string>
+<string name="ui_101" formatted="false">"燈光"</string>
+<string name="ui_102" formatted="false">"弱"</string>
+<string name="ui_103" formatted="false">"強"</string>
+<string name="ui_104" formatted="false">"擴散"</string>
+<string name="ui_105" formatted="false">"照射範圍"</string>
+<string name="ui_106" formatted="false">"先在打字機上敲下幾句想說的話吧"</string>
+<string name="ui_107" formatted="false">"選擇信封並封緘"</string>
+<string name="ui_108" formatted="false">"岩石灰紙 (同款)"</string>
+<string name="ui_109" formatted="false">"暖原木牛皮"</string>
+<string name="ui_110" formatted="false">"深炭黑卡"</string>
+<string name="ui_111" formatted="false">"素白羊皮"</string>
+<string name="ui_112" formatted="false">"收件人 (如: Mira / 未來的自己)"</string>
+<string name="ui_113" formatted="false">"信件標題 (可選,展示在信紙頂部)"</string>
+<string name="ui_114" formatted="false">"寄信日期: "</string>
+<string name="ui_115" formatted="false">" (點選修改)"</string>
+<string name="ui_116" formatted="false">"繼續打字"</string>
+<string name="ui_117" formatted="false">"封入信封並儲存"</string>
+<string name="ui_118" formatted="false">"信件已封存到 "</string>
+<string name="ui_119" formatted="false">"Tap here to start typing your letter...\n輕點紙面開始打字，寫完點選右上角裝入信封。"</string>
+<string name="ui_120" formatted="false">" 項記憶"</string>
+<string name="ui_121" formatted="false">"全部記憶"</string>
+<string name="ui_122" formatted="false">" · 進入模組"</string>
+<string name="ui_123" formatted="false">"與記憶對話  ↗"</string>
+<string name="ui_124" formatted="false">"還沒有記憶，先去全部記憶留下第一條"</string>
+<string name="ui_125" formatted="false">"與記憶對話"</string>
+<string name="ui_126" formatted="false">"已選擇封面(輕點更換)"</string>
+<string name="ui_127" formatted="false">"輕點更換照片"</string>
+<string name="ui_128" formatted="false">"最多新增 9 張照片"</string>
+<string name="ui_129" formatted="false">"從相簿選擇"</string>
+<string name="ui_130" formatted="false">"無法啟動相機,請改用相簿選圖"</string>
+<string name="ui_131" formatted="false">"取消"</string>
+<string name="ui_132" formatted="false">"寫下閱讀手記"</string>
+<string name="ui_133" formatted="false">"留下一段旋律"</string>
+<string name="ui_134" formatted="false">"記錄沿途足跡"</string>
+<string name="ui_135" formatted="false">"+ 新增書籍封面(可選,無封面則用下方句子作封面)"</string>
+<string name="ui_136" formatted="false">"+ 新增歌曲/專輯封面"</string>
+<string name="ui_137" formatted="false">"書名"</string>
+<string name="ui_138" formatted="false">"作者(可選)"</string>
+<string name="ui_139" formatted="false">"書裡最喜歡的一句話,或讀後感..."</string>
+<string name="ui_140" formatted="false">"歌名"</string>
+<string name="ui_141" formatted="false">"歌手"</string>
+<string name="ui_142" formatted="false">"歌詞摘錄或聽歌時的心情..."</string>
+<string name="ui_143" formatted="false">"足跡標題(如: 長洲 / 銀閣寺)"</string>
+<string name="ui_144" formatted="false">"城市 · 地點(如: 香港 · 長洲島)"</string>
+<string name="ui_145" formatted="false">"+ 再加一段時刻"</string>
+<string name="ui_146" formatted="false">"最多新增 9 段時刻"</string>
+<string name="ui_147" formatted="false">"儲存到記憶冊"</string>
+<string name="ui_148" formatted="false">"照片(最多 9 張,前 2 張會進入當天拼圖)"</string>
+<string name="ui_149" formatted="false">"+ 照片\n("</string>
+<string name="ui_150" formatted="false">"時間(如 12:07)"</string>
+<string name="ui_151" formatted="false">"+ 新增這一刻的照片"</string>
+<string name="ui_152" formatted="false">"寫下這一刻看到了什麼..."</string>
+<string name="ui_153" formatted="false">"請至少填寫地點或一段足跡內容"</string>
+<string name="ui_154" formatted="false">"走過一段路。"</string>
+<string name="ui_155" formatted="false">"請至少新增一張圖片或寫下一句話"</string>
+<string name="ui_156" formatted="false">"讀過的一本書"</string>
+<string name="ui_157" formatted="false">"聽過的一首歌"</string>
+<string name="ui_158" formatted="false">"日常手記"</string>
+<string name="ui_159" formatted="false">"正在儲存..."</string>
+<string name="ui_160" formatted="false">"儲存失敗,請檢查圖片或儲存空間後重試"</string>
+<string name="ui_161" formatted="false">"已儲存到記憶冊"</string>
+<string name="ui_162" formatted="false">"輕點任意一組展開細節 · 共 "</string>
+<string name="ui_163" formatted="false">" 段記憶"</string>
+<string name="ui_164" formatted="false">"旋律與日常留聲 · "</string>
+<string name="ui_165" formatted="false">"沿途足跡與信件 · "</string>
+<string name="ui_166" formatted="false">"電影與書 · "</string>
+<string name="ui_167" formatted="false">"當天的旋律與留聲 · 輕點卡片進入播放詳情"</string>
+<string name="ui_168" formatted="false">"當天的足跡與信件 · 輕點卡片拆信或檢視手賬"</string>
+<string name="ui_169" formatted="false">"當天的銀幕與書頁 · 輕點進入票根翻轉詳情"</string>
+<string name="ui_170" formatted="false">"純真"</string>
+<string name="ui_171" formatted="false">"如果有期待 我想最好\n是不說\n你總是微笑的 你總是\n不開口\n世界被你掌握"</string>
+<string name="ui_172" formatted="false">"返回主頁"</string>
+<string name="ui_173" formatted="false">"等待新增聲音"</string>
+<string name="ui_174" formatted="false">"正在錄音"</string>
+<string name="ui_175" formatted="false">"● 正在錄製聲音...  "</string>
+<string name="ui_176" formatted="false">"  (再次點選結束錄音)"</string>
+<string name="ui_177" formatted="false">"▶ 正在試聽 · "</string>
+<string name="ui_178" formatted="false">"需要麥克風許可權才能現場錄音，你也可以直接從本地上傳錄音檔案"</string>
+<string name="ui_179" formatted="false">"已選擇畫面照片 (輕點更換)"</string>
+<string name="ui_180" formatted="false">"日常留聲"</string>
+<string name="ui_181" formatted="false">"請選擇「現場錄音」或「上傳本地錄音檔案」"</string>
+<string name="ui_182" formatted="false">"🎙 現場錄音"</string>
+<string name="ui_183" formatted="false">"📁 上傳本地錄音"</string>
+<string name="ui_184" formatted="false">"▶ 試聽當前聲音"</string>
+<string name="ui_185" formatted="false">"這段聲音的名字 (如: 堅尼地城的海浪 / 外婆的叮囑)"</string>
+<string name="ui_186" formatted="false">"採集地點或場景 (如: 香港 · 海傍 / 老家廚房)"</string>
+<string name="ui_187" formatted="false">"寫下聽到這段聲音時的畫面與故事..."</string>
+<string name="ui_188" formatted="false">"儲存這段聲音到記憶冊"</string>
+<string name="ui_189" formatted="false">"+ 上傳當時的畫面照片 (點選選擇)"</string>
+<string name="ui_190" formatted="false">"現場錄音"</string>
+<string name="ui_191" formatted="false">"■ 結束錄音"</string>
+<string name="ui_192" formatted="false">"啟動麥克風錄音失敗，請嘗試從本地上傳錄音檔案"</string>
+<string name="ui_193" formatted="false">"🎙 重新錄音"</string>
+<string name="ui_194" formatted="false">"✓ 已完成現場錄音 ("</string>
+<string name="ui_195" formatted="false">"▶ 試聽當前聲音 ("</string>
+<string name="ui_196" formatted="false">"本地上傳 · "</string>
+<string name="ui_197" formatted="false">"錄音檔案"</string>
+<string name="ui_198" formatted="false">"✓ 已匯入錄音: "</string>
+<string name="ui_199" formatted="false">"音訊檔案"</string>
+<string name="ui_200" formatted="false">"▶ 試聽已上傳的錄音 ("</string>
+<string name="ui_201" formatted="false">"⏸ 暫停試聽"</string>
+<string name="ui_202" formatted="false">"無法播放該音訊檔案，請確認格式為 m4a/mp3/wav/aac/ogg"</string>
+<string name="ui_203" formatted="false">"請先錄製/上傳一段聲音，或寫下關於聲音的描述"</string>
+<string name="ui_204" formatted="false">"生活中總有些聲音是你不想忘記的。"</string>
+<string name="ui_205" formatted="false">"聲音記憶"</string>
+<string name="ui_206" formatted="false">"正在儲存聲音..."</string>
+<string name="ui_207" formatted="false">"儲存失敗，請檢查音訊檔案後重試"</string>
+<string name="ui_208" formatted="false">"已將這段聲音收入記憶冊"</string>
+<string name="ui_209" formatted="false">"對話"</string>
+<string name="ui_210" formatted="false">"材料"</string>
+<string name="ui_211" formatted="false">"正在備份記憶與附件…"</string>
+<string name="ui_212" formatted="false">"無法寫入備份"</string>
+<string name="ui_213" formatted="false">"備份已儲存，不包含模型金鑰"</string>
+<string name="ui_214" formatted="false">"正在檢查備份…"</string>
+<string name="ui_215" formatted="false">"無法開啟備份"</string>
+<string name="ui_216" formatted="false">"模型"</string>
+<string name="ui_217" formatted="false">"關於我"</string>
+<string name="ui_218" formatted="false">"回顧"</string>
+<string name="ui_219" formatted="false">"管理"</string>
+<string name="ui_220" formatted="false">"返回記憶冊"</string>
+<string name="ui_221" formatted="false">"記憶"</string>
+<string name="ui_222" formatted="false">"那些留下來的，都在這裡"</string>
+<string name="ui_223" formatted="false">"對話選單"</string>
+<string name="ui_224" formatted="false">"結果讀取失敗，請重試"</string>
+<string name="ui_225" formatted="false">"切換到"</string>
+<string name="ui_226" formatted="false">"正在處理，請稍候"</string>
+<string name="ui_227" formatted="false">"我的記憶 · "</string>
+<string name="ui_228" formatted="false">"材料與管理"</string>
+<string name="ui_229" formatted="false">"關於我與回顧"</string>
+<string name="ui_230" formatted="false">"模型設定"</string>
+<string name="ui_231" formatted="false">"新增"</string>
+<string name="ui_232" formatted="false">"新增文字材料或自述"</string>
+<string name="ui_233" formatted="false">"留下新的文字"</string>
+<string name="ui_234" formatted="false">"寫一份材料"</string>
+<string name="ui_235" formatted="false">"寫下關於我的事"</string>
+<string name="ui_236" formatted="false">"說點什麼，讓記憶回應你…"</string>
+<string name="ui_237" formatted="false">"訊息輸入框"</string>
+<string name="ui_238" formatted="false">"傳送"</string>
+<string name="ui_239" formatted="false">"傳送文字訊息"</string>
+<string name="ui_240" formatted="false">"正在翻開記憶…"</string>
+<string name="ui_241" formatted="false">" 段記憶 · 只在你的記錄裡尋找"</string>
+<string name="ui_242" formatted="false">"部分來源已更新，舊對話保留供翻看。"</string>
+<string name="ui_243" formatted="false">"↑ 更早的對話"</string>
+<string name="ui_244" formatted="false">"↓ 更新的對話"</string>
+<string name="ui_245" formatted="false">"複製文字"</string>
+<string name="ui_246" formatted="false">"把這句話留作記憶"</string>
+<string name="ui_247" formatted="false">"訊息"</string>
+<string name="ui_248" formatted="false">"正在提取可留下的文字…"</string>
+<string name="ui_249" formatted="false">" 條記憶來源"</string>
+<string name="ui_250" formatted="false">"正在想起…"</string>
+<string name="ui_251" formatted="false">"正在翻找有關的記憶…"</string>
+<string name="ui_252" formatted="false">"訊息最多 2000 字"</string>
+<string name="ui_253" formatted="false">"我"</string>
+<string name="ui_254" formatted="false">"憶"</string>
+<string name="ui_255" formatted="false">"把片刻，留成回聲。"</string>
+<string name="ui_256" formatted="false">"一本書，一首歌，或某段日子。\n想起什麼，就從這裡說起。"</string>
+<string name="ui_257" formatted="false">"最近，我留下了什麼？"</string>
+<string name="ui_258" formatted="false">"我看過哪些電影？"</string>
+<string name="ui_259" formatted="false">" · 示例"</string>
+<string name="ui_260" formatted="false">"這次想起的記憶"</string>
+<string name="ui_261" formatted="false">"合上"</string>
+<string name="ui_262" formatted="false">"開始新的對話"</string>
+<string name="ui_263" formatted="false">"以前的對話"</string>
+<string name="ui_264" formatted="false">"記憶概況"</string>
+<string name="ui_265" formatted="false">"正在讀取…"</string>
+<string name="ui_266" formatted="false">"記憶冊中的六類記錄（包括現有示例）已自動接入，不用手動加入或先生成摘要。聲音、圖片和音樂以你寫的說明、故事和感想作為記憶。也可以匯入額外文字。"</string>
+<string name="ui_267" formatted="false">"選擇記憶冊記錄提煉摘要與特徵"</string>
+<string name="ui_268" formatted="false">"這部手機的 Agent 記憶"</string>
+<string name="ui_269" formatted="false">"重新整理記憶列表"</string>
+<string name="ui_270" formatted="false">"給這段自述起個名字"</string>
+<string name="ui_271" formatted="false">"給這份材料起個名字"</string>
+<string name="ui_272" formatted="false">"發生日期 yyyy-MM-dd（可留空）"</string>
+<string name="ui_273" formatted="false">"寫寫你的喜好、經歷或此刻的自己，也可以貼上已有的自述（最多 24000 字）"</string>
+<string name="ui_274" formatted="false">"貼上日記、自述或其他文字（最多 24000 字）"</string>
+<string name="ui_275" formatted="false">"從 .txt / .md 檔案匯入"</string>
+<string name="ui_276" formatted="false">"儲存並提煉關於我的線索"</string>
+<string name="ui_277" formatted="false">"儲存並整理"</string>
+<string name="ui_278" formatted="false">"請填寫標題（最多160字）與正文（最多24000字）"</string>
+<string name="ui_279" formatted="false">"正在儲存原文並整理，長材料需要稍等…"</string>
+<string name="ui_280" formatted="false">"原文已儲存，可在“材料”列表重試整理。"</string>
+<string name="ui_281" formatted="false">"已整理，請在下方確認與你相符的線索"</string>
+<string name="ui_282" formatted="false">"已整理，可到“關於我”確認特徵"</string>
+<string name="ui_283" formatted="false">"只儲存到手機"</string>
+<string name="ui_284" formatted="false">"正在儲存到手機…"</string>
+<string name="ui_285" formatted="false">"原文已儲存，可在材料頁繼續整理"</string>
+<string name="ui_286" formatted="false">"正在讀取記憶…"</string>
+<string name="ui_287" formatted="false">" · 不要忘記"</string>
+<string name="ui_288" formatted="false">"來自記憶冊，已可直接問答；可按需提煉摘要"</string>
+<string name="ui_289" formatted="false">"原文已儲存，可直接問答或按需整理"</string>
+<string name="ui_290" formatted="false">"檢視原文"</string>
+<string name="ui_291" formatted="false">"提煉摘要與特徵"</string>
+<string name="ui_292" formatted="false">"正在整理…"</string>
+<string name="ui_293" formatted="false">"允許漸遠"</string>
+<string name="ui_294" formatted="false">"請替我記住"</string>
+<string name="ui_295" formatted="false">"正在儲存…"</string>
+<string name="ui_296" formatted="false">"重新喚醒"</string>
+<string name="ui_297" formatted="false">"讓它暫時睡去"</string>
+<string name="ui_298" formatted="false">"正在更新記憶…"</string>
+<string name="ui_299" formatted="false">"開啟記憶冊原記錄"</string>
+<string name="ui_300" formatted="false">"刪除這份記憶"</string>
+<string name="ui_301" formatted="false">"刪除這份 Agent 記憶？"</string>
+<string name="ui_302" formatted="false">"這份材料及摘要、相關特徵和引用過它的對話會從手機刪除。記憶冊中的原記錄會保留。"</string>
+<string name="ui_303" formatted="false">"保留"</string>
+<string name="ui_304" formatted="false">"正在刪除…"</string>
+<string name="ui_305" formatted="false">"上一頁"</string>
+<string name="ui_306" formatted="false">"下一頁 · 共 "</string>
+<string name="ui_307" formatted="false">" 條"</string>
+<string name="ui_308" formatted="false">"由你來介紹自己。直接寫下或匯入一段文字，原文會留在材料裡；整理後，你可以確認、修改或撤回提煉的線索。"</string>
+<string name="ui_309" formatted="false">"關於我的線索"</string>
+<string name="ui_310" formatted="false">"這裡是材料留下的線索。模型推斷會單獨標明；你確認之後，它才會作為理解你的參考。你隨時可以撤回。"</string>
+<string name="ui_311" formatted="false">"合併線索，看看我如何變化"</string>
+<string name="ui_312" formatted="false">"正在整理重複、變化與矛盾的線索…"</string>
+<string name="ui_313" formatted="false">"重新整理特徵"</string>
+<string name="ui_314" formatted="false">"正在讀取關於你的線索…"</string>
+<string name="ui_315" formatted="false">"日期未提供"</string>
+<string name="ui_316" formatted="false">"已選擇這條描述"</string>
+<string name="ui_317" formatted="false">"以這條描述為準"</string>
+<string name="ui_318" formatted="false">"正在儲存你的選擇…"</string>
+<string name="ui_319" formatted="false">"還沒有線索。可以先加入一份自己的文字。"</string>
+<string name="ui_320" formatted="false">"我的修正"</string>
+<string name="ui_321" formatted="false">"材料自述"</string>
+<string name="ui_322" formatted="false">"模型推斷"</string>
+<string name="ui_323" formatted="false">"已確認"</string>
+<string name="ui_324" formatted="false">"待確認"</string>
+<string name="ui_325" formatted="false">"檢視來源"</string>
+<string name="ui_326" formatted="false">"修改這條描述"</string>
+<string name="ui_327" formatted="false">"由你來定義自己"</string>
+<string name="ui_328" formatted="false">"儲存修正"</string>
+<string name="ui_329" formatted="false">"正在修正…"</string>
+<string name="ui_330" formatted="false">"這與我相符"</string>
+<string name="ui_331" formatted="false">"不再參考這條特徵"</string>
+<string name="ui_332" formatted="false">"這不代表我"</string>
+<string name="ui_333" formatted="false">"正在更新…"</string>
+<string name="ui_334" formatted="false">"填寫 API Key 和模型名即可使用。Agent 在 App 內執行，記憶儲存在手機。"</string>
+<string name="ui_335" formatted="false">"模型名稱（由模型供應商提供）"</string>
+<string name="ui_336" formatted="false">"你的模型 API Key"</string>
+<string name="ui_337" formatted="false">"已儲存的金鑰無法解密，請重新填寫。"</string>
+<string name="ui_338" formatted="false">"模型服務 API 地址，例如 https://example.com/v1"</string>
+<string name="ui_339" formatted="false">"模型服務地址 · 使用其他供應商時修改"</string>
+<string name="ui_340" formatted="false">"儲存模型設定"</string>
+<string name="ui_341" formatted="false">"模型設定已儲存，可以開始整理或對話"</string>
+<string name="ui_342" formatted="false">"模型設定儲存失敗"</string>
+<string name="ui_343" formatted="false">"儲存並測試模型"</string>
+<string name="ui_344" formatted="false">"正在直接連線模型服務…"</string>
+<string name="ui_345" formatted="false">"模型連線成功，可以開始使用"</string>
+<string name="ui_346" formatted="false">"請檢查模型設定"</string>
+<string name="ui_347" formatted="false">"API Key 會加密儲存在手機，只傳送給你選擇的模型服務。整理時會傳送材料，問答時會傳送相關記憶和最近對話。"</string>
+<string name="ui_348" formatted="false">"預設地址："</string>
+<string name="ui_349" formatted="false">"。這是模型供應商的介面，無需部署伺服器。支援相容 Chat Completions 和工具呼叫的模型。"</string>
+<string name="ui_350" formatted="false">"移除已儲存的 API Key"</string>
+<string name="ui_351" formatted="false">"移除金鑰失敗，請重試"</string>
+<string name="ui_352" formatted="false">"記憶冊還沒有記錄"</string>
+<string name="ui_353" formatted="false">"選擇記錄提煉摘要與特徵"</string>
+<string name="ui_354" formatted="false">"開始整理"</string>
+<string name="ui_355" formatted="false">"每次最多選擇10條記錄"</string>
+<string name="ui_356" formatted="false">"正在整理所選記錄…"</string>
+<string name="ui_357" formatted="false">"已整理"</string>
+<string name="ui_358" formatted="false">"條；《"</string>
+<string name="ui_359" formatted="false">"》原文已儲存，可在列表重試。"</string>
+<string name="ui_360" formatted="false">"已整理 "</string>
+<string name="ui_361" formatted="false">" 條記憶"</string>
+<string name="ui_362" formatted="false">"可參考 "</string>
+<string name="ui_363" formatted="false">" 條記憶冊記錄、"</string>
+<string name="ui_364" formatted="false">" 份文字材料。\n"</string>
+<string name="ui_365" formatted="false">"電影 "</string>
+<string name="ui_366" formatted="false">" · 閱讀手記 "</string>
+<string name="ui_367" formatted="false">" · 旋律 "</string>
+<string name="ui_368" formatted="false">" · 日常留聲 "</string>
+<string name="ui_369" formatted="false">" · 沿途足跡 "</string>
+<string name="ui_370" formatted="false">" · 寫一封信 "</string>
+<string name="ui_371" formatted="false">"\n包含 "</string>
+<string name="ui_372" formatted="false">" 條示例，可直接測試；回答會標明示例來源。"</string>
+<string name="ui_373" formatted="false">"正在讀取文字檔案…"</string>
+<string name="ui_374" formatted="false">"文字材料.txt"</string>
+<string name="ui_375" formatted="false">"第一版支援 .txt / .md 檔案"</string>
+<string name="ui_376" formatted="false">"無法開啟檔案"</string>
+<string name="ui_377" formatted="false">"檔案超過200KB"</string>
+<string name="ui_378" formatted="false">"檔案需要使用 UTF-8 編碼"</string>
+<string name="ui_379" formatted="false">"需要最多24000字的純文字"</string>
+<string name="ui_380" formatted="false">"檔案裡還沒有文字，請換一份材料"</string>
+<string name="ui_381" formatted="false">"文字已填入，可編輯後儲存"</string>
+<string name="ui_382" formatted="false">"正在翻回原文…"</string>
+<string name="ui_383" formatted="false">"\n\n—— 原文 ——\n\n"</string>
+<string name="ui_384" formatted="false">"沉睡"</string>
+<string name="ui_385" formatted="false">"漸遠"</string>
+<string name="ui_386" formatted="false">"清晰"</string>
+<string name="ui_387" formatted="false">"存在矛盾，等你決定"</string>
+<string name="ui_388" formatted="false">"隨著時間變化"</string>
+<string name="ui_389" formatted="false">"相互印證"</string>
+<string name="ui_390" formatted="false">"正在翻看對話…"</string>
+<string name="ui_391" formatted="false">"還沒有儲存的對話"</string>
+<string name="ui_392" formatted="false">" · 來源已更新"</string>
+<string name="ui_393" formatted="false">"把這句話留下來？"</string>
+<string name="ui_394" formatted="false">"你可以修改文字。確認後才會進入長期記憶。"</string>
+<string name="ui_395" formatted="false">"不儲存"</string>
+<string name="ui_396" formatted="false">"確認記住"</string>
+<string name="ui_397" formatted="false">"正在儲存記憶…"</string>
+<string name="ui_398" formatted="false">"已經記住"</string>
+<string name="ui_399" formatted="false">"把一段日子折成一頁。回顧會保留原文來源；原記錄變動後，可重新整理。"</string>
+<string name="ui_400" formatted="false">"開始日期 yyyy-MM-dd"</string>
+<string name="ui_401" formatted="false">"結束日期 yyyy-MM-dd"</string>
+<string name="ui_402" formatted="false">"這段日子的名字"</string>
+<string name="ui_403" formatted="false">"這個月留下的"</string>
+<string name="ui_404" formatted="false">"折成一頁回顧"</string>
+<string name="ui_405" formatted="false">"正在逐段回顧這段日子…"</string>
+<string name="ui_406" formatted="false">"正在讀取回顧…"</string>
+<string name="ui_407" formatted="false">" 至 "</string>
+<string name="ui_408" formatted="false">" · 來源已變化，請重新整理"</string>
+<string name="ui_409" formatted="false">"更新這頁回顧"</string>
+<string name="ui_410" formatted="false">"正在更新回顧…"</string>
+<string name="ui_411" formatted="false">"翻回來源 · "</string>
+<string name="ui_412" formatted="false">"原記錄"</string>
+<string name="ui_413" formatted="false">"整理材料"</string>
+<string name="ui_414" formatted="false">"整理階段回顧"</string>
+<string name="ui_415" formatted="false">"合併個人線索"</string>
+<string name="ui_416" formatted="false">"尋找記憶並回答"</string>
+<string name="ui_417" formatted="false">"未完成的任務"</string>
+<string name="ui_418" formatted="false">"現有示例預設可用於測試。所有原文都留在手機；漸遠與沉睡隻影響喚起的順序，不會刪除原文。"</string>
+<string name="ui_419" formatted="false">"匯出完整記憶備份"</string>
+<string name="ui_420" formatted="false">"我的記憶-"</string>
+<string name="ui_421" formatted="false">"從備份恢復"</string>
+<string name="ui_422" formatted="false">"備份包含記憶冊、文字、摘要、特徵、對話、回顧和附件，不包含 API Key。恢復時保留手機上已有的同編號記錄。"</string>
+<string name="ui_423" formatted="false">"正在檢查待辦…"</string>
+<string name="ui_424" formatted="false">"未完成的任務，可接著做"</string>
+<string name="ui_425" formatted="false">"已儲存進度"</string>
+<string name="ui_426" formatted="false">"繼續"</string>
+<string name="ui_427" formatted="false">"正在繼續任務…"</string>
+<string name="ui_428" formatted="false">"任務已完成"</string>
+<string name="ui_429" formatted="false">"移除這項待辦"</string>
+<string name="ui_430" formatted="false">"確認這條對話記憶"</string>
+<string name="ui_431" formatted="false">"記憶提案無法讀取"</string>
+<string name="ui_432" formatted="false">"恢復這份記憶備份？"</string>
+<string name="ui_433" formatted="false">" 條 Agent 記憶、"</string>
+<string name="ui_434" formatted="false">" 個附件。已有同編號記錄會保留。"</string>
+<string name="ui_435" formatted="false">"恢復"</string>
+<string name="ui_436" formatted="false">"正在恢復記憶…"</string>
+<string name="ui_437" formatted="false">"記憶已恢復"</string>
+<string name="ui_438" formatted="false">"便籤文字排版"</string>
+<string name="ui_439" formatted="false">"豎排電影海報"</string>
+<string name="ui_440" formatted="false">"橫排電影海報"</string>
+<string name="ui_441" formatted="false">"穿插大標題 (仿筆記/陽臺)"</string>
+<string name="ui_442" formatted="false">"右側交疊標題 (仿麻雀/弓箭)"</string>
+<string name="ui_443" formatted="false">"暗夜斜籤 (仿親愛的男孩)"</string>
+<string name="ui_444" formatted="false">"薑黃橫幅籤 (仿About)"</string>
+<string name="ui_445" formatted="false">"隨機紋路"</string>
+<string name="ui_446" formatted="false">"細密齒痕"</string>
+<string name="ui_447" formatted="false">"側邊手撕"</string>
+<string name="ui_448" formatted="false">"四周撕裂"</string>
+<string name="ui_449" formatted="false">"復古便籤+NEW貼"</string>
+<string name="ui_450" formatted="false">"霧灰便籤紙"</string>
+<string name="ui_451" formatted="false">"暗夜炭黑紙"</string>
+<string name="ui_452" formatted="false">"復古薑黃紙"</string>
+<string name="ui_453" formatted="false">"暖白手賬紙"</string>
+<string name="ui_454" formatted="false">"經典熱敏票"</string>
+<string name="ui_455" formatted="false">"百老匯膠片"</string>
+<string name="ui_456" formatted="false">"IMAX珍藏票"</string>
+<string name="ui_457" formatted="false">"藝術影展票"</string>
+<string name="ui_458" formatted="false">"掃描原件全幅"</string>
+<string name="ui_459" formatted="false">"圖片無法顯示"</string>
+<string name="ui_460" formatted="false">"✎ 打字機重寫"</string>
+<string name="ui_461" formatted="false">"輕點信封拆開閱讀"</string>
+<string name="ui_462" formatted="false">"致"</string>
+<string name="ui_463" formatted="false">"✓ 已選擇書封/心情照片（將在詳情便籤內展示）"</string>
+<string name="ui_464" formatted="false">"✓ 已選擇 "</string>
+<string name="ui_465" formatted="false">" 張書封/心情照片（將在詳情便籤內依次展示）"</string>
+<string name="ui_466" formatted="false">"✓ 已拍攝書封/心情照片（將在詳情便籤內展示）"</string>
+<string name="ui_467" formatted="false">"字型載入失敗，請選擇有效的 .ttf 或 .otf 字型檔案"</string>
+<string name="ui_468" formatted="false">"自定義字型已應用到摘抄便籤"</string>
+<string name="ui_469" formatted="false">"無法啟動相機，請從相簿選圖"</string>
+<string name="ui_470" formatted="false">"配圖預覽（詳情便籤內展示，輕點更換）"</string>
+<string name="ui_471" formatted="false">"✓ 已有書封/心情照片 (輕點下方按鈕可重拍或更換)"</string>
+<string name="ui_472" formatted="false">"儲存書摘便籤"</string>
+<string name="ui_473" formatted="false">"編輯閱讀手記"</string>
+<string name="ui_474" formatted="false">"寫下閱讀手記"</string>
+<string name="ui_475" formatted="false">"外層便籤預覽"</string>
+<string name="ui_476" formatted="false">"↻ 切換便籤樣式"</string>
+<string name="ui_477" formatted="false">"+ 新增書封或心情照片（詳情頁放在同一張便籤紙上）"</string>
+<string name="ui_478" formatted="false">"便籤樣式"</string>
+<string name="ui_479" formatted="false">"樣式"</string>
+<string name="ui_480" formatted="false">"紙張"</string>
+<string name="ui_481" formatted="false">"字型 · 可匯入 .ttf / .otf"</string>
+<string name="ui_482" formatted="false">"段落對齊方式"</string>
+<string name="ui_483" formatted="false">"居中"</string>
+<string name="ui_484" formatted="false">"左對齊手記"</string>
+<string name="ui_485" formatted="false">"摘抄字號"</string>
+<string name="ui_486" formatted="false">"摘抄與想法"</string>
+<string name="ui_487" formatted="false">"摘抄"</string>
+<string name="ui_488" formatted="false">"寫下觸動你的書句摘抄，或者自己的想法...\n例如：她自己也以為她的痛苦久已鈍化了，但是那痛苦似乎是她身體裡唯一的有生命力的東西..."</string>
+<string name="ui_489" formatted="false">"輸入書名（必填，顯示在便籤最下方）"</string>
+<string name="ui_490" formatted="false">"作者 / 章節頁碼 (可選)"</string>
+<string name="ui_491" formatted="false">"例如：海明威 / 第三章 (可選)"</string>
+<string name="ui_492" formatted="false">"補充自己的讀書想法 / 隨感 (可選)"</string>
+<string name="ui_493" formatted="false">"除了原句摘抄外，還可以寫下你自己的讀後感或批註..."</string>
+<string name="ui_494" formatted="false">"在便籤正面同時展示補充想法：關 (僅在詳情頁展示)"</string>
+<string name="ui_495" formatted="false">"書封與照片"</string>
+<string name="ui_496" formatted="false">"拍下一張書的封面照片，或此刻代表你心情的畫面。外層列表展示文字便籤，詳情頁將圖片、摘抄與感悟放在同一張紙上。"</string>
+<string name="ui_497" formatted="false">"+ 匯入字型(.ttf/.otf)"</string>
+<string name="ui_498" formatted="false">"在便籤正面同時展示補充想法：開 ✓"</string>
+<string name="ui_499" formatted="false">"太陽照常升起"</string>
+<string name="ui_500" formatted="false">"她自己也以為她的痛苦久已鈍化了，\n但是那痛苦似乎是她身體裡\n唯一的有生命力的東西，\n永遠是新鮮強烈的，\n一發作起來就不給她片刻的休息。"</string>
+<string name="ui_501" formatted="false">"請填寫書名（將展示在便籤最底下）"</string>
+<string name="ui_502" formatted="false">"請寫下書裡的句子摘抄或你的想法"</string>
+<string name="ui_503" formatted="false">"儲存失敗，請重試"</string>
+<string name="ui_504" formatted="false">"已儲存讀書摘抄便籤"</string>
+<string name="ui_505" formatted="false">"電影筆記"</string>
+<string name="ui_506" formatted="false">"我們在別人的生活中扮演的到底是他們進步的理由，還是造成別人拼命進步只是為了要擺脫的那個原因。"</string>
+<string name="ui_507" formatted="false">"導演 / "</string>
+<string name="ui_508" formatted="false">"為了記住《"</string>
+<string name="ui_509" formatted="false">"》的這一幕，\n我們總是要試著思考跟察知，"</string>
+<string name="ui_510" formatted="false">"為了自己好，\n我們總是要試著思考跟察知，"</string>
+<string name="ui_511" formatted="false">"那些銀幕亮起又暗下的瞬間，都留在這張便簽裡。"</string>
+<string name="ui_512" formatted="false">"未命名影片"</string>
+<string name="ui_513" formatted="false">"銀幕放映"</string>
+<string name="ui_514" formatted="false">"百老匯電影中心"</string>
+<string name="ui_515" formatted="false">"3號鐳射廳"</string>
+<string name="ui_516" formatted="false">"G排 12座"</string>
+<string name="ui_517" formatted="false">"2D 原版"</string>
+<string name="ui_518" formatted="false">"影廳 HALL"</string>
+<string name="ui_519" formatted="false">"座位 SEAT"</string>
+<string name="ui_520" formatted="false">"日期場次 TIME"</string>
+<string name="ui_521" formatted="false">"票價 PRICE"</string>
+<string name="ui_522" formatted="false">"粗斜體 (仿參考圖)"</string>
+<string name="ui_523" formatted="false">"醒目粗體"</string>
+<string name="ui_524" formatted="false">"文藝常規"</string>
+<string name="ui_525" formatted="false">"輕度模糊 (仿參考圖)"</string>
+<string name="ui_526" formatted="false">"中度柔焦"</string>
+<string name="ui_527" formatted="false">"深度朦朧"</string>
+<string name="ui_528" formatted="false">"清晰壓暗"</string>
+<string name="ui_529" formatted="false">"✓ 已選擇電影海報 (輕點可更換)"</string>
+<string name="ui_530" formatted="false">"✓ 已匯入電影票根掃描件 (已切換至背面預覽)"</string>
+<string name="ui_531" formatted="false">"✓ 已拍攝電影海報 (輕點可更換)"</string>
+<string name="ui_532" formatted="false">"✓ 已拍照掃描電影票根 (已切換至背面預覽)"</string>
+<string name="ui_533" formatted="false">"自定義字型已匯入並應用"</string>
+<string name="ui_534" formatted="false">"✓ 已有電影海報 (輕點可更換)"</string>
+<string name="ui_535" formatted="false">"✓ 已有掃描票根原件 (輕點可重新掃描/更換)"</string>
+<string name="ui_536" formatted="false">"儲存電影便籤與票根"</string>
+<string name="ui_537" formatted="false">"電影便籤與票根"</string>
+<string name="ui_538" formatted="false">"當前預覽：正面 (便籤/海報)"</string>
+<string name="ui_539" formatted="false">"⇄ 翻面檢視背後票根"</string>
+<string name="ui_540" formatted="false">"當前預覽：背面 (電影院票根)"</string>
+<string name="ui_541" formatted="false">"當前預覽：正面 ("</string>
+<string name="ui_542" formatted="false">"正面樣式"</string>
+<string name="ui_543" formatted="false">"正面呈現方式"</string>
+<string name="ui_544" formatted="false">"便籤/海報容器邊框 (齒痕與撕裂紋路)"</string>
+<string name="ui_545" formatted="false">"便籤文字構圖 (模仿 layoutexp3.jpg 模版)"</string>
+<string name="ui_546" formatted="false">"便籤紙張底色"</string>
+<string name="ui_547" formatted="false">"☐ 左上角貼上黃色「NEW」膠帶標籤"</string>
+<string name="ui_548" formatted="false">"標題字型 (與正文字型區分，支援上傳自定義字型)"</string>
+<string name="ui_549" formatted="false">"標題字號"</string>
+<string name="ui_550" formatted="false">"其餘正文字型與字號"</string>
+<string name="ui_551" formatted="false">"正文字號"</string>
+<string name="ui_552" formatted="false">"支援上傳豎排海報或橫排劇照"</string>
+<string name="ui_553" formatted="false">"🖼 從相簿選電影海報"</string>
+<string name="ui_554" formatted="false">"📷 拍攝電影海報"</string>
+<string name="ui_555" formatted="false">"電影與感想"</string>
+<string name="ui_556" formatted="false">"電影片名 / 便籤大標題 (如: 親愛的男孩 / 嘉年華)"</string>
+<string name="ui_557" formatted="false">"導演 / 演員或副標題 (如: 文珍 / 王家衛)"</string>
+<string name="ui_558" formatted="false">"寫下觀影感悟或臺詞 (用換行分隔上下段，穿插在大標題上下)..."</string>
+<string name="ui_559" formatted="false">"背面票根"</string>
+<string name="ui_560" formatted="false">"可直接拍照掃描紙質電影票根，自動貼合在封面背後"</string>
+<string name="ui_561" formatted="false">"📷 拍照掃描電影票根"</string>
+<string name="ui_562" formatted="false">"📑 相簿匯入票根照片"</string>
+<string name="ui_563" formatted="false">"☑ 已啟用「熱敏票高對比掃描增強濾鏡」"</string>
+<string name="ui_564" formatted="false">"套用電影院票根模版 (顯示在封面背後)"</string>
+<string name="ui_565" formatted="false">"票根票面資訊 (可隨時修改)"</string>
+<string name="ui_566" formatted="false">"影院 (如: 百老匯影城)"</string>
+<string name="ui_567" formatted="false">"影廳 (如: 3號廳)"</string>
+<string name="ui_568" formatted="false">"座位 (如: G排12座)"</string>
+<string name="ui_569" formatted="false">"版本 (如: 2D / IMAX)"</string>
+<string name="ui_570" formatted="false">"票價 (如: ¥55)"</string>
+<string name="ui_571" formatted="false">"場次時間 (如: 19:40)"</string>
+<string name="ui_572" formatted="false">"評分 (如: 4.8)"</string>
+<string name="ui_573" formatted="false">"+ 上傳字型(.ttf)"</string>
+<string name="ui_574" formatted="false">"☑ 左上角已貼上黃色「NEW」膠帶標籤"</string>
+<string name="ui_575" formatted="false">"✨ 掃描增強：黑白高對比熱敏票掃描件 (點選可切換原彩)"</string>
+<string name="ui_576" formatted="false">"🎨 掃描增強：保持票根照片原始色彩 (點選可切換黑白掃描件)"</string>
+<string name="ui_577" formatted="false">"筆記"</string>
+<string name="ui_578" formatted="false">"為了自己好，我們總是要試著思考跟察知，\n我們在別人的生活中扮演的到底是他們進步的理由，還是造成別人拼命進步只是為了要擺脫的那個原因。"</string>
+<string name="ui_579" formatted="false">"儲存失敗，請檢查圖片後重試"</string>
+<string name="ui_580" formatted="false">"電影便籤與背後票根已儲存"</string>
+<string name="ui_581" formatted="false">"@太陽照常升起"</string>
+<string name="ui_582" formatted="false">"《小王子》 · 聖埃克蘇佩裡"</string>
+<string name="ui_583" formatted="false">"未命名書摘"</string>
+<string name="ui_584" formatted="false">"@小王子 · 聖埃克蘇佩裡"</string>
+<string name="ui_585" formatted="false">"最底下的文字是書名"</string>
+<string name="ui_586" formatted="false">"和紙膠帶方箋"</string>
+<string name="ui_587" formatted="false">"活頁孔+回形針"</string>
+<string name="ui_588" formatted="false">"黃銅釘+卷角箋"</string>
+<string name="ui_589" formatted="false">"燕尾夾+手撕紙"</string>
+<string name="ui_590" formatted="false">"寬邊相框便籤"</string>
+<string name="ui_591" formatted="false">"復古牛皮手撕籤"</string>
+<string name="ui_592" formatted="false">"宣白手賬紙"</string>
+<string name="ui_593" formatted="false">"暖米書頁紙"</string>
+<string name="ui_594" formatted="false">"復古牛皮紙"</string>
+<string name="ui_595" formatted="false">"冷霧灰白紙"</string>
+<string name="ui_596" formatted="false">"暗夜墨黑紙"</string>
+<string name="ui_597" formatted="false">"寫下一句觸動你的書中摘抄，或此刻閱讀時的心情…"</string>
+<string name="ui_598" formatted="false">"✓ 已選擇專輯/背景圖片（已自動應用為模糊背景與左上角小封面）"</string>
+<string name="ui_599" formatted="false">"✓ 已拍攝背景圖片（已自動應用為模糊背景與左上角小封面）"</string>
+<string name="ui_600" formatted="false">"自定義歌詞字型已匯入並應用"</string>
+<string name="ui_601" formatted="false">"✓ 已有背景/封面照片 (輕點下方按鈕可更換)"</string>
+<string name="ui_602" formatted="false">"儲存音樂歌詞卡片"</string>
+<string name="ui_603" formatted="false">"編輯旋律"</string>
+<string name="ui_604" formatted="false">"留下一段旋律"</string>
+<string name="ui_605" formatted="false">"實時歌詞卡片預覽 (輕點卡片可直接更換封面/背景圖片)"</string>
+<string name="ui_606" formatted="false">"封面與背景"</string>
+<string name="ui_607" formatted="false">"上傳一張專輯封面、演唱會照片或當時的心情畫面：卡片背景將自動模糊化襯托歌詞，左上角同步呈現清晰小封面。"</string>
+<string name="ui_608" formatted="false">"🖼 從相簿選擇圖片"</string>
+<string name="ui_609" formatted="false">"📷 拍照作為背景"</string>
+<string name="ui_610" formatted="false">"背景模糊程度"</string>
+<string name="ui_611" formatted="false">"字型與排版"</string>
+<string name="ui_612" formatted="false">"選擇歌詞字型 (點選右側按鈕可匯入任意本地字型檔案)"</string>
+<string name="ui_613" formatted="false">"歌詞字重與傾斜風格"</string>
+<string name="ui_614" formatted="false">"歌詞字號"</string>
+<string name="ui_615" formatted="false">"歌曲與歌詞"</string>
+<string name="ui_616" formatted="false">"歌名 (顯示在左上角小封面旁第一行)"</string>
+<string name="ui_617" formatted="false">"例如：純真"</string>
+<string name="ui_618" formatted="false">"歌手 / 樂隊 (顯示在左上角小封面旁第二行)"</string>
+<string name="ui_619" formatted="false">"例如：Mayday"</string>
+<string name="ui_620" formatted="false">"打動你的那幾句歌詞 (按換行分段排版)"</string>
+<string name="ui_621" formatted="false">"寫下最觸動你的那幾句歌詞...\n例如：\n如果有期待 我想最好\n是不說\n你總是微笑的 你總是\n不開口\n世界被你掌握"</string>
+<string name="ui_622" formatted="false">"聽歌時的心情 / 故事隨記 (可選，點進詳情頁時在卡片下方展示)"</string>
+<string name="ui_623" formatted="false">"記錄下聽這首歌時的場景或心情（可選）..."</string>
+<string name="ui_624" formatted="false">"請填寫歌名"</string>
+<string name="ui_625" formatted="false">"請填寫想要留下的歌詞"</string>
+<string name="ui_626" formatted="false">"已儲存音樂歌詞卡片"</string>
+<string name="ui_back_home">‹ 返回主頁</string><string name="ui_home">主頁</string><string name="welcome_description">歡迎來到記憶冊</string><string name="welcome_quote">「 時間會走遠，\n但被記住的瞬間會一直發光。 」</string><string name="welcome_enter">輕點螢幕直接進入 · TAP TO ENTER</string><string name="home_zoom_in">放大幕布</string>
+<string name="home_zoom_out">縮小幕布</string>
+<string name="home_canvas_map">幕布位置小地圖，點按或拖動以移動視野</string>
+<string name="letter_fold">收起信紙，返回信封</string>
+<string name="letter_next_page">下一頁</string>
+</resources>

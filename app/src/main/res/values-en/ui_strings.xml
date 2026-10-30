@@ -1,0 +1,634 @@
+<resources>
+<string name="ui_000" formatted="false">"A sound to remember"</string>
+<string name="ui_001" formatted="false">"Handwritten notes"</string>
+<string name="ui_002" formatted="false">"Serif notes"</string>
+<string name="ui_003" formatted="false">"Typewriter"</string>
+<string name="ui_004" formatted="false">"Italic letters"</string>
+<string name="ui_005" formatted="false">"Memory fragments"</string>
+<string name="ui_006" formatted="false">"A quiet walk,\nwind and light on paper."</string>
+<string name="ui_007" formatted="false">"Choose a valid .ttf or .otf font"</string>
+<string name="ui_008" formatted="false">"Font imported and applied"</string>
+<string name="ui_009" formatted="false">"Choose a photo"</string>
+<string name="ui_010" formatted="false">"Take a photo"</string>
+<string name="ui_011" formatted="false">"Camera unavailable. Choose a photo instead."</string>
+<string name="ui_012" formatted="false">"Place (e.g. Cheung Chau / Ginkaku-ji)"</string>
+<string name="ui_013" formatted="false">"City or weather (optional)"</string>
+<string name="ui_014" formatted="false">"Canvas "</string>
+<string name="ui_015" formatted="false">"+ Add a page"</string>
+<string name="ui_016" formatted="false">"Keep the next view"</string>
+<string name="ui_017" formatted="false">"Delete this page"</string>
+<string name="ui_018" formatted="false">"Add photo"</string>
+<string name="ui_019" formatted="false">"Zoom"</string>
+<string name="ui_020" formatted="false">"↻ Rotate"</string>
+<string name="ui_021" formatted="false">"Reset"</string>
+<string name="ui_022" formatted="false">"Edit text"</string>
+<string name="ui_023" formatted="false">"Text 1 ▾"</string>
+<string name="ui_024" formatted="false">"+ Add text"</string>
+<string name="ui_025" formatted="false">"Delete"</string>
+<string name="ui_026" formatted="false">"Write here…"</string>
+<string name="ui_027" formatted="false">"Font"</string>
+<string name="ui_028" formatted="false">"Size"</string>
+<string name="ui_029" formatted="false">"+ Import font (.ttf/.otf)"</string>
+<string name="ui_030" formatted="false">"Text "</string>
+<string name="ui_031" formatted="false">"Up to 10 text boxes per page"</string>
+<string name="ui_032" formatted="false">"Save image"</string>
+<string name="ui_033" formatted="false">"Save note"</string>
+<string name="ui_034" formatted="false">"Image saved to Photos"</string>
+<string name="ui_035" formatted="false">"Could not save image: "</string>
+<string name="ui_036" formatted="false">"Travel notes"</string>
+<string name="ui_037" formatted="false">"Paper notes"</string>
+<string name="ui_038" formatted="false">"Saving..."</string>
+<string name="ui_039" formatted="false">"Could not save. Check your photos and retry."</string>
+<string name="ui_040" formatted="false">"Travel note saved"</string>
+<string name="ui_041" formatted="false">"Moments worth keeping,\nresting quietly here."</string>
+<string name="ui_042" formatted="false">"Along the way"</string>
+<string name="ui_043" formatted="false">"HH:mm|Text"</string>
+<string name="ui_044" formatted="false">"Keep the wind and light along the way."</string>
+<string name="ui_045" formatted="false">"Tap to write..."</string>
+<string name="ui_046" formatted="false">"Drag and zoom after adding a photo"</string>
+<string name="ui_047" formatted="false">"Book cover or mood photo"</string>
+<string name="ui_048" formatted="false">"Photo "</string>
+<string name="ui_049" formatted="false">"Loading photo"</string>
+<string name="ui_050" formatted="false">"Photo unavailable. Tap to retry."</string>
+<string name="ui_051" formatted="false">"Desk"</string>
+<string name="ui_052" formatted="false">"Date / Shuffle"</string>
+<string name="ui_053" formatted="false">"Note / Cover"</string>
+<string name="ui_054" formatted="false">"Shuffle"</string>
+<string name="ui_055" formatted="false">"Open ›"</string>
+<string name="ui_056" formatted="false">"Could not import photo"</string>
+<string name="ui_057" formatted="false">"Could not import recording"</string>
+<string name="ui_058" formatted="false">"Imported recording"</string>
+<string name="ui_059" formatted="false">"Recording updated"</string>
+<string name="ui_060" formatted="false">"‹ Back"</string>
+<string name="ui_061" formatted="false">"+ Scan / Upload  "</string>
+<string name="ui_062" formatted="false">"✎ Edit note &amp; ticket"</string>
+<string name="ui_063" formatted="false">"+ Change cover"</string>
+<string name="ui_064" formatted="false">"Tap to flip: note / poster ⇄ ticket"</string>
+<string name="ui_065" formatted="false">"Original ticket (tap to enlarge)"</string>
+<string name="ui_066" formatted="false">"Original photo (tap to enlarge)"</string>
+<string name="ui_067" formatted="false">"Edit excerpt &amp; note style"</string>
+<string name="ui_068" formatted="false">"Edit melody &amp; card style"</string>
+<string name="ui_069" formatted="false">"Listening notes / Mood"</string>
+<string name="ui_070" formatted="false">"View original cover / mood photo ›"</string>
+<string name="ui_071" formatted="false">"+ Change recording"</string>
+<string name="ui_072" formatted="false">"+ Change photo"</string>
+<string name="ui_073" formatted="false">"“Some sounds are worth remembering.”"</string>
+<string name="ui_074" formatted="false">"Field recording"</string>
+<string name="ui_075" formatted="false">"📁 Import / replace audio"</string>
+<string name="ui_076" formatted="false">"🖼 Change scene photo"</string>
+<string name="ui_077" formatted="false">"🎙 Add a sound memory"</string>
+<string name="ui_078" formatted="false">"Cannot play this recording. Upload it again."</string>
+<string name="ui_079" formatted="false">"✎ Edit paper journal"</string>
+<string name="ui_080" formatted="false">"  (Tap a page to edit text and photos)"</string>
+<string name="ui_081" formatted="false">"Travel page "</string>
+<string name="ui_082" formatted="false">"All"</string>
+<string name="ui_083" formatted="false">"Tickets"</string>
+<string name="ui_084" formatted="false">"Everyday sounds"</string>
+<string name="ui_085" formatted="false">"Reading notes"</string>
+<string name="ui_086" formatted="false">"Melodies"</string>
+<string name="ui_087" formatted="false">"Write a letter"</string>
+<string name="ui_088" formatted="false">"Memory album"</string>
+<string name="ui_089" formatted="false">"Create"</string>
+<string name="ui_090" formatted="false">"Film ticket (note, poster &amp; scanned ticket)"</string>
+<string name="ui_091" formatted="false">"Everyday sounds (record or import audio)"</string>
+<string name="ui_092" formatted="false">"Reading notes (excerpts &amp; photos)"</string>
+<string name="ui_093" formatted="false">"Melodies (lyrics card)"</string>
+<string name="ui_094" formatted="false">"Along the way (paper journal)"</string>
+<string name="ui_095" formatted="false">"Write a letter (typewriter &amp; envelope)"</string>
+<string name="ui_096" formatted="false">"Create a memory"</string>
+<string name="ui_097" formatted="false">"Explore"</string>
+<string name="ui_098" formatted="false">"Talk to memories"</string>
+<string name="ui_099" formatted="false">"Seal in envelope ›"</string>
+<string name="ui_100" formatted="false">"Medium"</string>
+<string name="ui_101" formatted="false">"Light"</string>
+<string name="ui_102" formatted="false">"Low"</string>
+<string name="ui_103" formatted="false">"High"</string>
+<string name="ui_104" formatted="false">"Diffusion"</string>
+<string name="ui_105" formatted="false">"Light range"</string>
+<string name="ui_106" formatted="false">"Write a few words first."</string>
+<string name="ui_107" formatted="false">"Choose and seal an envelope"</string>
+<string name="ui_108" formatted="false">"Stone grey"</string>
+<string name="ui_109" formatted="false">"Warm kraft"</string>
+<string name="ui_110" formatted="false">"Charcoal"</string>
+<string name="ui_111" formatted="false">"Ivory"</string>
+<string name="ui_112" formatted="false">"Recipient (e.g. Mira / future me)"</string>
+<string name="ui_113" formatted="false">"Letter title (optional)"</string>
+<string name="ui_114" formatted="false">"Date: "</string>
+<string name="ui_115" formatted="false">" (tap to change)"</string>
+<string name="ui_116" formatted="false">"Keep typing"</string>
+<string name="ui_117" formatted="false">"Seal &amp; save"</string>
+<string name="ui_118" formatted="false">"Letter saved for "</string>
+<string name="ui_119" formatted="false">"Tap here to start typing your letter...\nWhen finished, seal it in an envelope."</string>
+<string name="ui_120" formatted="false">" memories"</string>
+<string name="ui_121" formatted="false">"All memories"</string>
+<string name="ui_122" formatted="false">" · Open module"</string>
+<string name="ui_123" formatted="false">"Talk to memories  ↗"</string>
+<string name="ui_124" formatted="false">"No memories yet. Open All memories to begin."</string>
+<string name="ui_125" formatted="false">"Talk to memories"</string>
+<string name="ui_126" formatted="false">"Cover selected (tap to change)"</string>
+<string name="ui_127" formatted="false">"Tap to change photo"</string>
+<string name="ui_128" formatted="false">"Up to 9 photos"</string>
+<string name="ui_129" formatted="false">"Choose from Photos"</string>
+<string name="ui_130" formatted="false">"Camera unavailable. Choose from Photos."</string>
+<string name="ui_131" formatted="false">"Cancel"</string>
+<string name="ui_132" formatted="false">"Write a reading note"</string>
+<string name="ui_133" formatted="false">"Keep a melody"</string>
+<string name="ui_134" formatted="false">"Record a moment along the way"</string>
+<string name="ui_135" formatted="false">"+ Add book cover (optional)"</string>
+<string name="ui_136" formatted="false">"+ Add song / album cover"</string>
+<string name="ui_137" formatted="false">"Book title"</string>
+<string name="ui_138" formatted="false">"Author (optional)"</string>
+<string name="ui_139" formatted="false">"A favorite excerpt or reflection..."</string>
+<string name="ui_140" formatted="false">"Song title"</string>
+<string name="ui_141" formatted="false">"Artist"</string>
+<string name="ui_142" formatted="false">"Lyrics or your mood while listening..."</string>
+<string name="ui_143" formatted="false">"Place title (e.g. Cheung Chau)"</string>
+<string name="ui_144" formatted="false">"City · Place"</string>
+<string name="ui_145" formatted="false">"+ Add a moment"</string>
+<string name="ui_146" formatted="false">"Up to 9 moments"</string>
+<string name="ui_147" formatted="false">"Save to album"</string>
+<string name="ui_148" formatted="false">"Photos (up to 9; first 2 appear in the day collage)"</string>
+<string name="ui_149" formatted="false">"+ Photo\n("</string>
+<string name="ui_150" formatted="false">"Time (e.g. 12:07)"</string>
+<string name="ui_151" formatted="false">"+ Add a photo of this moment"</string>
+<string name="ui_152" formatted="false">"What did you see here?..."</string>
+<string name="ui_153" formatted="false">"Enter a place or describe a moment."</string>
+<string name="ui_154" formatted="false">"A walk to remember."</string>
+<string name="ui_155" formatted="false">"Add a photo or write a few words."</string>
+<string name="ui_156" formatted="false">"A book I read"</string>
+<string name="ui_157" formatted="false">"A song I heard"</string>
+<string name="ui_158" formatted="false">"Daily notes"</string>
+<string name="ui_159" formatted="false">"Saving..."</string>
+<string name="ui_160" formatted="false">"Could not save. Check photos or storage and retry."</string>
+<string name="ui_161" formatted="false">"Saved to album"</string>
+<string name="ui_162" formatted="false">"Tap a group to explore · "</string>
+<string name="ui_163" formatted="false">" memories"</string>
+<string name="ui_164" formatted="false">"Melodies &amp; everyday sounds · "</string>
+<string name="ui_165" formatted="false">"Along the way &amp; letters · "</string>
+<string name="ui_166" formatted="false">"Films &amp; books · "</string>
+<string name="ui_167" formatted="false">"The day\'s music and sounds · Tap to open"</string>
+<string name="ui_168" formatted="false">"The day\'s places and letters · Tap to open"</string>
+<string name="ui_169" formatted="false">"The day\'s films and books · Tap to open"</string>
+<string name="ui_170" formatted="false">"Innocence"</string>
+<string name="ui_171" formatted="false">"If there is hope,\nperhaps it is best left unsaid.\nYou keep smiling,\nyou never speak.\nThe world is in your hands."</string>
+<string name="ui_172" formatted="false">"Home"</string>
+<string name="ui_173" formatted="false">"Waiting for audio"</string>
+<string name="ui_174" formatted="false">"Recording"</string>
+<string name="ui_175" formatted="false">"● Recording...  "</string>
+<string name="ui_176" formatted="false">"  (tap again to finish)"</string>
+<string name="ui_177" formatted="false">"▶ Previewing · "</string>
+<string name="ui_178" formatted="false">"Microphone access is needed to record. You can also import an audio file."</string>
+<string name="ui_179" formatted="false">"Scene photo selected (tap to change)"</string>
+<string name="ui_180" formatted="false">"Everyday sounds"</string>
+<string name="ui_181" formatted="false">"Record live or import an audio file"</string>
+<string name="ui_182" formatted="false">"🎙 Record live"</string>
+<string name="ui_183" formatted="false">"📁 Import audio"</string>
+<string name="ui_184" formatted="false">"▶ Preview audio"</string>
+<string name="ui_185" formatted="false">"Name this sound"</string>
+<string name="ui_186" formatted="false">"Place or scene"</string>
+<string name="ui_187" formatted="false">"Describe the scene and story behind this sound..."</string>
+<string name="ui_188" formatted="false">"Save sound to album"</string>
+<string name="ui_189" formatted="false">"+ Add scene photo"</string>
+<string name="ui_190" formatted="false">"Live recording"</string>
+<string name="ui_191" formatted="false">"■ Stop recording"</string>
+<string name="ui_192" formatted="false">"Could not start recording. Try importing audio."</string>
+<string name="ui_193" formatted="false">"🎙 Record again"</string>
+<string name="ui_194" formatted="false">"✓ Recording complete ("</string>
+<string name="ui_195" formatted="false">"▶ Preview audio ("</string>
+<string name="ui_196" formatted="false">"Imported · "</string>
+<string name="ui_197" formatted="false">"Recording"</string>
+<string name="ui_198" formatted="false">"✓ Audio imported: "</string>
+<string name="ui_199" formatted="false">"Audio file"</string>
+<string name="ui_200" formatted="false">"▶ Preview imported audio ("</string>
+<string name="ui_201" formatted="false">"⏸ Pause preview"</string>
+<string name="ui_202" formatted="false">"Cannot play this file. Use m4a/mp3/wav/aac/ogg."</string>
+<string name="ui_203" formatted="false">"Record or import audio, or describe a sound."</string>
+<string name="ui_204" formatted="false">"Some sounds are worth remembering."</string>
+<string name="ui_205" formatted="false">"Sound memory"</string>
+<string name="ui_206" formatted="false">"Saving sound..."</string>
+<string name="ui_207" formatted="false">"Could not save. Check the audio file and retry."</string>
+<string name="ui_208" formatted="false">"Sound saved to album"</string>
+<string name="ui_209" formatted="false">"Chat"</string>
+<string name="ui_210" formatted="false">"Materials"</string>
+<string name="ui_211" formatted="false">"Backing up memories and attachments…"</string>
+<string name="ui_212" formatted="false">"Cannot write backup"</string>
+<string name="ui_213" formatted="false">"Backup saved. Model keys are excluded."</string>
+<string name="ui_214" formatted="false">"Checking backup…"</string>
+<string name="ui_215" formatted="false">"Cannot open backup"</string>
+<string name="ui_216" formatted="false">"Model"</string>
+<string name="ui_217" formatted="false">"About me"</string>
+<string name="ui_218" formatted="false">"Reflections"</string>
+<string name="ui_219" formatted="false">"Manage"</string>
+<string name="ui_220" formatted="false">"Back to album"</string>
+<string name="ui_221" formatted="false">"Memory"</string>
+<string name="ui_222" formatted="false">"Everything you kept is here"</string>
+<string name="ui_223" formatted="false">"Chat menu"</string>
+<string name="ui_224" formatted="false">"Cannot read the result. Please retry."</string>
+<string name="ui_225" formatted="false">"Switch to"</string>
+<string name="ui_226" formatted="false">"Working. Please wait."</string>
+<string name="ui_227" formatted="false">"My memories · "</string>
+<string name="ui_228" formatted="false">"Materials &amp; management"</string>
+<string name="ui_229" formatted="false">"About me &amp; reflections"</string>
+<string name="ui_230" formatted="false">"Model settings"</string>
+<string name="ui_231" formatted="false">"Add"</string>
+<string name="ui_232" formatted="false">"Add a text or personal story"</string>
+<string name="ui_233" formatted="false">"Leave some new words"</string>
+<string name="ui_234" formatted="false">"Write a text"</string>
+<string name="ui_235" formatted="false">"Write about myself"</string>
+<string name="ui_236" formatted="false">"Say something. Let memory answer…"</string>
+<string name="ui_237" formatted="false">"Message input"</string>
+<string name="ui_238" formatted="false">"Send"</string>
+<string name="ui_239" formatted="false">"Send message"</string>
+<string name="ui_240" formatted="false">"Opening memories…"</string>
+<string name="ui_241" formatted="false">" memories · Searching only your records"</string>
+<string name="ui_242" formatted="false">"Some sources changed. Earlier chats remain available."</string>
+<string name="ui_243" formatted="false">"↑ Earlier chats"</string>
+<string name="ui_244" formatted="false">"↓ Newer chats"</string>
+<string name="ui_245" formatted="false">"Copy text"</string>
+<string name="ui_246" formatted="false">"Keep this as a memory"</string>
+<string name="ui_247" formatted="false">"Message"</string>
+<string name="ui_248" formatted="false">"Finding words worth keeping…"</string>
+<string name="ui_249" formatted="false">" memory sources"</string>
+<string name="ui_250" formatted="false">"Remembering…"</string>
+<string name="ui_251" formatted="false">"Looking through related memories…"</string>
+<string name="ui_252" formatted="false">"Up to 2,000 characters per message"</string>
+<string name="ui_253" formatted="false">"Me"</string>
+<string name="ui_254" formatted="false">"M"</string>
+<string name="ui_255" formatted="false">"Let a moment become an echo."</string>
+<string name="ui_256" formatted="false">"A book, a song, or a chapter of life.\nBegin with whatever comes to mind."</string>
+<string name="ui_257" formatted="false">"What have I kept lately?"</string>
+<string name="ui_258" formatted="false">"Which films have I watched?"</string>
+<string name="ui_259" formatted="false">" · Sample"</string>
+<string name="ui_260" formatted="false">"Memories recalled this time"</string>
+<string name="ui_261" formatted="false">"Close"</string>
+<string name="ui_262" formatted="false">"New conversation"</string>
+<string name="ui_263" formatted="false">"Past conversations"</string>
+<string name="ui_264" formatted="false">"Memory overview"</string>
+<string name="ui_265" formatted="false">"Loading…"</string>
+<string name="ui_266" formatted="false">"The six album categories, including samples, are connected automatically. Audio, photos and music use your written descriptions as memories. You may also import text."</string>
+<string name="ui_267" formatted="false">"Choose album records to summarize"</string>
+<string name="ui_268" formatted="false">"Memories on this phone"</string>
+<string name="ui_269" formatted="false">"Refresh memory list"</string>
+<string name="ui_270" formatted="false">"Name this personal story"</string>
+<string name="ui_271" formatted="false">"Name this text"</string>
+<string name="ui_272" formatted="false">"Date yyyy-MM-dd (optional)"</string>
+<string name="ui_273" formatted="false">"Write about yourself or paste a personal story (up to 24,000 characters)"</string>
+<string name="ui_274" formatted="false">"Paste a journal entry or other text (up to 24,000 characters)"</string>
+<string name="ui_275" formatted="false">"Import .txt / .md"</string>
+<string name="ui_276" formatted="false">"Save &amp; find personal insights"</string>
+<string name="ui_277" formatted="false">"Save &amp; organize"</string>
+<string name="ui_278" formatted="false">"Enter a title (up to 160 characters) and text (up to 24,000)."</string>
+<string name="ui_279" formatted="false">"Saving and organizing. Long texts may take a moment…"</string>
+<string name="ui_280" formatted="false">"Original saved. Retry organizing it in Materials."</string>
+<string name="ui_281" formatted="false">"Organized. Confirm the insights that fit you below."</string>
+<string name="ui_282" formatted="false">"Organized. Confirm insights in About me."</string>
+<string name="ui_283" formatted="false">"Save to phone only"</string>
+<string name="ui_284" formatted="false">"Saving to phone…"</string>
+<string name="ui_285" formatted="false">"Original saved. Organize it later in Materials."</string>
+<string name="ui_286" formatted="false">"Reading memories…"</string>
+<string name="ui_287" formatted="false">" · Keep close"</string>
+<string name="ui_288" formatted="false">"Connected from the album. Ready for questions; summarizing is optional."</string>
+<string name="ui_289" formatted="false">"Original saved. Ready for questions or organizing."</string>
+<string name="ui_290" formatted="false">"View original"</string>
+<string name="ui_291" formatted="false">"Summarize &amp; find insights"</string>
+<string name="ui_292" formatted="false">"Organizing…"</string>
+<string name="ui_293" formatted="false">"Let it fade"</string>
+<string name="ui_294" formatted="false">"Please remember this"</string>
+<string name="ui_295" formatted="false">"Saving…"</string>
+<string name="ui_296" formatted="false">"Wake this memory"</string>
+<string name="ui_297" formatted="false">"Let it rest"</string>
+<string name="ui_298" formatted="false">"Updating memory…"</string>
+<string name="ui_299" formatted="false">"Open original album record"</string>
+<string name="ui_300" formatted="false">"Delete this memory"</string>
+<string name="ui_301" formatted="false">"Delete this Agent memory?"</string>
+<string name="ui_302" formatted="false">"This text, its summary, related insights and chats citing it will be removed from this phone. The album\'s original record will remain."</string>
+<string name="ui_303" formatted="false">"Keep"</string>
+<string name="ui_304" formatted="false">"Deleting…"</string>
+<string name="ui_305" formatted="false">"Previous"</string>
+<string name="ui_306" formatted="false">"Next · Total "</string>
+<string name="ui_307" formatted="false">" items"</string>
+<string name="ui_308" formatted="false">"Introduce yourself in your own words. Write or import a text; the original stays in Materials. You can confirm, edit or withdraw the insights afterward."</string>
+<string name="ui_309" formatted="false">"Insights about me"</string>
+<string name="ui_310" formatted="false">"These insights come from your materials. Model inferences are marked separately and become a reference only after your confirmation. You may withdraw them anytime."</string>
+<string name="ui_311" formatted="false">"Merge insights &amp; explore changes"</string>
+<string name="ui_312" formatted="false">"Organizing repeated, changing and conflicting insights…"</string>
+<string name="ui_313" formatted="false">"Refresh insights"</string>
+<string name="ui_314" formatted="false">"Reading insights about you…"</string>
+<string name="ui_315" formatted="false">"Date not provided"</string>
+<string name="ui_316" formatted="false">"Description selected"</string>
+<string name="ui_317" formatted="false">"Use this description"</string>
+<string name="ui_318" formatted="false">"Saving your choice…"</string>
+<string name="ui_319" formatted="false">"No insights yet. Add a personal text to begin."</string>
+<string name="ui_320" formatted="false">"My correction"</string>
+<string name="ui_321" formatted="false">"Personal account"</string>
+<string name="ui_322" formatted="false">"Model inference"</string>
+<string name="ui_323" formatted="false">"Confirmed"</string>
+<string name="ui_324" formatted="false">"Pending"</string>
+<string name="ui_325" formatted="false">"View source"</string>
+<string name="ui_326" formatted="false">"Edit this description"</string>
+<string name="ui_327" formatted="false">"Define yourself in your own words"</string>
+<string name="ui_328" formatted="false">"Save correction"</string>
+<string name="ui_329" formatted="false">"Correcting…"</string>
+<string name="ui_330" formatted="false">"This fits me"</string>
+<string name="ui_331" formatted="false">"Stop using this insight"</string>
+<string name="ui_332" formatted="false">"This does not represent me"</string>
+<string name="ui_333" formatted="false">"Updating…"</string>
+<string name="ui_334" formatted="false">"Enter an API key and model name. The Agent runs in the app; memories stay on your phone."</string>
+<string name="ui_335" formatted="false">"Model name (from your provider)"</string>
+<string name="ui_336" formatted="false">"Your model API key"</string>
+<string name="ui_337" formatted="false">"Cannot decrypt the saved key. Please enter it again."</string>
+<string name="ui_338" formatted="false">"Model API URL, e.g. https://example.com/v1"</string>
+<string name="ui_339" formatted="false">"Model API address · Change for another provider"</string>
+<string name="ui_340" formatted="false">"Save model settings"</string>
+<string name="ui_341" formatted="false">"Settings saved. You can organize memories or chat."</string>
+<string name="ui_342" formatted="false">"Could not save model settings"</string>
+<string name="ui_343" formatted="false">"Save &amp; test model"</string>
+<string name="ui_344" formatted="false">"Connecting to model service…"</string>
+<string name="ui_345" formatted="false">"Model connected successfully"</string>
+<string name="ui_346" formatted="false">"Check model settings"</string>
+<string name="ui_347" formatted="false">"The API key is encrypted on your phone and sent only to your selected provider. Organizing sends the text; chat sends relevant memories and recent messages."</string>
+<string name="ui_348" formatted="false">"Default URL: "</string>
+<string name="ui_349" formatted="false">". This is the provider\'s API; no server setup is needed. Supports compatible Chat Completions models with tool calling."</string>
+<string name="ui_350" formatted="false">"Remove saved API key"</string>
+<string name="ui_351" formatted="false">"Could not remove key. Retry."</string>
+<string name="ui_352" formatted="false">"No records in the album yet"</string>
+<string name="ui_353" formatted="false">"Choose records to summarize"</string>
+<string name="ui_354" formatted="false">"Start organizing"</string>
+<string name="ui_355" formatted="false">"Select up to 10 records at a time"</string>
+<string name="ui_356" formatted="false">"Organizing selected records…"</string>
+<string name="ui_357" formatted="false">"Organized"</string>
+<string name="ui_358" formatted="false">" items; original for “"</string>
+<string name="ui_359" formatted="false">"” saved. Retry from the list."</string>
+<string name="ui_360" formatted="false">"Organized "</string>
+<string name="ui_361" formatted="false">" memories"</string>
+<string name="ui_362" formatted="false">"Available: "</string>
+<string name="ui_363" formatted="false">" album records, "</string>
+<string name="ui_364" formatted="false">" text materials.\n\n"</string>
+<string name="ui_365" formatted="false">"Films "</string>
+<string name="ui_366" formatted="false">" · Reading notes "</string>
+<string name="ui_367" formatted="false">" · Melodies "</string>
+<string name="ui_368" formatted="false">" · Everyday sounds "</string>
+<string name="ui_369" formatted="false">" · Along the way "</string>
+<string name="ui_370" formatted="false">" · Write a letter "</string>
+<string name="ui_371" formatted="false">"\nIncludes "</string>
+<string name="ui_372" formatted="false">" samples for testing. Answers will identify sample sources."</string>
+<string name="ui_373" formatted="false">"Reading text file…"</string>
+<string name="ui_374" formatted="false">"Text material.txt"</string>
+<string name="ui_375" formatted="false">"Supports .txt / .md files"</string>
+<string name="ui_376" formatted="false">"Cannot open file"</string>
+<string name="ui_377" formatted="false">"File exceeds 200 KB"</string>
+<string name="ui_378" formatted="false">"Use UTF-8 text encoding"</string>
+<string name="ui_379" formatted="false">"Plain text only, up to 24,000 characters"</string>
+<string name="ui_380" formatted="false">"This file is empty. Choose another text."</string>
+<string name="ui_381" formatted="false">"Text loaded. Edit it before saving."</string>
+<string name="ui_382" formatted="false">"Opening original text…"</string>
+<string name="ui_383" formatted="false">"\n\n— Original —\n\n\n"</string>
+<string name="ui_384" formatted="false">"Resting"</string>
+<string name="ui_385" formatted="false">"Fading"</string>
+<string name="ui_386" formatted="false">"Clear"</string>
+<string name="ui_387" formatted="false">"Conflicting insights. Your choice is needed."</string>
+<string name="ui_388" formatted="false">"Changes over time"</string>
+<string name="ui_389" formatted="false">"Supporting insights"</string>
+<string name="ui_390" formatted="false">"Opening conversations…"</string>
+<string name="ui_391" formatted="false">"No saved conversations yet"</string>
+<string name="ui_392" formatted="false">" · Source updated"</string>
+<string name="ui_393" formatted="false">"Keep these words?"</string>
+<string name="ui_394" formatted="false">"You can edit them. They enter long-term memory only after confirmation."</string>
+<string name="ui_395" formatted="false">"Don\'t save"</string>
+<string name="ui_396" formatted="false">"Confirm &amp; remember"</string>
+<string name="ui_397" formatted="false">"Saving memory…"</string>
+<string name="ui_398" formatted="false">"Remembered"</string>
+<string name="ui_399" formatted="false">"Fold a chapter of life into a page. Reflections keep source references and can be refreshed when originals change."</string>
+<string name="ui_400" formatted="false">"Start date yyyy-MM-dd"</string>
+<string name="ui_401" formatted="false">"End date yyyy-MM-dd"</string>
+<string name="ui_402" formatted="false">"Name this chapter"</string>
+<string name="ui_403" formatted="false">"What this month left behind"</string>
+<string name="ui_404" formatted="false">"Create a reflection"</string>
+<string name="ui_405" formatted="false">"Reviewing this chapter…"</string>
+<string name="ui_406" formatted="false">"Reading reflections…"</string>
+<string name="ui_407" formatted="false">" to "</string>
+<string name="ui_408" formatted="false">" · Sources changed. Organize again."</string>
+<string name="ui_409" formatted="false">"Update reflection"</string>
+<string name="ui_410" formatted="false">"Updating reflection…"</string>
+<string name="ui_411" formatted="false">"Return to source · "</string>
+<string name="ui_412" formatted="false">"Original record"</string>
+<string name="ui_413" formatted="false">"Organize material"</string>
+<string name="ui_414" formatted="false">"Create a reflection"</string>
+<string name="ui_415" formatted="false">"Merge personal insights"</string>
+<string name="ui_416" formatted="false">"Find memories &amp; answer"</string>
+<string name="ui_417" formatted="false">"Unfinished tasks"</string>
+<string name="ui_418" formatted="false">"Samples are available for testing. Originals stay on your phone. Fading and resting affect recall order without deleting text."</string>
+<string name="ui_419" formatted="false">"Export full memory backup"</string>
+<string name="ui_420" formatted="false">"My memories-"</string>
+<string name="ui_421" formatted="false">"Restore from backup"</string>
+<string name="ui_422" formatted="false">"Backups include album records, text, summaries, insights, chats, reflections and attachments, excluding API keys. Existing records with matching IDs are kept during restore."</string>
+<string name="ui_423" formatted="false">"Checking tasks…"</string>
+<string name="ui_424" formatted="false">"Unfinished tasks to continue"</string>
+<string name="ui_425" formatted="false">"Progress saved"</string>
+<string name="ui_426" formatted="false">"Continue"</string>
+<string name="ui_427" formatted="false">"Resuming task…"</string>
+<string name="ui_428" formatted="false">"Task completed"</string>
+<string name="ui_429" formatted="false">"Remove task"</string>
+<string name="ui_430" formatted="false">"Confirm this chat memory"</string>
+<string name="ui_431" formatted="false">"Cannot read memory proposal"</string>
+<string name="ui_432" formatted="false">"Restore this memory backup?"</string>
+<string name="ui_433" formatted="false">" Agent memories, "</string>
+<string name="ui_434" formatted="false">" attachments. Existing records with matching IDs will be kept."</string>
+<string name="ui_435" formatted="false">"Restore"</string>
+<string name="ui_436" formatted="false">"Restoring memories…"</string>
+<string name="ui_437" formatted="false">"Memories restored"</string>
+<string name="ui_438" formatted="false">"Text note"</string>
+<string name="ui_439" formatted="false">"Portrait poster"</string>
+<string name="ui_440" formatted="false">"Landscape poster"</string>
+<string name="ui_441" formatted="false">"Interwoven headline"</string>
+<string name="ui_442" formatted="false">"Overlapping headline"</string>
+<string name="ui_443" formatted="false">"Dark tilted note"</string>
+<string name="ui_444" formatted="false">"Ochre banner"</string>
+<string name="ui_445" formatted="false">"Random texture"</string>
+<string name="ui_446" formatted="false">"Fine perforations"</string>
+<string name="ui_447" formatted="false">"Torn sides"</string>
+<string name="ui_448" formatted="false">"Torn edges"</string>
+<string name="ui_449" formatted="false">"Vintage note + NEW"</string>
+<string name="ui_450" formatted="false">"Mist grey paper"</string>
+<string name="ui_451" formatted="false">"Charcoal paper"</string>
+<string name="ui_452" formatted="false">"Vintage ochre paper"</string>
+<string name="ui_453" formatted="false">"Warm white paper"</string>
+<string name="ui_454" formatted="false">"Classic thermal ticket"</string>
+<string name="ui_455" formatted="false">"Broadway film"</string>
+<string name="ui_456" formatted="false">"IMAX collector ticket"</string>
+<string name="ui_457" formatted="false">"Art festival ticket"</string>
+<string name="ui_458" formatted="false">"Full scanned original"</string>
+<string name="ui_459" formatted="false">"Image unavailable"</string>
+<string name="ui_460" formatted="false">"✎ Rewrite on typewriter"</string>
+<string name="ui_461" formatted="false">"Tap the envelope to open"</string>
+<string name="ui_462" formatted="false">"To"</string>
+<string name="ui_463" formatted="false">"✓ Cover / mood photo selected (shown inside the detail note)"</string>
+<string name="ui_464" formatted="false">"✓ Selected "</string>
+<string name="ui_465" formatted="false">" cover / mood photos (shown inside the detail note)"</string>
+<string name="ui_466" formatted="false">"✓ Cover / mood photo taken (shown inside the detail note)"</string>
+<string name="ui_467" formatted="false">"Choose a valid .ttf or .otf font"</string>
+<string name="ui_468" formatted="false">"Custom font applied to excerpt note"</string>
+<string name="ui_469" formatted="false">"Camera unavailable. Choose a photo instead."</string>
+<string name="ui_470" formatted="false">"Photo preview (tap to change)"</string>
+<string name="ui_471" formatted="false">"✓ Cover / mood photo available (use buttons below to change)"</string>
+<string name="ui_472" formatted="false">"Save book note"</string>
+<string name="ui_473" formatted="false">"Edit reading note"</string>
+<string name="ui_474" formatted="false">"Write a reading note"</string>
+<string name="ui_475" formatted="false">"Note preview"</string>
+<string name="ui_476" formatted="false">"↻ Change note style"</string>
+<string name="ui_477" formatted="false">"+ Add book cover or mood photo"</string>
+<string name="ui_478" formatted="false">"Note style"</string>
+<string name="ui_479" formatted="false">"Style"</string>
+<string name="ui_480" formatted="false">"Paper"</string>
+<string name="ui_481" formatted="false">"Font · Import .ttf / .otf"</string>
+<string name="ui_482" formatted="false">"Paragraph alignment"</string>
+<string name="ui_483" formatted="false">"Centered"</string>
+<string name="ui_484" formatted="false">"Left aligned"</string>
+<string name="ui_485" formatted="false">"Excerpt size"</string>
+<string name="ui_486" formatted="false">"Excerpt &amp; reflections"</string>
+<string name="ui_487" formatted="false">"Excerpt"</string>
+<string name="ui_488" formatted="false">"Write an excerpt or a thought that moved you..."</string>
+<string name="ui_489" formatted="false">"Book title (required; shown at the bottom)"</string>
+<string name="ui_490" formatted="false">"Author / Chapter / Page (optional)"</string>
+<string name="ui_491" formatted="false">"E.g. Hemingway / Chapter 3 (optional)"</string>
+<string name="ui_492" formatted="false">"Your thoughts / reflections (optional)"</string>
+<string name="ui_493" formatted="false">"Add your own reflection or annotation..."</string>
+<string name="ui_494" formatted="false">"Show reflections on note: Off (details only)"</string>
+<string name="ui_495" formatted="false">"Cover &amp; photos"</string>
+<string name="ui_496" formatted="false">"Add a book cover or a photo of your mood. The list shows a text note; details bring photos, excerpts and reflections together on one sheet."</string>
+<string name="ui_497" formatted="false">"+ Import font (.ttf/.otf)"</string>
+<string name="ui_498" formatted="false">"Show reflections on note: On ✓"</string>
+<string name="ui_499" formatted="false">"The Sun Also Rises"</string>
+<string name="ui_500" formatted="false">"She had thought her pain dulled long ago,\nbut it was the only living thing inside her,\nalways fresh and fierce,\nnever giving her a moment\'s rest."</string>
+<string name="ui_501" formatted="false">"Enter a book title."</string>
+<string name="ui_502" formatted="false">"Write an excerpt or a reflection."</string>
+<string name="ui_503" formatted="false">"Could not save. Please retry."</string>
+<string name="ui_504" formatted="false">"Book note saved"</string>
+<string name="ui_505" formatted="false">"Film notes"</string>
+<string name="ui_506" formatted="false">"Are we the reason others grow, or the reason they struggle to grow just to leave us behind?"</string>
+<string name="ui_507" formatted="false">"Director / "</string>
+<string name="ui_508" formatted="false">"To remember this scene from “"</string>
+<string name="ui_509" formatted="false">"”,\nwe try to think and notice,\n"</string>
+<string name="ui_510" formatted="false">"For our own good,\nwe try to think and notice,\n"</string>
+<string name="ui_511" formatted="false">"The moments when the screen lights up and goes dark stay in this note."</string>
+<string name="ui_512" formatted="false">"Untitled film"</string>
+<string name="ui_513" formatted="false">"Cinema"</string>
+<string name="ui_514" formatted="false">"Broadway Cinematheque"</string>
+<string name="ui_515" formatted="false">"Laser Hall 3"</string>
+<string name="ui_516" formatted="false">"Row G · Seat 12"</string>
+<string name="ui_517" formatted="false">"2D Original"</string>
+<string name="ui_518" formatted="false">"Hall"</string>
+<string name="ui_519" formatted="false">"Seat"</string>
+<string name="ui_520" formatted="false">"Date &amp; Time"</string>
+<string name="ui_521" formatted="false">"Price"</string>
+<string name="ui_522" formatted="false">"Bold italic"</string>
+<string name="ui_523" formatted="false">"Bold"</string>
+<string name="ui_524" formatted="false">"Regular"</string>
+<string name="ui_525" formatted="false">"Light blur"</string>
+<string name="ui_526" formatted="false">"Soft focus"</string>
+<string name="ui_527" formatted="false">"Deep blur"</string>
+<string name="ui_528" formatted="false">"Clear &amp; dim"</string>
+<string name="ui_529" formatted="false">"✓ Film poster selected (tap to change)"</string>
+<string name="ui_530" formatted="false">"✓ Ticket scan imported (back preview)"</string>
+<string name="ui_531" formatted="false">"✓ Film poster captured (tap to change)"</string>
+<string name="ui_532" formatted="false">"✓ Ticket scanned (back preview)"</string>
+<string name="ui_533" formatted="false">"Custom font imported and applied"</string>
+<string name="ui_534" formatted="false">"✓ Film poster available (tap to change)"</string>
+<string name="ui_535" formatted="false">"✓ Original ticket scan available (tap to change)"</string>
+<string name="ui_536" formatted="false">"Save film note &amp; ticket"</string>
+<string name="ui_537" formatted="false">"Film note &amp; ticket"</string>
+<string name="ui_538" formatted="false">"Preview: Front (note / poster)"</string>
+<string name="ui_539" formatted="false">"⇄ Flip to ticket"</string>
+<string name="ui_540" formatted="false">"Preview: Back (ticket)"</string>
+<string name="ui_541" formatted="false">"Preview: Front ("</string>
+<string name="ui_542" formatted="false">"Front style"</string>
+<string name="ui_543" formatted="false">"Front presentation"</string>
+<string name="ui_544" formatted="false">"Note / poster border"</string>
+<string name="ui_545" formatted="false">"Note composition"</string>
+<string name="ui_546" formatted="false">"Paper color"</string>
+<string name="ui_547" formatted="false">"☐ Add yellow NEW tape"</string>
+<string name="ui_548" formatted="false">"Title font (custom fonts supported)"</string>
+<string name="ui_549" formatted="false">"Title size"</string>
+<string name="ui_550" formatted="false">"Body font &amp; size"</string>
+<string name="ui_551" formatted="false">"Body size"</string>
+<string name="ui_552" formatted="false">"Portrait posters or landscape stills"</string>
+<string name="ui_553" formatted="false">"🖼 Choose film poster"</string>
+<string name="ui_554" formatted="false">"📷 Photograph poster"</string>
+<string name="ui_555" formatted="false">"Film &amp; reflections"</string>
+<string name="ui_556" formatted="false">"Film title / Note headline"</string>
+<string name="ui_557" formatted="false">"Director / Cast / Subtitle"</string>
+<string name="ui_558" formatted="false">"Reflections or dialogue (use line breaks)..."</string>
+<string name="ui_559" formatted="false">"Ticket back"</string>
+<string name="ui_560" formatted="false">"Photograph a paper ticket to place it on the back"</string>
+<string name="ui_561" formatted="false">"📷 Scan paper ticket"</string>
+<string name="ui_562" formatted="false">"📑 Import ticket photo"</string>
+<string name="ui_563" formatted="false">"☑ Thermal ticket contrast enhancement enabled"</string>
+<string name="ui_564" formatted="false">"Ticket template (shown on the back)"</string>
+<string name="ui_565" formatted="false">"Ticket information"</string>
+<string name="ui_566" formatted="false">"Cinema"</string>
+<string name="ui_567" formatted="false">"Hall (e.g. Hall 3)"</string>
+<string name="ui_568" formatted="false">"Seat (e.g. G12)"</string>
+<string name="ui_569" formatted="false">"Version (e.g. 2D / IMAX)"</string>
+<string name="ui_570" formatted="false">"Price (e.g. ¥55)"</string>
+<string name="ui_571" formatted="false">"Showtime (e.g. 19:40)"</string>
+<string name="ui_572" formatted="false">"Rating (e.g. 4.8)"</string>
+<string name="ui_573" formatted="false">"+ Import font (.ttf)"</string>
+<string name="ui_574" formatted="false">"☑ Yellow NEW tape added"</string>
+<string name="ui_575" formatted="false">"✨ Scan: High contrast (tap for original colors)"</string>
+<string name="ui_576" formatted="false">"🎨 Scan: Original colors (tap for high contrast)"</string>
+<string name="ui_577" formatted="false">"Notes"</string>
+<string name="ui_578" formatted="false">"For our own good, we try to think and notice.\nDo we help others grow, or make them grow to leave us behind?"</string>
+<string name="ui_579" formatted="false">"Could not save. Check your photos and retry."</string>
+<string name="ui_580" formatted="false">"Film note &amp; ticket saved"</string>
+<string name="ui_581" formatted="false">"@The Sun Also Rises"</string>
+<string name="ui_582" formatted="false">"The Little Prince · Antoine de Saint-Exupéry"</string>
+<string name="ui_583" formatted="false">"Untitled book note"</string>
+<string name="ui_584" formatted="false">"@The Little Prince · Antoine de Saint-Exupéry"</string>
+<string name="ui_585" formatted="false">"The book title is at the bottom"</string>
+<string name="ui_586" formatted="false">"Washi tape note"</string>
+<string name="ui_587" formatted="false">"Binder holes &amp; paperclip"</string>
+<string name="ui_588" formatted="false">"Brass pin &amp; curled corner"</string>
+<string name="ui_589" formatted="false">"Binder clip &amp; torn paper"</string>
+<string name="ui_590" formatted="false">"Wide frame note"</string>
+<string name="ui_591" formatted="false">"Vintage kraft tag"</string>
+<string name="ui_592" formatted="false">"White journal paper"</string>
+<string name="ui_593" formatted="false">"Warm book paper"</string>
+<string name="ui_594" formatted="false">"Vintage kraft paper"</string>
+<string name="ui_595" formatted="false">"Cool mist paper"</string>
+<string name="ui_596" formatted="false">"Night black paper"</string>
+<string name="ui_597" formatted="false">"Write an excerpt or your mood while reading…"</string>
+<string name="ui_598" formatted="false">"✓ Album / background photo selected"</string>
+<string name="ui_599" formatted="false">"✓ Background photo captured"</string>
+<string name="ui_600" formatted="false">"Custom lyric font imported and applied"</string>
+<string name="ui_601" formatted="false">"✓ Background / cover photo available (tap to change)"</string>
+<string name="ui_602" formatted="false">"Save lyrics card"</string>
+<string name="ui_603" formatted="false">"Edit melody"</string>
+<string name="ui_604" formatted="false">"Keep a melody"</string>
+<string name="ui_605" formatted="false">"Live preview (tap to change cover / background)"</string>
+<string name="ui_606" formatted="false">"Cover &amp; background"</string>
+<string name="ui_607" formatted="false">"Add an album cover, concert photo or scene. The background is blurred behind the lyrics, with a clear small cover in the corner."</string>
+<string name="ui_608" formatted="false">"🖼 Choose a photo"</string>
+<string name="ui_609" formatted="false">"📷 Take background photo"</string>
+<string name="ui_610" formatted="false">"Background blur"</string>
+<string name="ui_611" formatted="false">"Font &amp; layout"</string>
+<string name="ui_612" formatted="false">"Lyric font (import a local font using the button)"</string>
+<string name="ui_613" formatted="false">"Lyric weight &amp; style"</string>
+<string name="ui_614" formatted="false">"Lyric size"</string>
+<string name="ui_615" formatted="false">"Song &amp; lyrics"</string>
+<string name="ui_616" formatted="false">"Song title (beside the cover)"</string>
+<string name="ui_617" formatted="false">"E.g. Innocence"</string>
+<string name="ui_618" formatted="false">"Artist / Band (beside the cover)"</string>
+<string name="ui_619" formatted="false">"E.g. Mayday"</string>
+<string name="ui_620" formatted="false">"Lyrics to keep (line breaks supported)"</string>
+<string name="ui_621" formatted="false">"Write the lyrics that moved you..."</string>
+<string name="ui_622" formatted="false">"Mood / Story (optional; shown in details)"</string>
+<string name="ui_623" formatted="false">"Describe the moment or mood (optional)..."</string>
+<string name="ui_624" formatted="false">"Enter a song title."</string>
+<string name="ui_625" formatted="false">"Enter the lyrics you want to keep."</string>
+<string name="ui_626" formatted="false">"Lyrics card saved"</string>
+<string name="ui_back_home">‹ Home</string><string name="ui_home">Home</string><string name="welcome_description">Welcome to your memory</string><string name="welcome_quote">Time drifts away, but the moments we remember keep shining.</string><string name="welcome_enter">TAP TO ENTER</string><string name="home_zoom_in">Zoom in</string>
+<string name="home_zoom_out">Zoom out</string>
+<string name="home_canvas_map">Canvas map. Tap or drag to move the viewport.</string>
+<string name="letter_fold">Fold letter back into envelope</string>
+<string name="letter_next_page">Next page</string>
+</resources>
