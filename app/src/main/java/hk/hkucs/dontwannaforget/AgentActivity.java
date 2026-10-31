@@ -260,7 +260,7 @@ public class AgentActivity extends AppCompatActivity {
     private void materialEditor(boolean about){
         titleInput=input(about?L10n.s(R.string.ui_270):L10n.s(R.string.ui_271),false);titleInput.setText(about?aboutTitle:materialTitle);
         dateInput=input(L10n.s(R.string.ui_272),false);dateInput.setText(about?aboutDate:materialDate);
-        materialInput=input(about?L10n.s(R.string.ui_273):L10n.s(R.string.ui_274),true);materialInput.setMinLines(5);materialInput.setText(about?aboutText:materialText);
+        materialInput=input(about?L10n.s(R.string.ui_273):L10n.s(R.string.ui_274),true);materialInput.setMinLines(5);materialInput.setText(about?aboutText:materialText);forwardMouseWheel(materialInput,scroll);
         button(L10n.s(R.string.ui_275),()->{importPage=page;picker.launch(new String[]{"text/*","application/octet-stream"});});
         button(about?L10n.s(R.string.ui_276):L10n.s(R.string.ui_277),()->{
             String title=titleInput.getText().toString().trim(),body=materialInput.getText().toString().trim();
@@ -459,8 +459,19 @@ public class AgentActivity extends AppCompatActivity {
     private void viewMemory(String id) {
         run(L10n.s(R.string.ui_382),client->client.memory(id),memory->{
             ScrollView scroll=new ScrollView(this);TextView body=text(memory.optString("summary")+L10n.s(R.string.ui_383)+memory.getString("content"),15,INK);
-            body.setPadding(dp(22),dp(16),dp(22),dp(16));body.setTextIsSelectable(true);scroll.addView(body);
+            body.setPadding(dp(22),dp(16),dp(22),dp(16));body.setTextIsSelectable(true);forwardMouseWheel(body,scroll);scroll.addView(body);
             new AlertDialog.Builder(this).setTitle(memory.getString("title")).setView(scroll).setPositiveButton(L10n.s(R.string.ui_261),null).show();
+        });
+    }
+    /** Full-height material text scrolls with its page, including while selectable/editable. */
+    private void forwardMouseWheel(View text,ScrollView container){
+        text.setOnGenericMotionListener((v,event)->{
+            if(event.getActionMasked()!=MotionEvent.ACTION_SCROLL
+                    || !event.isFromSource(InputDevice.SOURCE_CLASS_POINTER)
+                    || (event.getMetaState()&KeyEvent.META_SHIFT_ON)!=0 || event.getAxisValue(MotionEvent.AXIS_VSCROLL)==0)return false;
+            container.onGenericMotionEvent(event);
+            // Consume at both ends too: do not fall back to TextView's internal scrolling.
+            return true;
         });
     }
     @SuppressWarnings("unchecked")
