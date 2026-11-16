@@ -41,13 +41,32 @@ final class AgentChatReply {
             }}
         }
         List<String> numbers=declared.isEmpty()?referenceOrder:declared;
-        Matcher markers=Pattern.compile("\\[([^\\[\\]\\n]{1,100})\\]|【([^【】\\n]{1,100})】").matcher(answer);StringBuffer rendered=new StringBuffer();
+        Matcher markers=Pattern.compile("\\[([^\\[\\]\\n]{1,200})\\]|【([^【】\\n]{1,200})】").matcher(answer);StringBuffer rendered=new StringBuffer();
         while(markers.find()){
-            String key=markers.group(1)==null?markers.group(2):markers.group(1);String id=resolve(key,available,numbers);String replacement=markers.group();
+            String key=markers.group(1)==null?markers.group(2):markers.group(1);
+            String id=resolve(key,available,numbers);String replacement=markers.group();
             if(id!=null){cited.add(id);replacement="["+(new ArrayList<>(cited).indexOf(id)+1)+"]";}
-            else if(unknown.contains(key)||key.matches("[0-9]+|[A-Za-z0-9]+(?:[-_][A-Za-z0-9]+)+")){replacement="";unverified[0]=true;}
+            else {
+                String[] parts=key.trim().split("[,，;；、\\s]+");
+                boolean anyResolved=false,allSourceLike=parts.length>0;
+                StringBuilder groupOut=new StringBuilder();
+                LinkedHashSet<Integer> localNums=new LinkedHashSet<>();
+                for(String rawPart:parts){
+                    String part=rawPart.trim();if(part.isEmpty())continue;
+                    String pid=resolve(part,available,numbers);
+                    if(pid!=null){cited.add(pid);localNums.add(new ArrayList<>(cited).indexOf(pid)+1);anyResolved=true;}
+                    else if(unknown.contains(part)||looksLikeTechnicalId(part)){unverified[0]=true;}
+                    else {allSourceLike=false;}
+                }
+                if(anyResolved&&allSourceLike){
+                    for(int n:localNums)groupOut.append('[').append(n).append(']');
+                    replacement=groupOut.toString();
+                }else if(unknown.contains(key)||looksLikeTechnicalId(key)||allSourceLike&&unverified[0]){
+                    replacement="";unverified[0]=true;
+                }
+            }
             markers.appendReplacement(rendered,Matcher.quoteReplacement(replacement));
-        }markers.appendTail(rendered);answer=rendered.toString().trim();
+        }markers.appendTail(rendered);answer=stripBareTechnicalIds(rendered.toString()).trim();
         JSONArray sources=new JSONArray();boolean examples=false;for(String id:cited){JSONObject source=available.get(id);sources.put(source);examples|=source.optBoolean("testData");}
         if(unverified[0])answer+="\n\n（部分来源未能核实，请以原文为准。）";
         if(examples&&!answer.contains("示例"))answer="以下内容包含示例记忆，供测试参考。\n\n"+answer;
@@ -62,5 +81,16 @@ final class AgentChatReply {
         key=key.trim();if(available.containsKey(key))return key;
         if(key.matches("[0-9]{1,6}")){int i=Integer.parseInt(key)-1;return i>=0&&i<order.size()?order.get(i):null;}
         String match=null;for(Map.Entry<String,JSONObject> entry:available.entrySet())if(key.equals(entry.getValue().optString("title"))){if(match!=null)return null;match=entry.getKey();}return match;
+    }
+    private static boolean looksLikeTechnicalId(String s){
+        String t=s==null?"":s.trim();
+        return t.matches("[0-9]{1,6}|[A-Za-z0-9]+(?:[-_][A-Za-z0-9]+)+");
+    }
+    private static String stripBareTechnicalIds(String text){
+        // Never allow leaked UUIDs or internal mem_*/chat-* identifiers in visible prose.
+        String cleaned=text.replaceAll("(?<![A-Za-z0-9])[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}(?![A-Za-z0-9])","");
+        cleaned=cleaned.replaceAll("(?<![A-Za-z0-9])(?:chat|mem|med|sample|record)[-_][A-Za-z0-9_-]{2,}(?![A-Za-z0-9])","");
+        cleaned=cleaned.replaceAll("\\(\\s*[,，;；、\\s]*\\)|（\\s*[,，;；、\\s]*）","");
+        return cleaned.replaceAll("[ \\t]{2,}"," ");
     }
 }

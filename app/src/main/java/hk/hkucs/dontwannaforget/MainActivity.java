@@ -25,8 +25,14 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class MainActivity extends AppCompatActivity {
-    private final String[] NAMES = {L10n.s(R.string.ui_082), L10n.s(R.string.ui_083), L10n.s(R.string.ui_084), L10n.s(R.string.ui_085), L10n.s(R.string.ui_086), L10n.s(R.string.ui_042), L10n.s(R.string.ui_087)};
     private static final int[] TYPES = {-1, Record.TICKET, Record.VOICE, Record.BOOK, Record.MUSIC, Record.FOOTPRINT, Record.LETTER};
+    private String[] moduleNames() {
+        return new String[] {
+                L10n.s(R.string.ui_082), L10n.s(R.string.ui_083), L10n.s(R.string.ui_084),
+                L10n.s(R.string.ui_085), L10n.s(R.string.ui_086), L10n.s(R.string.ui_042),
+                L10n.s(R.string.ui_087)
+        };
+    }
 
     private MemoryAdapter adapter;
     private RecyclerView list;
@@ -42,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        FloatingHeader.style(findViewById(R.id.title));
-        FloatingHeader.style(findViewById(R.id.module_back));
+        FloatingHeader.glow(findViewById(R.id.title));
+        FloatingHeader.glow(findViewById(R.id.module_back));
         WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView()).setAppearanceLightStatusBars(false);
         WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView()).setAppearanceLightNavigationBars(false);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -60,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Repo repo = new Repo(this);
-        repo.seedSamplesIfDebug();
+        repo.seedPresetOrSamples();
         adapter = new MemoryAdapter(r -> {
             Intent intent = new Intent(this, r.type == Record.LETTER ? LetterActivity.class : DetailActivity.class);
             intent.putExtra("id", r.id);
@@ -160,7 +166,18 @@ public class MainActivity extends AppCompatActivity {
         updateScreen();
     }
 
+    void applyLanguageUI() {
+        updateScreen();
+        recreate();
+    }
+
+    @Override protected void onResume() {
+        super.onResume();
+        updateScreen();
+    }
+
     private void updateScreen() {
+        String[] names = moduleNames();
         View root = findViewById(R.id.main);
         if (showingHome) root.setBackgroundResource(R.drawable.bg_archive);
         else root.setBackgroundColor(0xFF101112);
@@ -173,17 +190,24 @@ public class MainActivity extends AppCompatActivity {
         WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView())
                 .setAppearanceLightNavigationBars(showingHome);
         list.setVisibility(showingHome ? View.INVISIBLE : View.VISIBLE);
+        TextView back = findViewById(R.id.module_back);
+        back.setText(L10n.s(R.string.ui_back_home));
+        back.setVisibility(showingHome ? View.GONE : View.VISIBLE);
         TextView title = findViewById(R.id.title);
         title.setVisibility(showingHome ? View.INVISIBLE : View.VISIBLE);
-        findViewById(R.id.module_back).setVisibility(showingHome ? View.GONE : View.VISIBLE);
         for (int i = 0; i < TYPES.length; i++) {
-            if (TYPES[i] == currentType) title.setText(currentType == -1 ? L10n.s(R.string.ui_088) : NAMES[i]);
+            if (TYPES[i] == currentType) title.setText(currentType == -1 ? L10n.s(R.string.ui_088) : names[i]);
         }
-        findViewById(R.id.nav_home).setSelected(showingHome);
-        ((TextView) findViewById(R.id.nav_home)).setTextColor(showingHome ? 0xFFF2EFE9 : 0xFFB5B8BD);
-        View create = findViewById(R.id.nav_create);
+        TextView navCreate = findViewById(R.id.nav_create);
+        TextView navHome = findViewById(R.id.nav_home);
+        TextView navFunctions = findViewById(R.id.nav_functions);
+        navCreate.setText(L10n.s(R.string.ui_089));
+        navHome.setText(L10n.s(R.string.ui_home));
+        navFunctions.setText(L10n.s(R.string.ui_097));
+        navHome.setSelected(showingHome);
+        navHome.setTextColor(showingHome ? 0xFFF2EFE9 : 0xFFB5B8BD);
         for (int i = 0; i < TYPES.length; i++) {
-            if (TYPES[i] == creationType) create.setContentDescription(L10n.s(R.string.ui_089) + NAMES[i]);
+            if (TYPES[i] == creationType) navCreate.setContentDescription(L10n.s(R.string.ui_089) + names[i]);
         }
     }
 
@@ -247,9 +271,10 @@ public class MainActivity extends AppCompatActivity {
         ScrollView scroll=new ScrollView(this);scroll.setClipToPadding(false);
         LinearLayout content=new LinearLayout(this);content.setOrientation(LinearLayout.VERTICAL);
         content.setPadding(Cards.dp(this,8),0,Cards.dp(this,8),0);
-        for(int i=0;i<NAMES.length;i++){
+        String[] names = moduleNames();
+        for(int i=0;i<names.length;i++){
             final int type=TYPES[i];boolean selected=!showingHome&&currentType==type;
-            TextView item=functionItem(NAMES[i],selected?0xFFF2F3F5:0xFFC5C7CB);
+            TextView item=functionItem(names[i],selected?0xFFF2F3F5:0xFFC5C7CB);
             item.setSelected(selected);
             item.setOnClickListener(v->{sheet.dismiss();openModule(type);});
             content.addView(item,new LinearLayout.LayoutParams(-1,-2));

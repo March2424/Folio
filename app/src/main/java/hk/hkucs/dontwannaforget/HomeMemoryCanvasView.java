@@ -14,7 +14,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -43,7 +42,7 @@ public class HomeMemoryCanvasView extends FrameLayout {
         curtain.setBackgroundResource(R.drawable.bg_archive);
         addView(curtain,new LayoutParams(-1,-1));
         viewport = new Viewport(context);
-        plane = new FrameLayout(context);
+        plane = new DeskPlane(context);
         plane.setClipChildren(false);
         plane.setPivotX(0); plane.setPivotY(0);
         viewport.addView(plane, new LayoutParams(1,1));
@@ -53,44 +52,50 @@ public class HomeMemoryCanvasView extends FrameLayout {
         LinearLayout header = new LinearLayout(context);
         header.setGravity(Gravity.CENTER_VERTICAL);
         header.setPadding(dp(16),0,dp(16),0);
-        TextView brand = Cards.text(context,"Folio",20,0xB3E4E1D8,Typeface.create("cursive",Typeface.NORMAL));
+        TextView brand = Cards.text(context,"Folio",21,0xFFDAD6CE,Typeface.create("cursive",Typeface.NORMAL));
         brand.setTag("folio-brand");brand.setGravity(Gravity.CENTER_VERTICAL);brand.setPadding(dp(8),0,dp(8),0);
+        brand.setShadowLayer(dp(3),0,0,0x66FFFFFF);
         header.addView(brand,new LinearLayout.LayoutParams(-2,dp(48)));
         View space = new View(context);
         header.addView(space,new LinearLayout.LayoutParams(0,1,1));
         TextView all = button(L10n.s(R.string.ui_121));
+        all.setTextSize(14);
         all.setOnClickListener(v -> host.openModule(-1));
         header.addView(all);
         addView(header,new LayoutParams(-1,dp(56),Gravity.TOP));
         FloatingHeader.style(header);
+        FloatingHeader.glow(all);
+        // Re-apply subtle pearlescent glow on cursive brand without overwriting its cursive font.
+        brand.setShadowLayer(dp(3),0,0,0x66FFFFFF);
         // Each control owns only its visible bounds; the gaps pass gestures to the canvas.
         zoomIn = new ZoomIcon(context,true);
         zoomOut = new ZoomIcon(context,false);
-        addGlassControl(zoomIn,curtain,48,48,Gravity.BOTTOM|Gravity.LEFT,16,68);
-        addGlassControl(zoomOut,curtain,48,48,Gravity.BOTTOM|Gravity.LEFT,16,16);
+        addGlassControl(zoomIn,curtain,48,48,Gravity.BOTTOM|Gravity.LEFT,16,68,14);
+        addGlassControl(zoomOut,curtain,48,48,Gravity.BOTTOM|Gravity.LEFT,16,16,14);
         miniMap = new MiniMap(context);
-        addGlassControl(miniMap,curtain,100,100,Gravity.BOTTOM|Gravity.LEFT,74,16);
-        TextView chat=button(L10n.s(R.string.ui_125)+"  +");
-        chat.setTextSize(12);
+        addGlassControl(miniMap,curtain,100,100,Gravity.BOTTOM|Gravity.LEFT,74,16,14);
+        TextView chat=button("✧  "+L10n.s(R.string.ui_125));
+        chat.setTextSize(12.5f);
+        chat.setTextColor(0xFFEDEAE2);
         chat.setMinHeight(0);
-        chat.setPadding(dp(8),dp(6),dp(8),dp(6));
+        chat.setPadding(dp(14),dp(8),dp(14),dp(8));
         chat.setIncludeFontPadding(false);
         chat.setSingleLine(true);
         chat.setEllipsize(android.text.TextUtils.TruncateAt.END);
         chat.setOnClickListener(v -> host.openConversation());
-        addGlassControl(chat,curtain,90,64,Gravity.BOTTOM|Gravity.RIGHT,16,16);
+        addGlassControl(chat,curtain,110,44,Gravity.BOTTOM|Gravity.RIGHT,16,16,22);
         // Keep the left group compact; the chat frame fits its label with a small inset.
         addOnLayoutChangeListener((v,l,t,r,b,ol,ot,or,ob) -> {
             int width=Math.round((r-l)/4f),height=Math.round((b-t)/9f);
-            int gap=dp(4),side=dp(16),bottom=dp(4);
-            int zoomWidth=Math.round(width*.34f),zoomHeight=(height-gap)/2;
+            int gap=dp(5),side=dp(16),bottom=dp(10);
+            int zoomWidth=Math.round(width*.35f),zoomHeight=(height-gap)/2;
             sizeControl(zoomIn,zoomWidth,zoomHeight,side,bottom+height-zoomHeight);
             sizeControl(zoomOut,zoomWidth,zoomHeight,side,bottom);
             sizeControl(miniMap,width-zoomWidth-gap,height,side+zoomWidth+gap,bottom);
-            int chatWidth=(int)Math.ceil(chat.getPaint().measureText(chat.getText().toString()))+dp(16);
+            int chatWidth=(int)Math.ceil(chat.getPaint().measureText(chat.getText().toString()))+dp(30);
             android.graphics.Paint.FontMetrics metrics=chat.getPaint().getFontMetrics();
-            int chatHeight=(int)Math.ceil(metrics.descent-metrics.ascent)+dp(12);
-            sizeControl(chat,Math.min(chatWidth,(r-l)/2-dp(24)),chatHeight,side,bottom);
+            int chatHeight=(int)Math.ceil(metrics.descent-metrics.ascent)+dp(18);
+            sizeControl(chat,Math.min(chatWidth,(r-l)/2-dp(20)),chatHeight,side,bottom);
         });
         viewport.addOnLayoutChangeListener((v,l,t,r,b,ol,ot,or,ob) -> {
             if (r-l != or-ol || b-t != ob-ot) { rebuild(); viewport.reset(); }
@@ -107,50 +112,70 @@ public class HomeMemoryCanvasView extends FrameLayout {
     private void rebuild() {
         int w=viewport.getWidth(),h=viewport.getHeight();
         if(w==0 || h==0)return;
-        // Keep previews small; grow the canvas from their actual sizes and spacing.
-        int cardDp=Math.max(88,Math.min(120,Math.round(w/getResources().getDisplayMetrics().density*.29f)));
+        // Keep three clear scale tiers so the desk has a focal centerpiece and organic orbit.
+        int cardDp=Math.max(88,Math.min(114,Math.round(w/getResources().getDisplayMetrics().density*.28f)));
         int oldWorldW=plane.getLayoutParams().width,oldWorldH=plane.getLayoutParams().height;
         Random random=new Random(seed);
-        List<Record> selected=new ArrayList<>();
+        List<List<Record>> buckets=new ArrayList<>();
         for(int type=0;type<NAMES.length;type++) {
-            int limit=2+random.nextInt(2),count=0;
-            for(Record r:records) if(r.type==type && count++<limit)selected.add(r);
+            List<Record> bucket=new ArrayList<>();
+            int limit=2+random.nextInt(2);
+            for(Record r:records) if(r.type==type && bucket.size()<limit)bucket.add(r);
+            if(!bucket.isEmpty())buckets.add(bucket);
         }
+        // Round-robin interleave across categories so neighboring cards vary visually.
+        List<Record> selected=new ArrayList<>();
+        int round=0;
+        boolean added;
+        do {
+            added=false;
+            for(List<Record> b:buckets) {
+                if(round<b.size()) { selected.add(b.get(round)); added=true; }
+            }
+            round++;
+        } while(added);
+
         List<View> cards=new ArrayList<>();
         List<RectF> footprints=new ArrayList<>();
         float occupiedArea=0;
-        Collections.shuffle(selected,random);
-        for(Record record:selected) {
-            View card=preview(record,Math.round(cardDp*(.92f+random.nextFloat()*.12f)));
+        for(int i=0;i<selected.size();i++) {
+            Record record=selected.get(i);
+            float tierScale=(i==0)?1.28f:(i<=3)?1.06f:(.86f+random.nextFloat()*.14f);
+            View card=preview(record,Math.round(cardDp*tierScale));
             LayoutParams size=(LayoutParams)card.getLayoutParams();
-            float rotation=random.nextFloat()*14f-7f;
+            float rotation=(i==0)?-1.6f:(random.nextFloat()*12f-6f);
             double angle=Math.toRadians(rotation);
-            // Include a breathing space around each rotated card.
-            float boundsW=(float)(size.width*Math.cos(angle)+size.height*Math.abs(Math.sin(angle)))+dp(32);
-            float boundsH=(float)(size.height*Math.cos(angle)+size.width*Math.abs(Math.sin(angle)))+dp(32);
+            int breathe=dp(i==0?34:28);
+            float boundsW=(float)(size.width*Math.cos(angle)+size.height*Math.abs(Math.sin(angle)))+breathe;
+            float boundsH=(float)(size.height*Math.cos(angle)+size.width*Math.abs(Math.sin(angle)))+breathe;
             card.setRotation(rotation);
+            card.setElevation(dp(i==0?10:i<=3?6:4));
             cards.add(card);
             footprints.add(new RectF(0,0,boundsW,boundsH));
             occupiedArea+=boundsW*boundsH;
         }
         float aspect=w/(float)h;
-        int worldW=Math.max(Math.round(w*1.12f),Math.round((float)Math.sqrt(occupiedArea/.64f*aspect)));
-        int worldH=Math.max(Math.round(h*1.12f),Math.round((float)Math.sqrt(occupiedArea/.64f/aspect)));
-        RectF conversationSpace=new RectF();
+        int worldW=Math.max(Math.round(w*1.26f),Math.round((float)Math.sqrt(occupiedArea/.56f*aspect)));
+        int worldH=Math.max(Math.round(h*1.22f),Math.round((float)Math.sqrt(occupiedArea/.56f/aspect)));
         List<RectF> placed=new ArrayList<>();
         plane.removeAllViews();
+        float seedAngle=random.nextFloat()*6.28f;
         for(int i=0;i<selected.size();i++) {
-            Record record=selected.get(i);
+            final Record record=selected.get(i);
             View card=cards.get(i);
             FrameLayout.LayoutParams old=(LayoutParams)card.getLayoutParams();
             LayoutParams lp=new LayoutParams(old.width,old.height);
             RectF footprint=footprints.get(i);
-            RectF position=scatteredPosition(footprint.width(),footprint.height(),worldW,worldH,conversationSpace,placed,random);
+            RectF position=constellationPosition(i,footprint.width(),footprint.height(),worldW,worldH,w,h,placed,seedAngle,random);
             placed.add(position);
             lp.leftMargin=Math.round(position.centerX()-old.width/2f);
             lp.topMargin=Math.round(position.centerY()-old.height/2f);
             card.setContentDescription(NAMES[record.type]+" · "+record.title+L10n.s(R.string.ui_122));
-            card.setOnClickListener(v -> host.openModule(record.type));
+            card.setOnClickListener(v -> v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(75)
+                    .withEndAction(() -> {
+                        v.setScaleX(1f);v.setScaleY(1f);
+                        host.openModule(record.type);
+                    }).start());
             plane.addView(card,lp);
         }
         // Fit the final spread plus edge room.
@@ -181,10 +206,11 @@ public class HomeMemoryCanvasView extends FrameLayout {
         }
         updateControls();
     }
-    private void addGlassControl(View content,View curtain,int width,int height,int gravity,int side,int bottom) {
+    private void addGlassControl(View content,View curtain,int width,int height,int gravity,int side,int bottom,float radiusDp) {
         FrostedNavigation glass=new FrostedNavigation(getContext(),null);
-        glass.setCornerRadiusDp(6);
-        glass.setGlassAppearance(0x282B2E2C,0x28FFFFFF,184);
+        glass.setCornerRadiusDp(radiusDp);
+        glass.setGlassAppearance(0x362B2E2C,0x3CFFFFFF,195);
+        glass.enableRoundedShadow(8);
         glass.setBackdrop(viewport,curtain);
         glass.addView(content,new LinearLayout.LayoutParams(-1,-1));
         LayoutParams lp=new LayoutParams(dp(width),dp(height),gravity);
@@ -250,17 +276,20 @@ public class HomeMemoryCanvasView extends FrameLayout {
         }
         @Override protected void onDraw(Canvas canvas){
             super.onDraw(canvas);measureMap();
-            ink.setStyle(Paint.Style.STROKE);ink.setStrokeWidth(dp(.7f));ink.setColor(0x45D8DAD4);
-            canvas.drawRect(map,ink);
-            canvas.save();canvas.clipRect(map);
+            ink.setStyle(Paint.Style.STROKE);ink.setStrokeWidth(dp(.75f));ink.setColor(0x45D8DAD4);
+            canvas.drawRoundRect(map,dp(6),dp(6),ink);
+            canvas.save();
+            android.graphics.Path clip=new android.graphics.Path();
+            clip.addRoundRect(map,dp(6),dp(6),android.graphics.Path.Direction.CW);
+            canvas.clipPath(clip);
             for(int i=0;i<plane.getChildCount();i++){
                 View card=plane.getChildAt(i);
                 LayoutParams lp=(LayoutParams)card.getLayoutParams();
                 float x=map.left+lp.leftMargin*mapScale,y=map.top+lp.topMargin*mapScale;
                 RectF rect=new RectF(x,y,x+lp.width*mapScale,y+lp.height*mapScale);
                 canvas.save();canvas.rotate(card.getRotation(),rect.centerX(),rect.centerY());
-                ink.setStyle(Paint.Style.FILL);ink.setColor(0x24E0E1DA);canvas.drawRect(rect,ink);
-                ink.setStyle(Paint.Style.STROKE);ink.setColor(0x85CDD0C8);canvas.drawRect(rect,ink);
+                ink.setStyle(Paint.Style.FILL);ink.setColor(0x2AE0E1DA);canvas.drawRoundRect(rect,dp(1.5f),dp(1.5f),ink);
+                ink.setStyle(Paint.Style.STROKE);ink.setColor(0x88CDD0C8);canvas.drawRoundRect(rect,dp(1.5f),dp(1.5f),ink);
                 canvas.restore();
             }
             float left=-plane.getTranslationX()/viewport.zoom,top=-plane.getTranslationY()/viewport.zoom;
@@ -269,8 +298,8 @@ public class HomeMemoryCanvasView extends FrameLayout {
                     map.top+(top+viewport.getHeight()/viewport.zoom)*mapScale);
             visible.intersect(map);
             visible.inset(dp(.8f),dp(.8f));
-            ink.setStyle(Paint.Style.FILL);ink.setColor(0x28FFFFFF);canvas.drawRect(visible,ink);
-            ink.setStyle(Paint.Style.STROKE);ink.setStrokeWidth(dp(1.4f));ink.setColor(0xE0ECEDE6);canvas.drawRect(visible,ink);
+            ink.setStyle(Paint.Style.FILL);ink.setColor(0x28F2E4C6);canvas.drawRoundRect(visible,dp(3),dp(3),ink);
+            ink.setStyle(Paint.Style.STROKE);ink.setStrokeWidth(dp(1.3f));ink.setColor(0xDCD8C690);canvas.drawRoundRect(visible,dp(3),dp(3),ink);
             canvas.restore();
         }
         @Override public boolean onTouchEvent(MotionEvent event){
@@ -289,33 +318,80 @@ public class HomeMemoryCanvasView extends FrameLayout {
         @Override public boolean performClick(){super.performClick();return true;}
     }
 
-    private RectF scatteredPosition(float width,float height,int worldW,int worldH,
-                                    RectF conversation,List<RectF> placed,Random random) {
+    /** Place the centerpiece near optical center and orbit remaining cards along a golden-angle spiral. */
+    private RectF constellationPosition(int index,float width,float height,int worldW,int worldH,
+                                        int viewW,int viewH,List<RectF> placed,float seedAngle,Random random) {
+        float cx=worldW/2f, cy=worldH/2f-dp(18);
+        if(index==0) {
+            float x=cx-width/2f, y=cy-height/2f;
+            return new RectF(x,y,x+width,y+height);
+        }
+        float visLeft=(worldW-viewW)/2f, visRight=visLeft+viewW;
+        float visTop=(worldH-viewH)/2f, visBottom=visTop+viewH;
+        float topGuard=visTop+dp(62), bottomGuard=visBottom-dp(94);
+
         RectF best=null;
         float bestScore=Float.MAX_VALUE;
-        // Sample freely in both axes. Prefer clear, loosely spaced positions without making
-        // rows or columns; the fixed session seed keeps media refreshes from jumping.
-        for(int attempt=0;attempt<1200;attempt++) {
-            float x=dp(8)+random.nextFloat()*(worldW-width-dp(16));
-            float y=dp(8)+random.nextFloat()*(worldH-height-dp(16));
+        float goldenAngle=2.3999632f;
+        float baseAngle=index*goldenAngle+seedAngle;
+        float minR=dp(84)+Math.max(width,height)*.36f;
+        float maxR=Math.max(worldW,worldH)*.46f;
+
+        for(int attempt=0;attempt<420;attempt++) {
+            float t=attempt/420f;
+            float r=minR+t*(maxR-minR);
+            float theta=baseAngle+(attempt%9-4)*0.22f+t*1.6f;
+            float x=cx+r*(float)Math.cos(theta)-width/2f;
+            float y=cy+r*(float)Math.sin(theta)*1.08f-height/2f;
+            x=Math.max(dp(10),Math.min(worldW-width-dp(10),x));
+            y=Math.max(dp(10),Math.min(worldH-height-dp(10),y));
+
             RectF candidate=new RectF(x,y,x+width,y+height);
-            if(RectF.intersects(candidate,conversation))continue;
-            float overlap=0,alignment=0;
+            float overlap=0;
             for(RectF other:placed) {
                 overlap+=Math.max(0,Math.min(candidate.right,other.right)-Math.max(x,other.left))
                         *Math.max(0,Math.min(candidate.bottom,other.bottom)-Math.max(y,other.top));
-                float dx=Math.abs(candidate.centerX()-other.centerX());
-                float dy=Math.abs(candidate.centerY()-other.centerY());
-                alignment+=Math.max(0,1-dx/dp(22))+Math.max(0,1-dy/dp(22));
             }
-            float nx=(candidate.centerX()-worldW/2f)/(worldW/2f);
-            float ny=(candidate.centerY()-worldH/2f)/(worldH/2f);
-            float score=overlap/(width*height)*1000+(nx*nx+ny*ny)*.65f
-                    +alignment*.24f+random.nextFloat()*.32f;
+            float hudPenalty=0;
+            if(candidate.right>visLeft && candidate.left<visRight) {
+                if(candidate.top<topGuard && candidate.bottom>visTop) hudPenalty+=450;
+                if(candidate.bottom>bottomGuard && candidate.top<visBottom) hudPenalty+=450;
+            }
+            float distPenalty=(float)Math.hypot(candidate.centerX()-cx,candidate.centerY()-cy)/dp(180);
+            float score=overlap/(width*height)*2000f+hudPenalty+distPenalty+random.nextFloat()*.15f;
             if(score<bestScore){bestScore=score;best=candidate;}
+            if(overlap==0 && hudPenalty==0 && attempt>24) break;
         }
-        // Fallback for an unusually small viewport.
-        return best!=null?best:new RectF(dp(8),dp(8),dp(8)+width,dp(8)+height);
+        return best!=null?best:new RectF(dp(12),dp(68),dp(12)+width,dp(68)+height);
+    }
+
+    /** Delicate archival orbital rings and registration crosshairs drawn behind the memory cards. */
+    private final class DeskPlane extends FrameLayout {
+        private final Paint deskPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
+        DeskPlane(Context context) {
+            super(context);
+            setWillNotDraw(false);
+        }
+        @Override protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            float w=getWidth(), h=getHeight();
+            if(w<=0 || h<=0) return;
+            float cx=w/2f, cy=h/2f-dp(18);
+            deskPaint.setStyle(Paint.Style.STROKE);
+            deskPaint.setStrokeWidth(dp(.8f));
+            deskPaint.setColor(0x14D8C690);
+            float baseR=Math.min(w,h)*.24f;
+            canvas.drawCircle(cx,cy,baseR,deskPaint);
+            canvas.drawCircle(cx,cy,baseR*1.75f,deskPaint);
+
+            deskPaint.setColor(0x1CF2EFE9);
+            float cross=dp(4.5f);
+            float[][] marks={{cx-baseR*1.3f,cy-baseR*.9f},{cx+baseR*1.4f,cy+baseR*.85f},{cx-baseR*.9f,cy+baseR*1.4f}};
+            for(float[] m:marks) {
+                canvas.drawLine(m[0]-cross,m[1],m[0]+cross,m[1],deskPaint);
+                canvas.drawLine(m[0],m[1]-cross,m[0],m[1]+cross,deskPaint);
+            }
+        }
     }
     private View preview(Record record,int widthDp) {
         // Scale the complete original card so typography and decorations shrink together.

@@ -58,8 +58,11 @@ final class HomeEntranceView extends FrameLayout {
         splashOverlay.addView(stage2Box, new LayoutParams(-1, -1, Gravity.CENTER));
 
         TextView skipHint = Cards.text(c, L10n.s(R.string.welcome_enter), 9.5f,
-                0x66B0ACA4, AppFonts.regular());
+                FloatingHeader.DETAIL_MUTED, AppFonts.regular());
         skipHint.setGravity(Gravity.CENTER);
+        skipHint.setPadding(Cards.dp(c, 8), Cards.dp(c, 4), Cards.dp(c, 8), Cards.dp(c, 4));
+        FloatingHeader.glow(skipHint);
+        skipHint.setAlpha(0.72f);
         LayoutParams slp = new LayoutParams(-2, -2, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
         slp.bottomMargin = Cards.dp(c, 36);
         splashOverlay.addView(skipHint, slp);

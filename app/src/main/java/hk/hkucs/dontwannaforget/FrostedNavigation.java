@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.*;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.LinearLayout;
 
 /** Small downsampled backdrop blur, compatible with the app's API 24 minimum. */
@@ -11,10 +12,23 @@ public final class FrostedNavigation extends LinearLayout {
     private final Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG);
     private final Path outline=new Path();
     private float cornerRadiusDp=24;
-    public void setCornerRadiusDp(float radius){cornerRadiusDp=Math.max(0,radius);invalidate();}
-    private int tintColor=0x662B2E2C,borderColor=0x38FFFFFF,backdropAlpha=255;
+    public void setCornerRadiusDp(float radius){cornerRadiusDp=Math.max(0,radius);invalidateOutline();invalidate();}
+    private int tintColor=0x662B2E2C,borderColor=0x38FFFFFF,backdropAlpha=255,backdropFillColor=0xFF171918;
     public void setGlassAppearance(int tint,int border,int blurAlpha){
         tintColor=tint;borderColor=border;backdropAlpha=Math.max(0,Math.min(255,blurAlpha));invalidate();
+    }
+    /** Base clear color behind sampled backdrop; use warm light ivory on bright pages. */
+    public void setBackdropFillColor(int color){backdropFillColor=color;invalidate();}
+    /** Enable a rounded drop shadow matching the glass corner radius for floating menus and dialogs. */
+    public void enableRoundedShadow(float elevationDp){
+        setElevation(Cards.dp(getContext(),elevationDp));
+        setOutlineProvider(new ViewOutlineProvider(){
+            @Override public void getOutline(View view,Outline out){
+                if(view.getWidth()>0 && view.getHeight()>0){
+                    out.setRoundRect(0,0,view.getWidth(),view.getHeight(),Cards.dp(view.getContext(),cornerRadiusDp));
+                }
+            }
+        });
     }
     private Bitmap backdrop;
     private int[] pixels,temporary;
@@ -31,7 +45,7 @@ public final class FrostedNavigation extends LinearLayout {
             if(backdrop==null||backdrop.getWidth()!=w||backdrop.getHeight()!=h){
                 if(backdrop!=null)backdrop.recycle();backdrop=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888);pixels=new int[w*h];temporary=new int[w*h];
             }
-            backdrop.eraseColor(0xFF171918);
+            backdrop.eraseColor(backdropFillColor);
             // Capture siblings separately; redrawing the ancestor during its draw pass
             // would corrupt Android's elevation-sorted child list.
             Canvas sample=new Canvas(backdrop);sample.scale(w/(float)getWidth(),h/(float)getHeight());

@@ -1,6 +1,7 @@
 package hk.hkucs.dontwannaforget;
 
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -14,9 +15,15 @@ final class FloatingHeader {
     static void style(View header) {
         header.setTag("floating-header");
         header.setBackground(null);
-        header.setAlpha(.86f);
+        header.setAlpha(.92f);
         header.setElevation(Cards.dp(header.getContext(), 8));
         softenText(header);
+    }
+    /** Apply the luminous Ming-serif glow style used on detail top-right actions. */
+    static void glow(TextView view) {
+        view.setTypeface(AppFonts.regular());
+        view.setTextColor(DETAIL_MUTED);
+        style(view);
     }
     static final int DETAIL_BACKGROUND=0xFF111212;
     static final int DETAIL_TEXT=0xFFE8E4DC,DETAIL_MUTED=0xFF8E8A82;
@@ -46,10 +53,18 @@ final class FloatingHeader {
         if(view instanceof TextView && !(view instanceof EditText)) {
             TextView text=(TextView)view;
             text.setIncludeFontPadding(false);
-            int color=text.getCurrentTextColor();
-            boolean light=Color.red(color)+Color.green(color)+Color.blue(color)>420;
-            text.setShadowLayer(Cards.dp(view.getContext(), 3),0,0,light?0xA0000000:0xB3FFFFFF);
-            if(text.isClickable())text.setMinHeight(Cards.dp(view.getContext(),48));
+            if(text.getBackground()==null) {
+                int color=text.getCurrentTextColor();
+                boolean light=Color.red(color)+Color.green(color)+Color.blue(color)>420;
+                text.setShadowLayer(Cards.dp(view.getContext(), 3),0,0,light?0xA0000000:0xB3FFFFFF);
+                if(text.isClickable()) {
+                    text.setMinHeight(Cards.dp(view.getContext(),44));
+                    text.setGravity((text.getGravity()&Gravity.HORIZONTAL_GRAVITY_MASK)|Gravity.CENTER_VERTICAL);
+                }
+            } else {
+                text.setShadowLayer(0,0,0,0);
+                text.setGravity(Gravity.CENTER);
+            }
         } else if(view instanceof ViewGroup) {
             ViewGroup group=(ViewGroup)view;
             for(int i=0;i<group.getChildCount();i++)softenText(group.getChildAt(i));
@@ -70,7 +85,7 @@ final class FloatingHeader {
             View spacer=new View(header.getContext());
             column.removeView(header);
             // The initial breathing room scrolls away with the document.
-            headerParams.height=Math.max(header.getHeight(),Cards.dp(header.getContext(),56));
+            headerParams.height=Math.max(header.getHeight(),Cards.dp(header.getContext(),44));
             column.addView(spacer,index,headerParams);
             FrameLayout layer=new FrameLayout(header.getContext());
             parent.removeView(scroll);parent.addView(layer,position,scrollParams);

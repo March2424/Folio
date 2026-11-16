@@ -108,8 +108,8 @@ final class LocalMemoryAgent {
             "只有示例时仍正常回答测试问题并标明示例，不要以‘没有真实记录’拒绝查询。当前资料优先于历史找不到的结论。",
             "用户追问‘这个电影’‘那首歌’‘为什么’时，优先结合conversationMemories和最近对话确定所指；多条作品无法确定就自然追问。动机只根据用户自述，未记录就明确不知道；可能的解释必须标明推测，不用剧情编造用户动机。",
             "初始检索可能不完整；概括时期时用日期范围检索，结果有限就明确说‘从找到的记录看’，不假装统计了全部记忆。",
-            "优先输出 JSON：{\"answer\":\"中文回答，记忆事实后用[完整记忆ID]标来源\",\"sourceIds\":[\"实际引用的记忆ID\"]}。",
-            "来源ID只能来自本轮提供的材料，citationReferences给出本轮可用的数字编号对应关系。无依据时回答不知道或追问，sourceIds为[]。");
+            "优先输出 JSON：{\"answer\":\"自然流畅的中文回答，记忆事实后如需标出处请用数字编号如[1]（多个出处分开写如[1][2]），绝不要在回答正文中写出英文ID、下划线编号或UUID，也不要把多个ID写进同一个括号\",\"sourceIds\":[\"实际引用的完整记忆ID\"]}。",
+            "sourceIds只能原样取自本轮提供的材料，不得改写或编造；citationReferences给出本轮可用的编号对应关系。无依据时回答不知道或追问，sourceIds为[]。");
         JSONArray messages=new JSONArray().put(message("system",system)),initial=new JSONArray(),conversationMemories=new JSONArray();
         JSONArray history=store.history(session);
         if(history.length()>0){JSONArray turns=store.transcript(session);for(int i=turns.length()-1;i>=Math.max(0,turns.length()-history.length());i--){JSONObject turn=turns.getJSONObject(i);if(!"assistant".equals(turn.optString("role")))continue;

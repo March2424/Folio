@@ -83,4 +83,15 @@ public class AgentChatReplyTest {
         try{AgentModelClient.parseJson("一段普通说明，不是结构化材料。");fail();}catch(IOException expected){}
         assertEquals("大括号 {仍然是字符串}",AgentModelClient.parseJson("说明：{\"summary\":\"大括号 {仍然是字符串}\"} 结束").getString("summary"));
     }
+    @Test public void multiIdAndUuidMarkersDoNotLeakRawIds() throws Exception {
+        JSONObject reply=parse("{\"answer\":\"还抄下这句话[movie-one，chat-73127ed5-4a1e-43a0-8cab-7d51c70e84a2]，像是在意承诺，日期2026-11-10。\",\"sourceIds\":[\"movie-one\"]}");
+        String ans=reply.getString("answer");
+        assertFalse(ans.contains("chat-73127ed5"));
+        assertFalse(ans.contains("movie-one"));
+        assertTrue(ans.contains("2026-11-10"));
+        assertTrue(ans.contains("[1]"));
+        JSONObject bare=parse("{\"answer\":\"提到了mem_movie_01和chat-73127ed5-4a1e-43a0-8cab-7d51c70e84a2。\",\"sourceIds\":[]}");
+        assertFalse(bare.getString("answer").contains("mem_movie_01"));
+        assertFalse(bare.getString("answer").contains("chat-73127ed5"));
+    }
 }

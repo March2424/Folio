@@ -167,7 +167,7 @@ public class MusicEditActivity extends AppCompatActivity {
         LinearLayout col = new LinearLayout(this);
         col.setOrientation(LinearLayout.VERTICAL);
         int pad = Cards.dp(this, 16);
-        col.setPadding(pad, Cards.dp(this, 10), pad, Cards.dp(this, 44));
+        col.setPadding(pad, Cards.dp(this, 2), pad, Cards.dp(this, 44));
         sv.addView(col, new FrameLayout.LayoutParams(-1, -2));
 
         // 1. 顶部导航栏
@@ -211,33 +211,11 @@ public class MusicEditActivity extends AppCompatActivity {
     }
 
     private void buildTopBar(LinearLayout col) {
-        LinearLayout top = new LinearLayout(this);
-        top.setGravity(Gravity.CENTER_VERTICAL);
-        top.setPadding(0, Cards.dp(this, 4), 0, Cards.dp(this, 12));
-
-        TextView back = Cards.text(this, L10n.s(R.string.ui_060), 13, 0xFFC7C2B8, AppFonts.regular());
-        back.setOnClickListener(v -> finish());
-        HomeNavigation.bind(back);
-        top.addView(back);
-
-        TextView head = Cards.text(this, recordId != null ? L10n.s(R.string.ui_603) : L10n.s(R.string.ui_604), 15, 0xFFF2EFE9,
-                Typeface.create(AppFonts.regular(), Typeface.BOLD));
-        head.setGravity(Gravity.CENTER);
-        head.setMaxLines(2);head.setEllipsize(android.text.TextUtils.TruncateAt.END);
-        top.addView(head, new LinearLayout.LayoutParams(0, -2, 1f));
-
-        tvDate = Cards.text(this, dateStr, 12, 0xFFD8C690, AppFonts.regular());
-        tvDate.setPadding(Cards.dp(this, 10), Cards.dp(this, 5), Cards.dp(this, 10), Cards.dp(this, 5));
-        GradientDrawable dbg = new GradientDrawable();
-        dbg.setColor(0xFF282A29);
-        dbg.setCornerRadius(Cards.dp(this, 12));
-        dbg.setStroke(Cards.dp(this, 1), 0xFF444644);
-        tvDate.setBackground(dbg);
-        tvDate.setOnClickListener(v -> pickDate());
-        top.addView(tvDate);
-
-        col.addView(top);
-        FloatingHeader.pin(top);
+        String title = recordId != null ? L10n.s(R.string.ui_603) : L10n.s(R.string.ui_604);
+        EditorUi.TopBar bar = EditorUi.topBar(this, title, dateStr, false, this::finish, this::pickDate);
+        tvDate = bar.pill;
+        col.addView(bar.root);
+        FloatingHeader.pin(bar.root);
     }
 
     private void buildLivePreviewSection(LinearLayout col) {

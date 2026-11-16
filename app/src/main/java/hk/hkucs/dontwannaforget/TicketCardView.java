@@ -235,26 +235,26 @@ public class TicketCardView extends View {
                 paperColor = 0xFF333636;
                 inkMain = 0xFF969A98;
                 inkSub = 0xFF7D817F;
-                inkMeta = 0xFF646866;
+                inkMeta = 0xFF8C908E;
                 break;
             case TicketStyle.TONE_OCHRE:
                 paperColor = 0xFFA89A64;
                 inkMain = 0xFF231D15;
                 inkSub = 0xFF3D3426;
-                inkMeta = 0xFF6B5F42;
+                inkMeta = 0xFF4F452E;
                 break;
             case TicketStyle.TONE_WARM_CREAM:
                 paperColor = 0xFFCBC7BE;
                 inkMain = 0xFF1A1918;
                 inkSub = 0xFF3A3835;
-                inkMeta = 0xFF75716A;
+                inkMeta = 0xFF5D5952;
                 break;
             case TicketStyle.TONE_MIST_GREY:
             default:
                 paperColor = 0xFF8F9392;
                 inkMain = 0xFF141616;
                 inkSub = 0xFF242727;
-                inkMeta = 0xFF5A5E5D;
+                inkMeta = 0xFF3B3F3E;
                 break;
         }
 
@@ -461,7 +461,7 @@ public class TicketCardView extends View {
         // 配置底部编号与日期画笔
         metaPaint.setTypeface(AppFonts.regular());
         metaPaint.setColor(inkMeta);
-        metaPaint.setTextSize(dp1 * 8.2f * scale);
+        metaPaint.setTextSize(Math.max(dp1 * 7.8f, dp1 * 9.0f * scale));
         metaPaint.setTextAlign(Paint.Align.LEFT);
 
         float padX = dp1 * 18f * scale;
@@ -519,6 +519,9 @@ public class TicketCardView extends View {
             canvas.restore();
 
             canvas.drawText(serial, r.left + padX, r.bottom - dp1 * 10f * scale, metaPaint);
+            metaPaint.setTextAlign(Paint.Align.RIGHT);
+            canvas.drawText(dateText, r.right - padX, r.bottom - dp1 * 10f * scale, metaPaint);
+            metaPaint.setTextAlign(Paint.Align.LEFT);
             return;
         }
 

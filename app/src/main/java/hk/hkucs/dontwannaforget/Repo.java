@@ -329,6 +329,31 @@ public class Repo {
     }
 
     /**
+     * 若 assets/preset_memories.zip 存在，则首次启动自动导入该预设记忆包(支持 Release/Debug 打包携带真实图文音记忆,不灌入示例);
+     * 否则在 Debug 构建下沿用示例数据。
+     */
+    public void seedPresetOrSamples() {
+        SharedPreferences sp = app.getSharedPreferences("dev", Context.MODE_PRIVATE);
+        try (java.io.InputStream probe = app.getAssets().open("preset_memories.zip")) {
+            if (probe != null) {
+                if (sp.getBoolean("seeded_preset_v1", false)) return;
+                IO.execute(() -> {
+                    try (java.io.InputStream in = app.getAssets().open("preset_memories.zip")) {
+                        AgentBackup backup = new AgentBackup(app, AgentStore.get(app), db);
+                        AgentBackup.Prepared prepared = backup.prepare(in);
+                        backup.restore(prepared);
+                        sp.edit().putBoolean("seeded_preset_v1", true).apply();
+                    } catch (Exception ignored) {}
+                });
+                return;
+            }
+        } catch (Exception ignored) {
+            // No preset_memories.zip bundled in assets; fall back to debug sample seeding.
+        }
+        seedSamplesIfDebug();
+    }
+
+    /**
      * 仅调试构建:空库时灌入示例数据,方便预览 UI。
      * 示例记录 id 以 sample- 开头,可通过 {@link #clearSamples()} 清除;发布构建不会执行。
      */

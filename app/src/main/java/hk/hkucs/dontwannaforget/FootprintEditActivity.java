@@ -219,7 +219,7 @@ public class FootprintEditActivity extends AppCompatActivity {
         LinearLayout col = new LinearLayout(this);
         col.setOrientation(LinearLayout.VERTICAL);
         int pad = Cards.dp(this, 16);
-        col.setPadding(pad, Cards.dp(this, 10), pad, Cards.dp(this, 40));
+        col.setPadding(pad, Cards.dp(this, 2), pad, Cards.dp(this, 40));
         sv.addView(col, new FrameLayout.LayoutParams(-1, -2));
 
         // 1. 顶部返回与地点/日期栏
@@ -279,69 +279,47 @@ public class FootprintEditActivity extends AppCompatActivity {
     }
 
     private void buildTopHeader(LinearLayout col) {
-        LinearLayout top = new LinearLayout(this);
-        top.setGravity(Gravity.CENTER_VERTICAL);
-        top.setPadding(0, Cards.dp(this, 4), 0, Cards.dp(this, 10));
+        EditorUi.TopBar bar = EditorUi.topBar(this, L10n.s(R.string.ui_042), dateStr, true,
+                this::finish, this::pickDate);
+        tvDate = bar.pill;
+        col.addView(bar.root);
+        FloatingHeader.pin(bar.root);
 
-        // Draw the arrow independently of font metrics, which can clip a text chevron.
-        android.widget.ImageView back=new android.widget.ImageView(this);
-        back.setImageDrawable(new AgentLineIcon("back",0xFFFAF8F3));
-        back.setScaleType(android.widget.ImageView.ScaleType.FIT_CENTER);
-        back.setPadding(Cards.dp(this,9),Cards.dp(this,9),Cards.dp(this,9),Cards.dp(this,9));
-        back.setContentDescription(L10n.s(R.string.ui_060));back.setFocusable(true);
-        GradientDrawable backBg = new GradientDrawable();
-        backBg.setShape(GradientDrawable.OVAL);
-        backBg.setColor(0x6623211E);
-        back.setBackground(backBg);
-        int bs = Cards.dp(this, 40);
-        back.setOnClickListener(v -> finish());
-        HomeNavigation.bind(back);
-        top.addView(back, new LinearLayout.LayoutParams(bs, bs));
-
-        // 中间地点与副标题轻量化输入
-        LinearLayout metaCol = new LinearLayout(this);
-        metaCol.setOrientation(LinearLayout.VERTICAL);
-        metaCol.setPadding(Cards.dp(this, 12), 0, Cards.dp(this, 8), 0);
+        // Full-width editorial paper meta block so location and weather hints never truncate.
+        LinearLayout metaCard = new LinearLayout(this);
+        metaCard.setOrientation(LinearLayout.VERTICAL);
+        GradientDrawable metaBg = new GradientDrawable();
+        metaBg.setColor(0xFFF6F4EE);
+        metaBg.setCornerRadius(Cards.dp(this, 12));
+        metaBg.setStroke(Cards.dp(this, 1), 0xFFDCD6C9);
+        metaCard.setBackground(metaBg);
+        metaCard.setPadding(Cards.dp(this, 14), Cards.dp(this, 10), Cards.dp(this, 14), Cards.dp(this, 10));
 
         etTitle = new EditText(this);
         etTitle.setHint(L10n.s(R.string.ui_012));
         etTitle.setHintTextColor(0xFF8C867B);
         etTitle.setTextColor(getColor(R.color.ink));
-        etTitle.setTextSize(15);
+        etTitle.setTextSize(15.5f);
         etTitle.setTypeface(Typeface.create(AppFonts.regular(), Typeface.BOLD));
         etTitle.setSingleLine(true);
-        etTitle.setIncludeFontPadding(false);
         etTitle.setBackground(null);
-        etTitle.setPadding(0, 0, 0, Cards.dp(this, 2));
-        metaCol.addView(etTitle);
+        etTitle.setPadding(0, Cards.dp(this, 2), 0, Cards.dp(this, 3));
+        metaCard.addView(etTitle, new LinearLayout.LayoutParams(-1, -2));
 
         etSub = new EditText(this);
         etSub.setHint(L10n.s(R.string.ui_013));
         etSub.setHintTextColor(0xFFA09A8E);
         etSub.setTextColor(getColor(R.color.ink_sub));
-        etSub.setTextSize(12);
+        etSub.setTextSize(12.5f);
         etSub.setTypeface(AppFonts.regular());
         etSub.setSingleLine(true);
-        etSub.setIncludeFontPadding(false);
         etSub.setBackground(null);
-        etSub.setPadding(0, 0, 0, 0);
-        metaCol.addView(etSub);
+        etSub.setPadding(0, Cards.dp(this, 2), 0, Cards.dp(this, 1));
+        metaCard.addView(etSub, new LinearLayout.LayoutParams(-1, -2));
 
-        top.addView(metaCol, new LinearLayout.LayoutParams(0, -2, 1f));
-
-        tvDate = Cards.text(this, dateStr, 12, getColor(R.color.wine), AppFonts.regular());
-        tvDate.setIncludeFontPadding(false);tvDate.setGravity(Gravity.CENTER);
-        tvDate.setPadding(Cards.dp(this, 10), Cards.dp(this, 6), Cards.dp(this, 10), Cards.dp(this, 6));
-        GradientDrawable dateBg = new GradientDrawable();
-        dateBg.setColor(0xFFFAF8F3);
-        dateBg.setCornerRadius(Cards.dp(this, 14));
-        dateBg.setStroke(Cards.dp(this, 1), 0xFFD8D2C5);
-        tvDate.setBackground(dateBg);
-        tvDate.setOnClickListener(v -> pickDate());
-        top.addView(tvDate);
-
-        col.addView(top);
-        FloatingHeader.pin(top);
+        LinearLayout.LayoutParams mlp = new LinearLayout.LayoutParams(-1, -2);
+        mlp.bottomMargin = Cards.dp(this, 10);
+        col.addView(metaCard, mlp);
     }
 
     private void refreshPageTabs() {

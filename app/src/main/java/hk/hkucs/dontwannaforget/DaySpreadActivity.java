@@ -34,7 +34,7 @@ public class DaySpreadActivity extends AppCompatActivity {
     private String dateStr;
     private final List<Record> dayRecords = new ArrayList<>();
     private FrameLayout stage;
-    private TextView tvHeader, tvSubHeader, tvBottomHint;
+    private TextView tvHeader, tvSubHeader;
     private int focusedGroup = -1; // -1 = 层级1(exa2 全景展开); >=0 = 层级2(exa3 某类别展开)
 
     // 三个类别组: 0=音乐(MUSIC), 1=足迹与日常(FOOTPRINT/LIFE), 2=电影与书(TICKET/BOOK)
@@ -95,7 +95,7 @@ public class DaySpreadActivity extends AppCompatActivity {
         col.setOrientation(LinearLayout.VERTICAL);
         col.setGravity(Gravity.CENTER_HORIZONTAL);
         int pad = Cards.dp(this, 24);
-        col.setPadding(pad, Cards.dp(this, 16), pad, Cards.dp(this, 96));
+        col.setPadding(pad, Cards.dp(this, 4), pad, Cards.dp(this, 40));
 
         // 顶部返回与操作栏
         LinearLayout topBar = new LinearLayout(this);
@@ -116,12 +116,12 @@ public class DaySpreadActivity extends AppCompatActivity {
         tvHeader = Cards.text(this, "", 22, getColor(R.color.ink),
                 Typeface.create(AppFonts.regular(), Typeface.BOLD));
         tvHeader.setGravity(Gravity.CENTER);
-        tvHeader.setPadding(0, Cards.dp(this, 18), 0, Cards.dp(this, 4));
+        tvHeader.setPadding(0, Cards.dp(this, 10), 0, Cards.dp(this, 4));
         col.addView(tvHeader);
 
         tvSubHeader = Cards.text(this, "", 13, getColor(R.color.ink_sub), AppFonts.regular());
         tvSubHeader.setGravity(Gravity.CENTER);
-        tvSubHeader.setPadding(0, 0, 0, Cards.dp(this, 16));
+        tvSubHeader.setPadding(0, 0, 0, Cards.dp(this, 10));
         col.addView(tvSubHeader);
 
         LinearLayout floatingTitle = new LinearLayout(this);
@@ -138,28 +138,6 @@ public class DaySpreadActivity extends AppCompatActivity {
 
         sv.addView(col, new FrameLayout.LayoutParams(-1, -2));
         root.addView(sv, new FrameLayout.LayoutParams(-1, -1));
-
-        // 底部圆形收起/返回按钮(仿 exa2 / exa3 底部中央圆钮)
-        FrameLayout bottomBar = new FrameLayout(this);
-        bottomBar.setPadding(pad, Cards.dp(this, 12), pad, Cards.dp(this, 24));
-        tvBottomHint = Cards.text(this, "✦", 20, Color.WHITE, AppFonts.regular());
-        tvBottomHint.setGravity(Gravity.CENTER);
-        GradientDrawable orb = new GradientDrawable();
-        orb.setShape(GradientDrawable.OVAL);
-        orb.setColor(getColor(R.color.wine));
-        orb.setStroke(Cards.dp(this, 2), 0x55FFFFFF);
-        tvBottomHint.setBackground(orb);
-        tvBottomHint.setElevation(Cards.dp(this, 6));
-        tvBottomHint.setOnClickListener(v -> {
-            v.animate().scaleX(0.90f).scaleY(0.90f).setDuration(80).withEndAction(() -> {
-                v.animate().scaleX(1f).scaleY(1f).setDuration(120).start();
-                if (focusedGroup != -1) showOverview(true);
-                else finish();
-            }).start();
-        });
-        bottomBar.addView(tvBottomHint, new FrameLayout.LayoutParams(
-                Cards.dp(this, 48), Cards.dp(this, 48), Gravity.CENTER));
-        root.addView(bottomBar, new FrameLayout.LayoutParams(-1, -2, Gravity.BOTTOM));
 
         setContentView(root);
         ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
@@ -206,46 +184,77 @@ public class DaySpreadActivity extends AppCompatActivity {
         focusedGroup = -1;
         tvHeader.setText(formatDayGreeting(dateStr));
         tvSubHeader.setText(L10n.s(R.string.ui_162) + dayRecords.size() + L10n.s(R.string.ui_163));
-        tvBottomHint.setText("∨");
 
         transitionStage(() -> {
             stage.removeAllViews();
-            stage.getLayoutParams().height = Cards.dp(this, 490);
-            stage.requestLayout();
 
-            List<Record> musics = recordsForGroup(GROUP_MUSIC);
-            List<Record> footprints = recordsForGroup(GROUP_FOOTPRINT);
-            List<Record> movies = recordsForGroup(GROUP_MOVIE);
-
-            int slot = 0;
-            // 1. 左上: 音乐与声音组
-            if (!musics.isEmpty()) {
-                View v = buildGroupCluster(GROUP_MUSIC, musics);
-                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-2, -2, Gravity.TOP | Gravity.START);
-                lp.leftMargin = Cards.dp(this, 4);
-                lp.topMargin = Cards.dp(this, 8);
-                stage.addView(v, lp);
-                animateSpread(v, -4f, animate, slot++);
+            List<Integer> activeGroups = new ArrayList<>();
+            List<List<Record>> activeLists = new ArrayList<>();
+            int[] candidates = {GROUP_MUSIC, GROUP_FOOTPRINT, GROUP_MOVIE};
+            for (int g : candidates) {
+                List<Record> grp = recordsForGroup(g);
+                if (!grp.isEmpty()) {
+                    activeGroups.add(g);
+                    activeLists.add(grp);
+                }
             }
 
-            // 2. 右中: 足迹与信件组(像 exa2 右侧叠放的拍立得照片)
-            if (!footprints.isEmpty()) {
-                View v = buildGroupCluster(GROUP_FOOTPRINT, footprints);
-                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-2, -2, Gravity.TOP | Gravity.END);
-                lp.rightMargin = Cards.dp(this, 4);
-                lp.topMargin = Cards.dp(this, musics.isEmpty() ? 24 : 96);
+            int count = activeGroups.size();
+            if (count == 1) {
+                stage.getLayoutParams().height = Cards.dp(this, 360);
+                stage.requestLayout();
+                View v = buildGroupCluster(activeGroups.get(0), activeLists.get(0));
+                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-2, -2,
+                        Gravity.TOP | Gravity.CENTER_HORIZONTAL);
+                lp.topMargin = Cards.dp(this, 26);
                 stage.addView(v, lp);
-                animateSpread(v, 5f, animate, slot++);
-            }
+                animateSpread(v, -2.5f, animate, 0);
+            } else if (count == 2) {
+                stage.getLayoutParams().height = Cards.dp(this, 420);
+                stage.requestLayout();
 
-            // 3. 左下: 电影票根 / 书籍组
-            if (!movies.isEmpty()) {
-                View v = buildGroupCluster(GROUP_MOVIE, movies);
-                FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-2, -2, Gravity.BOTTOM | Gravity.START);
-                lp.leftMargin = Cards.dp(this, 10);
-                lp.bottomMargin = Cards.dp(this, 12);
-                stage.addView(v, lp);
-                animateSpread(v, -3f, animate, slot);
+                View v0 = buildGroupCluster(activeGroups.get(0), activeLists.get(0));
+                FrameLayout.LayoutParams lp0 = new FrameLayout.LayoutParams(-2, -2,
+                        Gravity.TOP | Gravity.START);
+                lp0.leftMargin = Cards.dp(this, 8);
+                lp0.topMargin = Cards.dp(this, 14);
+                stage.addView(v0, lp0);
+                animateSpread(v0, -3.5f, animate, 0);
+
+                View v1 = buildGroupCluster(activeGroups.get(1), activeLists.get(1));
+                FrameLayout.LayoutParams lp1 = new FrameLayout.LayoutParams(-2, -2,
+                        Gravity.TOP | Gravity.END);
+                lp1.rightMargin = Cards.dp(this, 8);
+                lp1.topMargin = Cards.dp(this, 128);
+                stage.addView(v1, lp1);
+                animateSpread(v1, 4.2f, animate, 1);
+            } else if (count >= 3) {
+                stage.getLayoutParams().height = Cards.dp(this, 490);
+                stage.requestLayout();
+
+                View v0 = buildGroupCluster(activeGroups.get(0), activeLists.get(0));
+                FrameLayout.LayoutParams lp0 = new FrameLayout.LayoutParams(-2, -2,
+                        Gravity.TOP | Gravity.START);
+                lp0.leftMargin = Cards.dp(this, 4);
+                lp0.topMargin = Cards.dp(this, 8);
+                stage.addView(v0, lp0);
+                animateSpread(v0, -4f, animate, 0);
+
+                View v1 = buildGroupCluster(activeGroups.get(1), activeLists.get(1));
+                FrameLayout.LayoutParams lp1 = new FrameLayout.LayoutParams(-2, -2,
+                        Gravity.TOP | Gravity.END);
+                lp1.rightMargin = Cards.dp(this, 4);
+                lp1.topMargin = Cards.dp(this, 92);
+                stage.addView(v1, lp1);
+                animateSpread(v1, 4.8f, animate, 1);
+
+                View v2 = buildGroupCluster(activeGroups.get(2), activeLists.get(2));
+                FrameLayout.LayoutParams lp2 = new FrameLayout.LayoutParams(-2, -2,
+                        Gravity.TOP | Gravity.START);
+                lp2.leftMargin = Cards.dp(this, 12);
+                lp2.topMargin = Cards.dp(this, 232);
+                stage.addView(v2, lp2);
+                animateSpread(v2, -2.8f, animate, 2);
             }
         });
     }
@@ -335,7 +344,6 @@ public class DaySpreadActivity extends AppCompatActivity {
                 : L10n.s(R.string.ui_169);
         tvHeader.setText(title);
         tvSubHeader.setText(sub);
-        tvBottomHint.setText("‹");
 
         transitionStage(() -> {
             stage.removeAllViews();
@@ -384,7 +392,9 @@ public class DaySpreadActivity extends AppCompatActivity {
             // 将卡片按 exa3.jpg 的左右交错方式散落排布在画布上
             float[] tilts = {-4f, 4.5f, -2.5f, 3.5f, -3f};
             int stepY = Cards.dp(this, 155);
-            int totalH = Math.max(Cards.dp(this, 460), Cards.dp(this, 240) + (cards.size() - 1) * stepY);
+            int totalH = cards.size() == 1
+                    ? Cards.dp(this, 340)
+                    : Math.max(Cards.dp(this, 440), Cards.dp(this, 240) + (cards.size() - 1) * stepY);
             stage.getLayoutParams().height = totalH;
             stage.requestLayout();
 
@@ -393,7 +403,7 @@ public class DaySpreadActivity extends AppCompatActivity {
                 FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) c.getLayoutParams();
                 if (cards.size() == 1) {
                     lp.gravity = Gravity.CENTER_HORIZONTAL | Gravity.TOP;
-                    lp.topMargin = Cards.dp(this, 48);
+                    lp.topMargin = Cards.dp(this, 24);
                 } else {
                     boolean leftSide = (i % 2 == 0);
                     lp.gravity = (leftSide ? Gravity.START : Gravity.END) | Gravity.TOP;

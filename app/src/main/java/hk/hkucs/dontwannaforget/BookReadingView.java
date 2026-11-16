@@ -80,7 +80,8 @@ public class BookReadingView extends FrameLayout {
             text.addView(thought, lp);
         }
         if (record.date != null && !record.date.isEmpty()) {
-            TextView date = text(record.date, 11, secondary, AppFonts.regular());
+            TextView date = text(record.date, 12, secondary, AppFonts.regular());
+            date.setLetterSpacing(0.06f);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-1, -2);
             lp.topMargin = dp(32);
             text.addView(date, lp);

@@ -2,6 +2,8 @@ package hk.hkucs.dontwannaforget;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,7 +102,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.VH> {
             for (Map.Entry<String, List<Record>> e : byDate.entrySet()) {
                 rows.add(new DayGroup(e.getKey(), e.getValue()));
             }
-        } else if (filter == Record.TICKET || filter == Record.VOICE || filter == Record.BOOK || filter == Record.MUSIC || filter == Record.FOOTPRINT) {
+        } else if (filter == Record.TICKET || filter == Record.VOICE || filter == Record.BOOK || filter == Record.MUSIC || filter == Record.FOOTPRINT || filter == Record.LETTER) {
             // 模仿 example/layoutexp3.jpg、IMG_3860.jpg、bookexp1/2.jpg 与 IMG_3870.jpg: 采用错落穿插的散落式拼贴布局
             if (random) {
                 Collections.shuffle(list, new Random(seed));
@@ -108,8 +110,8 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.VH> {
             int i = 0;
             int step = 0;
             while (i < list.size()) {
-                // 交替使用「不对称双卡错落行」与「单卡留白+暗底编号行」，还原散落式节奏
-                if ((filter == Record.FOOTPRINT || step % 2 == 0) && i + 1 < list.size()) {
+                // 所有分类展陈页统一采用「大画幅单卡特写 + 斜角双卡画廊」交替节奏 (1 -> 2 -> 1 -> 2)
+                if (step % 2 == 1 && i + 1 < list.size()) {
                     rows.add(new Record[]{list.get(i), list.get(i + 1)});
                     i += 2;
                 } else {
@@ -206,104 +208,212 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.VH> {
     }
 
     /**
-     * 模仿 example/layoutexp3.jpg、声音页、书籍便签页与音乐歌词页的散落式拼贴布局:
-     * - 打破齐整两列网格，采用安全边距、高低错位、微倾旋转与暗底编号留白点缀
+     * 全分类统一画廊展陈引擎：
+     * - 单卡特写行：大画幅主展品（多页手账/信封自带叠放质感）+ 对侧档案角标 + 统一美术馆题签；
+     * - 双卡斜角行：42dp 对角线高低错位 + 对向微倾角 + 简洁题签。
      */
     private void bindPair(VH h, Context c, Record[] pair, int pos) {
-        int available=availableWidthDp(h,c);
-        int pairWidth=Math.max(80,(available-58)/2);
+        int available = availableWidthDp(h, c);
+        int pairWidth = Math.max(80, (available - 56) / 2);
         FrameLayout stage = new FrameLayout(c);
         stage.setClipChildren(false);
         stage.setClipToPadding(false);
-        stage.setPadding(0, Cards.dp(c, 10), 0, Cards.dp(c, 14));
+        stage.setPadding(0, Cards.dp(c, 12), 0, Cards.dp(c, 20));
 
         Record r0 = pair[0];
         Record r1 = pair.length > 1 ? pair[1] : null;
         Random rnd = new Random((random ? seed : 17L) * 31 + pos * 97L + (r0 != null ? r0.title.hashCode() : 0));
 
         if (r1 == null && r0 != null) {
-            // 单张主卡片错落行
-            boolean alignLeft = (pos % 3 != 1);
-            int cardW = (r0.type == Record.VOICE) ? 236
-                    : r0.type == Record.FOOTPRINT ? Math.min(180,pairWidth)
-                    : (r0.type == Record.BOOK || r0.type == Record.MUSIC) ? 242
-                    : (coverMode ? 210 : 256);
-            cardW=Math.min(cardW,available-48);
-            View card = buildScatteredCard(c, r0, cardW, false);
-            FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) card.getLayoutParams();
-            lp.gravity = alignLeft ? (Gravity.START | Gravity.TOP) : (Gravity.END | Gravity.TOP);
-            lp.topMargin = Cards.dp(c, 18);
-            if (alignLeft) {
-                lp.leftMargin = Cards.dp(c, 24);
-            } else {
-                lp.rightMargin = Cards.dp(c, 24);
-            }
-            card.setRotation((rnd.nextFloat() * 4.4f - 2.2f));
-            card.setOnClickListener(v -> onOpen.open(r0));
-            stage.addView(card, lp);
+            boolean alignLeft = ((pos / 2) % 2 == 0);
+            int cardW = soloWidthDp(r0, available);
+            float tilt = alignLeft ? (-1.2f - rnd.nextFloat() * 0.8f) : (1.2f + rnd.nextFloat() * 0.8f);
+            View exhibit = buildExhibitItem(c, r0, cardW, false, tilt, !alignLeft, true);
+            exhibit.setOnClickListener(v -> onOpen.open(r0));
 
-            // 在对侧暗色背景空白处点缀微缩编号与日期
-            String serial;
-            if (r0.type == Record.VOICE) {
-                serial = "VOICE #" + String.format(java.util.Locale.US, "%04d", Math.abs(r0.title.hashCode()) % 9000 + 1000);
-            } else if (r0.type == Record.BOOK) {
-                serial = BookNoteStyle.fromRecord(r0).serialCode;
-            } else if (r0.type == Record.MUSIC) {
-                serial = MusicCardStyle.fromRecord(r0).serialCode;
-            } else {
-                serial = TicketStyle.defaultSerial(r0);
-            }
-            TextView idTag = Cards.text(c, serial, 8.5f, 0xFF9C8E4E, AppFonts.regular());
-            idTag.setRotation(-4f);
-            FrameLayout.LayoutParams idLp = new FrameLayout.LayoutParams(-2, -2,
-                    alignLeft ? (Gravity.END | Gravity.TOP) : (Gravity.START | Gravity.TOP));
-            idLp.topMargin = Cards.dp(c, 4);
-            if (alignLeft) idLp.rightMargin = Cards.dp(c, 28);
-            else idLp.leftMargin = Cards.dp(c, 32);
-            stage.addView(idTag, idLp);
+            FrameLayout.LayoutParams slp = new FrameLayout.LayoutParams(-2, -2,
+                    Gravity.TOP | (alignLeft ? Gravity.START : Gravity.END));
+            slp.topMargin = Cards.dp(c, 22);
+            if (alignLeft) slp.leftMargin = Cards.dp(c, 22);
+            else slp.rightMargin = Cards.dp(c, 22);
+            stage.addView(exhibit, slp);
 
+            View stamp = buildCornerStamp(c, r0, pos, alignLeft);
+            FrameLayout.LayoutParams stLp = new FrameLayout.LayoutParams(-2, -2,
+                    Gravity.TOP | (alignLeft ? Gravity.END : Gravity.START));
+            stLp.topMargin = Cards.dp(c, 4);
+            if (alignLeft) stLp.rightMargin = Cards.dp(c, 26);
+            else stLp.leftMargin = Cards.dp(c, 26);
+            stage.addView(stamp, stLp);
         } else if (r0 != null && r1 != null) {
-            // 不对称双卡错落行
-            int pattern = pos % 3;
-
-            // 左卡: 可轻微向左出血或偏下错位
-            int w0 = (r0.type == Record.VOICE || r0.type == Record.BOOK || r0.type == Record.MUSIC)
-                    ? (pattern == 0 ? 186 : 176)
-                    : (coverMode ? 168 : (pattern == 0 ? 196 : 184));
-            w0=Math.min(w0,pairWidth);
-            View card0 = buildScatteredCard(c, r0, w0, true);
-            FrameLayout.LayoutParams lp0 = (FrameLayout.LayoutParams) card0.getLayoutParams();
-            lp0.gravity = Gravity.START | Gravity.TOP;
+            int w0 = Math.min(172, pairWidth);
+            View leftItem = buildExhibitItem(c, r0, w0, true, -2.5f + (rnd.nextFloat() - 0.5f) * 0.8f, false, false);
+            leftItem.setOnClickListener(v -> onOpen.open(r0));
+            FrameLayout.LayoutParams lp0 = new FrameLayout.LayoutParams(-2, -2, Gravity.START | Gravity.TOP);
             lp0.leftMargin = Cards.dp(c, 20);
-            lp0.topMargin = Cards.dp(c, pattern == 1 ? 30 : 8);
-            card0.setRotation(pattern == 0 ? -1.4f : (rnd.nextFloat() * 4.8f - 2.6f));
-            card0.setOnClickListener(v -> onOpen.open(r0));
-            stage.addView(card0, lp0);
+            lp0.topMargin = Cards.dp(c, 4);
+            stage.addView(leftItem, lp0);
 
-            // 右卡: 与左卡形成高低差与倾角对比
-            int w1 = (r1.type == Record.VOICE || r1.type == Record.BOOK || r1.type == Record.MUSIC)
-                    ? (pattern == 1 ? 178 : 184)
-                    : (coverMode ? 168 : (pattern == 1 ? 186 : 194));
-            w1=Math.min(w1,pairWidth);
-            View card1 = buildScatteredCard(c, r1, w1, true);
-            FrameLayout.LayoutParams lp1 = (FrameLayout.LayoutParams) card1.getLayoutParams();
-            lp1.gravity = Gravity.END | Gravity.TOP;
+            int w1 = Math.min(172, pairWidth);
+            View rightItem = buildExhibitItem(c, r1, w1, true, 2.2f + (rnd.nextFloat() - 0.5f) * 0.8f, true, false);
+            rightItem.setOnClickListener(v -> onOpen.open(r1));
+            FrameLayout.LayoutParams lp1 = new FrameLayout.LayoutParams(-2, -2, Gravity.END | Gravity.TOP);
             lp1.rightMargin = Cards.dp(c, 20);
-            lp1.topMargin = Cards.dp(c, pattern == 1 ? 8 : 30);
-            card1.setRotation(pattern == 1 ? -2.4f : (1.2f + rnd.nextFloat() * 1.2f));
-            card1.setOnClickListener(v -> onOpen.open(r1));
-            stage.addView(card1, lp1);
-
-            // 背景暗处点缀微小日期与 ID
-            TextView bgDate = Cards.text(c, r0.date.replace('.', '-'), 8f, 0xFF6E6B64, AppFonts.regular());
-            bgDate.setRotation(-5f);
-            FrameLayout.LayoutParams dlp = new FrameLayout.LayoutParams(-2, -2, Gravity.TOP | Gravity.CENTER_HORIZONTAL);
-            dlp.topMargin = Cards.dp(c, 2);
-            dlp.leftMargin = Cards.dp(c, 18);
-            stage.addView(bgDate, dlp);
+            lp1.topMargin = Cards.dp(c, 46);
+            stage.addView(rightItem, lp1);
         }
 
         h.box.addView(stage, new FrameLayout.LayoutParams(-1, -2));
+    }
+
+    private int soloWidthDp(Record r, int available) {
+        int preferred;
+        switch (r.type) {
+            case Record.TICKET:
+                preferred = coverMode ? 210 : 244;
+                break;
+            case Record.VOICE:
+                preferred = 232;
+                break;
+            case Record.BOOK:
+                preferred = 234;
+                break;
+            case Record.MUSIC:
+                preferred = 236;
+                break;
+            case Record.FOOTPRINT:
+                preferred = 228;
+                break;
+            case Record.LETTER:
+            default:
+                preferred = 244;
+                break;
+        }
+        return Math.min(preferred, available - 64);
+    }
+
+    private View buildExhibitItem(Context c, Record r, int wDp, boolean compact,
+                                  float tiltDeg, boolean alignEnd, boolean large) {
+        View card;
+        if (r.type == Record.FOOTPRINT) {
+            card = buildLayeredFootprintPaper(c, r, wDp, tiltDeg);
+        } else if (r.type == Record.LETTER) {
+            card = buildLayeredEnvelope(c, r, wDp, tiltDeg);
+        } else {
+            card = buildScatteredCard(c, r, wDp, compact);
+            card.setRotation(tiltDeg);
+        }
+
+        LinearLayout col = new LinearLayout(c);
+        col.setOrientation(LinearLayout.VERTICAL);
+        col.setClipChildren(false);
+        col.setClipToPadding(false);
+        col.addView(card);
+
+        if (r.type == Record.VOICE) {
+            // 留声卡已自带金色细线+日期+标题；特写行补充一行静谧地点签名
+            if (large && r.sub != null && !r.sub.trim().isEmpty()) {
+                TextView place = Cards.text(c, r.sub.trim(), 11.5f, 0xFF9E988E, AppFonts.regular());
+                place.setIncludeFontPadding(false);
+                place.setSingleLine(true);
+                place.setEllipsize(TextUtils.TruncateAt.END);
+                place.setGravity(alignEnd ? Gravity.END : Gravity.START);
+                place.setPadding(Cards.dp(c, 2), Cards.dp(c, 4), Cards.dp(c, 2), 0);
+                col.addView(place, new LinearLayout.LayoutParams(Cards.dp(c, wDp), -2));
+            }
+            return col;
+        }
+
+        String subText = exhibitSubText(r, large);
+        int subMaxLines = (large && (r.type == Record.BOOK || r.type == Record.MUSIC || r.type == Record.LETTER)) ? 2 : 1;
+        View caption = buildEditorialCaption(c, r.date, r.title, subText,
+                Cards.dp(c, wDp), alignEnd, large, subMaxLines);
+        ((LinearLayout.LayoutParams) caption.getLayoutParams()).topMargin = Cards.dp(c, large ? 12 : 10);
+        col.addView(caption);
+        return col;
+    }
+
+    private static String exhibitSubText(Record r, boolean large) {
+        if (r.type == Record.LETTER) {
+            if (large) return extractLetterSnippet(r.note);
+            return (r.sub != null && !r.sub.trim().isEmpty()) ? ("To " + r.sub.trim()) : "";
+        }
+        if (r.type == Record.BOOK) {
+            if (large) {
+                String thought = BookNoteStyle.fromRecord(r).thought;
+                if (thought != null && !thought.trim().isEmpty()) return thought.trim();
+            }
+            return r.sub != null ? r.sub.trim() : "";
+        }
+        if (r.type == Record.MUSIC) {
+            if (large) {
+                String thought = MusicCardStyle.fromRecord(r).thought;
+                if (thought != null && !thought.trim().isEmpty()) return thought.trim();
+            }
+            return r.sub != null ? r.sub.trim() : "";
+        }
+        if (r.type == Record.TICKET) {
+            String dir = r.sub != null ? r.sub.trim() : "";
+            String cinema = (large && r.fields != null && r.fields.length > 0 && r.fields[0] != null)
+                    ? r.fields[0].trim() : "";
+            if (!dir.isEmpty() && !cinema.isEmpty()) return dir + " · " + cinema;
+            return !dir.isEmpty() ? dir : cinema;
+        }
+        return r.sub != null ? r.sub.trim() : "";
+    }
+
+    private View buildCornerStamp(Context c, Record r, int pos, boolean alignLeft) {
+        LinearLayout stamp = new LinearLayout(c);
+        stamp.setOrientation(LinearLayout.VERTICAL);
+        stamp.setGravity(alignLeft ? Gravity.END : Gravity.START);
+
+        String primary;
+        String secondary = "";
+        switch (r.type) {
+            case Record.VOICE:
+                primary = "VOICE #" + String.format(Locale.US, "%04d", Math.abs(r.title.hashCode()) % 9000 + 1000);
+                if (r.fields != null && r.fields.length > 0 && r.fields[0] != null) secondary = r.fields[0].trim();
+                break;
+            case Record.BOOK:
+                primary = BookNoteStyle.fromRecord(r).serialCode;
+                if (r.sub != null) secondary = r.sub.trim();
+                break;
+            case Record.MUSIC:
+                primary = MusicCardStyle.fromRecord(r).serialCode;
+                if (r.sub != null) secondary = r.sub.trim();
+                break;
+            case Record.FOOTPRINT:
+                primary = String.format(Locale.US, "NO. %02d", pos + 1);
+                int pages = Math.max(1, r.fields != null ? r.fields.length : 1);
+                if (pages > 1) secondary = pages + "P";
+                break;
+            case Record.LETTER:
+                primary = String.format(Locale.US, "LETTER · %02d", pos + 1);
+                if (r.sub != null && !r.sub.trim().isEmpty()) secondary = "TO " + r.sub.trim();
+                break;
+            case Record.TICKET:
+            default:
+                primary = TicketStyle.defaultSerial(r);
+                if (r.rating != null && !r.rating.trim().isEmpty()) secondary = "★ " + r.rating.trim();
+                break;
+        }
+
+        TextView tag = Cards.text(c, primary, 8.5f, 0xFFAE9E62, AppFonts.regular());
+        tag.setIncludeFontPadding(false);
+        tag.setLetterSpacing(0.12f);
+        stamp.addView(tag);
+
+        if (!secondary.isEmpty()) {
+            TextView sub = Cards.text(c, secondary, 9f, 0xFF969086, AppFonts.regular());
+            sub.setIncludeFontPadding(false);
+            sub.setLetterSpacing(0.06f);
+            sub.setSingleLine(true);
+            sub.setMaxWidth(Cards.dp(c, 84));
+            sub.setEllipsize(TextUtils.TruncateAt.END);
+            sub.setPadding(0, Cards.dp(c, 3), 0, 0);
+            stamp.addView(sub);
+        }
+        return stamp;
     }
 
     /**
@@ -326,23 +436,23 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.VH> {
                 Typeface.create(AppFonts.regular(), Typeface.BOLD));
         dateCol.addView(dayNum);
 
-        TextView week = Cards.text(c, parts[1], 12, 0xFFB5AFA6, AppFonts.regular());
+        TextView week = Cards.text(c, parts[1], 12, 0xFFBEB8AE, AppFonts.regular());
         week.setPadding(0, Cards.dp(c, 2), 0, 0);
         dateCol.addView(week);
 
-        TextView monthYear = Cards.text(c, parts[2], 12, 0xFF9E988E, AppFonts.regular());
+        TextView monthYear = Cards.text(c, parts[2], 12, 0xFFA8A296, AppFonts.regular());
         monthYear.setPadding(0, Cards.dp(c, 1), 0, 0);
         dateCol.addView(monthYear);
 
         // 日期下方的精巧点缀线与微缩展开提示
         View dash = new View(c);
-        dash.setBackgroundColor(0x33F2D398);
+        dash.setBackgroundColor(0x4DF2D398);
         LinearLayout.LayoutParams dlp = new LinearLayout.LayoutParams(Cards.dp(c, 24), Cards.dp(c, 1.5f));
         dlp.topMargin = Cards.dp(c, 6);
         dlp.bottomMargin = Cards.dp(c, 4);
         dateCol.addView(dash, dlp);
 
-        TextView hint = Cards.text(c, L10n.s(R.string.ui_055), 10.5f, 0xFF7A756D, AppFonts.regular());
+        TextView hint = Cards.text(c, L10n.s(R.string.ui_055), 10.5f, 0xFF969086, AppFonts.regular());
         dateCol.addView(hint);
 
         line.addView(dateCol, new LinearLayout.LayoutParams(Cards.dp(c, 92), -2));
@@ -443,6 +553,141 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.VH> {
         col.addView(Cards.envelopeCard(c, r, wDp));
         col.setLayoutParams(new FrameLayout.LayoutParams(Cards.dp(c, wDp), -2));
         return col;
+    }
+
+    private View buildLayeredFootprintPaper(Context c, Record r, int wDp, float tiltDeg) {
+        FootprintCanvasView paper = Cards.footprintPaperCard(c, r, 0, wDp);
+        int pageCount = Math.max(1, r.fields != null ? r.fields.length : 1);
+        if (pageCount <= 1) {
+            paper.setRotation(tiltDeg);
+            return paper;
+        }
+        ViewGroup.LayoutParams pLp = paper.getLayoutParams();
+        int wPx = pLp.width;
+        int hPx = pLp.height;
+
+        FrameLayout stack = new FrameLayout(c);
+        stack.setClipChildren(false);
+        stack.setClipToPadding(false);
+
+        View underSheet = new View(c);
+        GradientDrawable ubg = new GradientDrawable();
+        ubg.setColor(0xFFE4DFD3);
+        ubg.setCornerRadius(Cards.dp(c, 12f * wDp / 340f));
+        ubg.setStroke(Cards.dp(c, 1), 0x22000000);
+        underSheet.setBackground(ubg);
+        underSheet.setElevation(Cards.dp(c, 2));
+        underSheet.setRotation(tiltDeg + (tiltDeg < 0 ? 4.6f : -4.6f));
+        underSheet.setTranslationX(Cards.dp(c, tiltDeg < 0 ? 6 : -6));
+        underSheet.setTranslationY(Cards.dp(c, 5));
+        stack.addView(underSheet, new FrameLayout.LayoutParams(wPx, hPx));
+
+        paper.setElevation(Cards.dp(c, 6));
+        paper.setRotation(tiltDeg);
+        stack.addView(paper, new FrameLayout.LayoutParams(wPx, hPx));
+        stack.setLayoutParams(new LinearLayout.LayoutParams(wPx, hPx));
+        return stack;
+    }
+
+    private View buildLayeredEnvelope(Context c, Record r, int wDp, float tiltDeg) {
+        EnvelopeView ev = (EnvelopeView) Cards.envelopeCard(c, r, wDp);
+        ViewGroup.LayoutParams lp = ev.getLayoutParams();
+        int wPx = lp.width;
+        int hPx = lp.height;
+
+        FrameLayout stack = new FrameLayout(c);
+        stack.setClipChildren(false);
+        stack.setClipToPadding(false);
+
+        // 信封背后微微露出的一角信纸，强化书信实体叠放质感
+        View letterPeek = new View(c);
+        GradientDrawable pbg = new GradientDrawable();
+        pbg.setColor(0xFFF1ECE0);
+        pbg.setCornerRadius(Cards.dp(c, 4));
+        pbg.setStroke(Cards.dp(c, 1), 0x22000000);
+        letterPeek.setBackground(pbg);
+        letterPeek.setElevation(Cards.dp(c, 2));
+        letterPeek.setRotation(tiltDeg + (tiltDeg < 0 ? 4.2f : -4.2f));
+        letterPeek.setTranslationX(Cards.dp(c, tiltDeg < 0 ? 5 : -5));
+        letterPeek.setTranslationY(-Cards.dp(c, 5));
+        stack.addView(letterPeek, new FrameLayout.LayoutParams(wPx, hPx));
+
+        ev.setElevation(Cards.dp(c, 6));
+        ev.setRotation(tiltDeg);
+        stack.addView(ev, new FrameLayout.LayoutParams(wPx, hPx));
+        stack.setLayoutParams(new LinearLayout.LayoutParams(wPx, hPx));
+        return stack;
+    }
+
+    private static String extractLetterSnippet(String note) {
+        if (note == null) return "";
+        String[] lines = note.replace("\r", "").split("\n");
+        StringBuilder out = new StringBuilder();
+        boolean skippedGreeting = false;
+        for (String raw : lines) {
+            String line = raw.trim();
+            if (line.isEmpty()) continue;
+            if (!skippedGreeting && out.length() == 0 && line.length() <= 24
+                    && (line.endsWith(",") || line.endsWith("，") || line.endsWith(":") || line.endsWith("："))) {
+                skippedGreeting = true;
+                continue;
+            }
+            if (out.length() > 0) out.append(" ");
+            out.append(line);
+            if (out.length() >= 72) break;
+        }
+        return out.length() > 0 ? out.toString() : note.trim();
+    }
+
+    private View buildEditorialCaption(Context c, String dateText, String titleText, String subText,
+                                       int widthPx, boolean alignEnd, boolean large, int subMaxLines) {
+        LinearLayout cap = new LinearLayout(c);
+        cap.setOrientation(LinearLayout.VERTICAL);
+        cap.setGravity(alignEnd ? Gravity.END : Gravity.START);
+
+        LinearLayout metaRow = new LinearLayout(c);
+        metaRow.setOrientation(LinearLayout.HORIZONTAL);
+        metaRow.setGravity(Gravity.CENTER_VERTICAL | (alignEnd ? Gravity.END : Gravity.START));
+        metaRow.setPadding(0, 0, 0, Cards.dp(c, 4));
+
+        View rule = new View(c);
+        rule.setBackgroundColor(0x77D8C690);
+        LinearLayout.LayoutParams rlp = new LinearLayout.LayoutParams(Cards.dp(c, 14), Cards.dp(c, 1.2f));
+        TextView date = Cards.text(c, dateText != null ? dateText : "", large ? 10.5f : 9.5f, 0xFFA8A296, AppFonts.regular());
+        date.setIncludeFontPadding(false);
+        date.setLetterSpacing(0.08f);
+        if (alignEnd) {
+            rlp.leftMargin = Cards.dp(c, 7);
+            metaRow.addView(date);
+            metaRow.addView(rule, rlp);
+        } else {
+            rlp.rightMargin = Cards.dp(c, 7);
+            metaRow.addView(rule, rlp);
+            metaRow.addView(date);
+        }
+        cap.addView(metaRow, new LinearLayout.LayoutParams(-1, -2));
+
+        TextView title = Cards.text(c, titleText != null ? titleText : "", large ? 15.5f : 13.5f,
+                0xFFF2EFE9, Typeface.create(AppFonts.regular(), Typeface.BOLD));
+        title.setIncludeFontPadding(false);
+        title.setSingleLine(true);
+        title.setEllipsize(TextUtils.TruncateAt.END);
+        title.setGravity(alignEnd ? Gravity.END : Gravity.START);
+        cap.addView(title, new LinearLayout.LayoutParams(-1, -2));
+
+        if (subText != null && !subText.trim().isEmpty()) {
+            TextView sub = Cards.text(c, subText.trim(), large ? 11.5f : 10.5f, 0xFF9E988E, AppFonts.regular());
+            sub.setIncludeFontPadding(false);
+            sub.setMaxLines(subMaxLines);
+            sub.setEllipsize(TextUtils.TruncateAt.END);
+            if (subMaxLines > 1) sub.setLineSpacing(0f, 1.35f);
+            sub.setPadding(0, Cards.dp(c, 3), 0, 0);
+            sub.setGravity(alignEnd ? Gravity.END : Gravity.START);
+            cap.addView(sub, new LinearLayout.LayoutParams(-1, -2));
+        }
+
+        cap.setLayoutParams(new LinearLayout.LayoutParams(widthPx, -2));
+        return cap;
     }
 
     /** 声音记忆卡(仿 example/IMG_3860.jpg: 上圆下平图片 + 简单日期与标题) */

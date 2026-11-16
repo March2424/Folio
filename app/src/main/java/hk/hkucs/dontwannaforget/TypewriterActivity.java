@@ -124,33 +124,30 @@ public class TypewriterActivity extends AppCompatActivity {
         mainCol.setOrientation(LinearLayout.VERTICAL);
         root.addView(mainCol, new FrameLayout.LayoutParams(-1, -1));
 
-        // 1. 顶部栏: ← 返回 | 177 / 3,000 | 装入信封 ›
-        LinearLayout topBar = new LinearLayout(this);
-        topBar.setGravity(Gravity.CENTER_VERTICAL);
-        int pad = Cards.dp(this, 20);
-        topBar.setPadding(pad, Cards.dp(this, 14), pad, Cards.dp(this, 8));
+        // 1. 顶部栏: ← 返回 | 0 / 3,000 | 装入信封 ›
+        EditorUi.TopBar bar = EditorUi.topBar(this, "0 / 3,000", L10n.s(R.string.ui_099), false,
+                this::finish, this::showEnvelopeSealDialog);
+        int pad = Cards.dp(this, 16);
+        bar.root.setPadding(pad, Cards.dp(this, 2), pad, Cards.dp(this, 6));
+        bar.back.setTextColor(0xFFC5C0B7);
 
-        TextView btnBack = Cards.text(this, L10n.s(R.string.ui_060), 13, 0xFFC5C0B7, AppFonts.regular());
-        btnBack.setOnClickListener(v -> finish());
-        HomeNavigation.bind(btnBack);
-        topBar.addView(btnBack, new LinearLayout.LayoutParams(0, -2, 1f));
+        tvCounter = bar.center;
+        tvCounter.setTextSize(12);
+        tvCounter.setTextColor(0xFFB5B0A6);
+        tvCounter.setTypeface(AppFonts.regular());
 
-        tvCounter = Cards.text(this, "0 / 3,000", 13, 0xFFB5B0A6, AppFonts.regular());
-        tvCounter.setPadding(0, 0, Cards.dp(this, 14), 0);
-        topBar.addView(tvCounter);
-
-        TextView btnEnvelope = Cards.text(this, L10n.s(R.string.ui_099), 13, 0xFF191917,
-                Typeface.create(AppFonts.regular(), Typeface.BOLD));
-        btnEnvelope.setPadding(Cards.dp(this, 14), Cards.dp(this, 7), Cards.dp(this, 14), Cards.dp(this, 7));
+        TextView btnEnvelope = bar.pill;
+        btnEnvelope.setTextSize(12);
+        btnEnvelope.setTextColor(0xFF191917);
+        btnEnvelope.setTypeface(Typeface.create(AppFonts.regular(), Typeface.BOLD));
+        btnEnvelope.setPadding(Cards.dp(this, 12), Cards.dp(this, 5), Cards.dp(this, 12), Cards.dp(this, 5));
         GradientDrawable envBg = new GradientDrawable();
         envBg.setColor(0xFFEADBC0);
-        envBg.setCornerRadius(Cards.dp(this, 16));
+        envBg.setCornerRadius(Cards.dp(this, 14));
         btnEnvelope.setBackground(envBg);
-        btnEnvelope.setOnClickListener(v -> showEnvelopeSealDialog());
-        topBar.addView(btnEnvelope);
 
-        root.addView(topBar, new FrameLayout.LayoutParams(-1, -2, Gravity.TOP));
-        FloatingHeader.style(topBar);
+        root.addView(bar.root, new FrameLayout.LayoutParams(-1, -2, Gravity.TOP));
+        FloatingHeader.style(bar.root);
 
         // 2. 中央打字机弧面纸张与聚光灯区域 (点击任意处唤起手机自带键盘)
         FrameLayout stageWrap = new FrameLayout(this);

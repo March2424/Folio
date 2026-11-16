@@ -41,7 +41,7 @@
 <string name="ui_039" formatted="false">"儲存失敗,請檢查圖片後重試"</string>
 <string name="ui_040" formatted="false">"足跡手賬已釋出"</string>
 <string name="ui_041" formatted="false">"那些不想忘記的瞬間，\n都輕輕停在這裡。"</string>
-<string name="ui_042" formatted="false">"沿途足跡"</string>
+<string name="ui_042" formatted="false">"足跡"</string>
 <string name="ui_043" formatted="false">"HH:mm|文字"</string>
 <string name="ui_044" formatted="false">"把沿途的風與光留在紙頁上。"</string>
 <string name="ui_045" formatted="false">"輕點輸入文字..."</string>
@@ -82,21 +82,21 @@
 <string name="ui_080" formatted="false">"  (輕點下方紙頁可編輯文字與圖片)"</string>
 <string name="ui_081" formatted="false">"足跡紙頁 "</string>
 <string name="ui_082" formatted="false">"全部"</string>
-<string name="ui_083" formatted="false">"票根"</string>
-<string name="ui_084" formatted="false">"日常留聲"</string>
-<string name="ui_085" formatted="false">"閱讀手記"</string>
+<string name="ui_083" formatted="false">"光影"</string>
+<string name="ui_084" formatted="false">"留聲"</string>
+<string name="ui_085" formatted="false">"書頁"</string>
 <string name="ui_086" formatted="false">"旋律"</string>
-<string name="ui_087" formatted="false">"寫一封信"</string>
+<string name="ui_087" formatted="false">"書信"</string>
 <string name="ui_088" formatted="false">"記憶冊"</string>
-<string name="ui_089" formatted="false">"建立"</string>
-<string name="ui_090" formatted="false">"電影票根 (便籤/海報排版 + 掃描票根)"</string>
-<string name="ui_091" formatted="false">"日常留聲 (現場錄音 / 上傳音訊)"</string>
-<string name="ui_092" formatted="false">"閱讀手記 (摘抄便籤 / 書封與心情照片)"</string>
-<string name="ui_093" formatted="false">"旋律 (歌詞卡片)"</string>
-<string name="ui_094" formatted="false">"沿途足跡 (紙質圖文手賬)"</string>
-<string name="ui_095" formatted="false">"寫一封信 (打字機與信封)"</string>
+<string name="ui_089" formatted="false">"記下"</string>
+<string name="ui_090" formatted="false">"光影 · 電影票根 (便籤/海報 + 掃描票根)"</string>
+<string name="ui_091" formatted="false">"留聲 · 聲音記憶 (現場錄音 / 上傳音訊)"</string>
+<string name="ui_092" formatted="false">"書頁 · 閱讀手記 (摘抄便籤 / 心情照片)"</string>
+<string name="ui_093" formatted="false">"旋律 · 歌詞卡片"</string>
+<string name="ui_094" formatted="false">"足跡 · 沿途手賬 (紙質圖文手賬)"</string>
+<string name="ui_095" formatted="false">"書信 · 寫一封信 (打字機與信封)"</string>
 <string name="ui_096" formatted="false">"留下新記憶"</string>
-<string name="ui_097" formatted="false">"功能"</string>
+<string name="ui_097" formatted="false">"目錄"</string>
 <string name="ui_098" formatted="false">"與記憶對話"</string>
 <string name="ui_099" formatted="false">"裝入信封 ›"</string>
 <string name="ui_100" formatted="false">"中"</string>
@@ -118,7 +118,7 @@
 <string name="ui_116" formatted="false">"繼續打字"</string>
 <string name="ui_117" formatted="false">"封入信封並儲存"</string>
 <string name="ui_118" formatted="false">"信件已封存到 "</string>
-<string name="ui_119" formatted="false">"Tap here to start typing your letter...\n輕點紙面開始打字，寫完點選右上角裝入信封。"</string>
+<string name="ui_119" formatted="false">"輕點紙面開始打字，寫完點選右上角裝入信封。"</string>
 <string name="ui_120" formatted="false">" 項記憶"</string>
 <string name="ui_121" formatted="false">"全部記憶"</string>
 <string name="ui_122" formatted="false">" · 進入模組"</string>
@@ -626,7 +626,7 @@
 <string name="ui_624" formatted="false">"請填寫歌名"</string>
 <string name="ui_625" formatted="false">"請填寫想要留下的歌詞"</string>
 <string name="ui_626" formatted="false">"已儲存音樂歌詞卡片"</string>
-<string name="ui_back_home">‹ 返回主頁</string><string name="ui_home">主頁</string><string name="welcome_description">歡迎來到記憶冊</string><string name="welcome_quote">「 時間會走遠，\n但被記住的瞬間會一直發光。 」</string><string name="welcome_enter">輕點螢幕直接進入 · TAP TO ENTER</string><string name="home_zoom_in">放大幕布</string>
+<string name="ui_back_home">‹ 展桌</string><string name="ui_home">展桌</string><string name="welcome_description">歡迎來到記憶冊</string><string name="welcome_quote">「 時間會走遠，\n但被記住的瞬間會一直發光。 」</string><string name="welcome_enter">輕點螢幕直接進入 · TAP TO ENTER</string><string name="home_zoom_in">放大幕布</string>
 <string name="home_zoom_out">縮小幕布</string>
 <string name="home_canvas_map">幕布位置小地圖，點按或拖動以移動視野</string>
 <string name="letter_fold">收起信紙，返回信封</string>

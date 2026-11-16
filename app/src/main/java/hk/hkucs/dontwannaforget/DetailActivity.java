@@ -3,10 +3,15 @@ package hk.hkucs.dontwannaforget;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Outline;
 import android.graphics.Typeface;
+import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.media.AudioAttributes;
 import android.media.AudioFormat;
 import android.media.AudioTrack;
@@ -17,8 +22,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewOutlineProvider;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -59,7 +68,8 @@ public class DetailActivity extends AppCompatActivity {
     private long synthStartMs = 0L;
     private int synthDurationSec = 30;
     private VoiceTapeView activeTapeView;
-    private TextView activePlayBtn, activeTimeLabel, activeSpeakerBtn;
+    private ImageView activePlayBtn, activeSpeakerBtn;
+    private TextView activeTimeLabel;
     private android.widget.SeekBar activeSeekBar;
     private final Handler handler = new Handler(Looper.getMainLooper());
 
@@ -290,6 +300,15 @@ public class DetailActivity extends AppCompatActivity {
                     0xFFA7A39B, AppFonts.regular());
             hint.setPadding(0, Cards.dp(this, 14), 0, 0);
             col.addView(hint);
+
+            String ticketMeta = (r.date != null ? r.date : "")
+                    + (r.sub != null && !r.sub.trim().isEmpty() ? ("  ·  " + r.sub.trim()) : "");
+            if (!ticketMeta.isEmpty()) {
+                TextView tvMeta = Cards.text(this, ticketMeta, 12f, 0xFFA8A39A, AppFonts.regular());
+                tvMeta.setLetterSpacing(0.06f);
+                tvMeta.setPadding(0, Cards.dp(this, 8), 0, 0);
+                col.addView(tvMeta);
+            }
         } else if (r.type == Record.MUSIC) {
             col.addView(Cards.musicCard(this, r, 300, false));
         } else if (r.type == Record.BOOK) {
@@ -526,7 +545,8 @@ public class DetailActivity extends AppCompatActivity {
         String musicMeta = (r.title != null ? r.title : "")
                 + (r.sub != null && !r.sub.trim().isEmpty() ? (" · " + r.sub.trim()) : "")
                 + "   ·   " + (r.date != null ? r.date : "");
-        TextView tvFooter = Cards.text(this, musicMeta, 12f, 0xFF8E8A82, AppFonts.regular());
+        TextView tvFooter = Cards.text(this, musicMeta, 12f, 0xFFA8A39A, AppFonts.regular());
+        tvFooter.setLetterSpacing(0.04f);
         tvFooter.setGravity(Gravity.CENTER);
         tvFooter.setPadding(0, Cards.dp(this, 18), 0, Cards.dp(this, 8));
         col.addView(tvFooter);
@@ -625,12 +645,21 @@ public class DetailActivity extends AppCompatActivity {
             col.addView(signature,signatureLp);
         }
 
-        // 3. 大幅场景照片 (自适应竖图或横图比例, 仿 voiceexp1.jpg 竖图 / voiceexp2.jpg 横图)
+        // 3. 大幅场景照片 (自适应竖图或横图比例, 微圆角裁切与下方液态玻璃播放条呼应)
         ImageView photoView = new ImageView(this);
         photoView.setAdjustViewBounds(true);
         photoView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         photoView.setMaxHeight(Cards.dp(this, 470));
         photoView.setBackgroundColor(0xFF1A1C1B);
+        photoView.setClipToOutline(true);
+        photoView.setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                if (view.getWidth() > 0 && view.getHeight() > 0) {
+                    outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), Cards.dp(DetailActivity.this, 14));
+                }
+            }
+        });
 
         Media coverMedia = MediaIndex.first(r.id, Media.COVER);
         if (coverMedia != null) {
@@ -647,42 +676,83 @@ public class DetailActivity extends AppCompatActivity {
             photoView.setOnClickListener(v -> pickImage(Media.COVER));
         }
         LinearLayout.LayoutParams photoLp = new LinearLayout.LayoutParams(-1, -2);
-        photoLp.bottomMargin = Cards.dp(this, 18);
+        photoLp.bottomMargin = Cards.dp(this, 16);
         col.addView(photoView, photoLp);
 
-        // 4. 胶囊形音频播放器控制条 (仿 voiceexp1.jpg / voiceexp2.jpg 的圆角胶囊条，适配暗黑背景 #222524)
+        // 4. 透明液态玻璃胶囊音频播放条: 等高矢量图标对齐 + Tabular 时间 + 细轨进度滑块
         LinearLayout pillBar = new LinearLayout(this);
         pillBar.setOrientation(LinearLayout.HORIZONTAL);
         pillBar.setGravity(Gravity.CENTER_VERTICAL);
-        int pillPadH = Cards.dp(this, 18);
-        pillBar.setPadding(pillPadH, 0, pillPadH, 0);
+        pillBar.setPadding(Cards.dp(this, 10), 0, Cards.dp(this, 8), 0);
+        pillBar.setElevation(Cards.dp(this, 6));
 
-        GradientDrawable pillBg = new GradientDrawable();
-        pillBg.setColor(0xFF222524);
-        pillBg.setCornerRadius(Cards.dp(this, 28));
-        pillBg.setStroke(Cards.dp(this, 1), 0xFF323635);
+        GradientDrawable pillBg = new GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                new int[]{0xD0262A29, 0xB81A1D1C}
+        );
+        pillBg.setCornerRadius(Cards.dp(this, 24));
+        pillBg.setStroke(Cards.dp(this, 1), 0x2EFFFFFF);
         pillBar.setBackground(pillBg);
 
-        // 播放/暂停按钮
-        activePlayBtn = Cards.text(this, "▶", 15f, 0xFFF4F2EE, AppFonts.regular());
-        activePlayBtn.setGravity(Gravity.CENTER);
-        activePlayBtn.setPadding(Cards.dp(this, 4), Cards.dp(this, 8), Cards.dp(this, 12), Cards.dp(this, 8));
+        android.util.TypedValue borderlessRipple = new android.util.TypedValue();
+        getTheme().resolveAttribute(android.R.attr.selectableItemBackgroundBorderless, borderlessRipple, true);
+
+        // 播放/暂停矢量按钮
+        activePlayBtn = new ImageView(this);
+        activePlayBtn.setImageDrawable(new AgentLineIcon("play", 0xFFF4F2EE));
+        activePlayBtn.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        int iconPad = Cards.dp(this, 7);
+        activePlayBtn.setPadding(iconPad, iconPad, iconPad, iconPad);
+        activePlayBtn.setBackgroundResource(borderlessRipple.resourceId);
         activePlayBtn.setOnClickListener(v -> toggleVoicePlayback(r));
-        pillBar.addView(activePlayBtn);
+        pillBar.addView(activePlayBtn, new LinearLayout.LayoutParams(Cards.dp(this, 34), Cards.dp(this, 34)));
 
-        // 时间显示 ("0:00 / 0:42")
+        // 等宽数字时间显示 ("0:00 / 0:20")
         int totalSec = parseDurationSeconds(r);
-        activeTimeLabel = Cards.text(this, "0:00 / " + formatShortTime(totalSec), 13f, 0xFFE8E4DC, AppFonts.regular());
-        activeTimeLabel.setPadding(0, 0, Cards.dp(this, 10), 0);
-        pillBar.addView(activeTimeLabel);
+        activeTimeLabel = Cards.text(this, "0:00 / " + formatShortTime(totalSec), 12.5f, 0xFFE6E2DA, AppFonts.regular());
+        activeTimeLabel.setIncludeFontPadding(false);
+        activeTimeLabel.setSingleLine(true);
+        activeTimeLabel.setFontFeatureSettings("tnum");
+        LinearLayout.LayoutParams timeLp = new LinearLayout.LayoutParams(-2, -2);
+        timeLp.leftMargin = Cards.dp(this, 2);
+        timeLp.rightMargin = Cards.dp(this, 6);
+        pillBar.addView(activeTimeLabel, timeLp);
 
-        // 进度条 SeekBar
+        // 细轨自定义进度滑块 (去掉原生 16dp 过宽内边距与过大滑块球)
         activeSeekBar = new android.widget.SeekBar(this);
         activeSeekBar.setMax(1000);
         activeSeekBar.setProgress(0);
-        activeSeekBar.setProgressTintList(android.content.res.ColorStateList.valueOf(0xFFF4F2EE));
-        activeSeekBar.setProgressBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFF555957));
-        activeSeekBar.setThumbTintList(android.content.res.ColorStateList.valueOf(0xFFF4F2EE));
+        activeSeekBar.setSplitTrack(false);
+        activeSeekBar.setPadding(Cards.dp(this, 8), 0, Cards.dp(this, 8), 0);
+
+        GradientDrawable trackBg = new GradientDrawable();
+        trackBg.setColor(0x38FFFFFF);
+        trackBg.setCornerRadius(Cards.dp(this, 2));
+        trackBg.setSize(-1, Cards.dp(this, 3));
+
+        GradientDrawable trackFill = new GradientDrawable();
+        trackFill.setColor(0xFFF4F2EE);
+        trackFill.setCornerRadius(Cards.dp(this, 2));
+        trackFill.setSize(-1, Cards.dp(this, 3));
+        ClipDrawable progressClip = new ClipDrawable(trackFill, Gravity.START, ClipDrawable.HORIZONTAL);
+
+        LayerDrawable seekLayers = new LayerDrawable(new android.graphics.drawable.Drawable[]{trackBg, progressClip});
+        seekLayers.setId(0, android.R.id.background);
+        seekLayers.setId(1, android.R.id.progress);
+        seekLayers.setLayerGravity(0, Gravity.CENTER_VERTICAL | Gravity.FILL_HORIZONTAL);
+        seekLayers.setLayerGravity(1, Gravity.CENTER_VERTICAL | Gravity.FILL_HORIZONTAL);
+        seekLayers.setLayerHeight(0, Cards.dp(this, 3));
+        seekLayers.setLayerHeight(1, Cards.dp(this, 3));
+        activeSeekBar.setProgressDrawable(seekLayers);
+
+        GradientDrawable thumb = new GradientDrawable();
+        thumb.setShape(GradientDrawable.OVAL);
+        thumb.setColor(0xFFF7F5F0);
+        int thumbSz = Cards.dp(this, 10);
+        thumb.setSize(thumbSz, thumbSz);
+        activeSeekBar.setThumb(thumb);
+        activeSeekBar.setThumbOffset(thumbSz / 2);
+
         activeSeekBar.setOnSeekBarChangeListener(new android.widget.SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(android.widget.SeekBar seekBar, int progress, boolean fromUser) {
@@ -706,25 +776,35 @@ public class DetailActivity extends AppCompatActivity {
             @Override public void onStartTrackingTouch(android.widget.SeekBar seekBar) {}
             @Override public void onStopTrackingTouch(android.widget.SeekBar seekBar) {}
         });
-        LinearLayout.LayoutParams sblp = new LinearLayout.LayoutParams(0, -2, 1f);
+        LinearLayout.LayoutParams sblp = new LinearLayout.LayoutParams(0, Cards.dp(this, 30), 1f);
         pillBar.addView(activeSeekBar, sblp);
 
-        // 扬声器/静音图标
+        // 扬声器/静音矢量图标
         isVoiceMuted = false;
-        activeSpeakerBtn = Cards.text(this, "🔊", 14f, 0xFFE8E4DC, AppFonts.regular());
-        activeSpeakerBtn.setPadding(Cards.dp(this, 8), Cards.dp(this, 8), Cards.dp(this, 8), Cards.dp(this, 8));
+        activeSpeakerBtn = new ImageView(this);
+        activeSpeakerBtn.setImageDrawable(new AgentLineIcon("volume", 0xFFE6E2DA));
+        activeSpeakerBtn.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        int smPad = Cards.dp(this, 6);
+        activeSpeakerBtn.setPadding(smPad, smPad, smPad, smPad);
+        activeSpeakerBtn.setBackgroundResource(borderlessRipple.resourceId);
         activeSpeakerBtn.setOnClickListener(v -> toggleVoiceMute());
-        pillBar.addView(activeSpeakerBtn);
+        LinearLayout.LayoutParams spkLp = new LinearLayout.LayoutParams(Cards.dp(this, 32), Cards.dp(this, 32));
+        spkLp.leftMargin = Cards.dp(this, 4);
+        pillBar.addView(activeSpeakerBtn, spkLp);
 
-        // 三点更多菜单 (⋮)
-        TextView moreBtn = Cards.text(this, "⋮", 18f, 0xFFE8E4DC,
-                Typeface.create(AppFonts.regular(), Typeface.BOLD));
-        moreBtn.setPadding(Cards.dp(this, 8), Cards.dp(this, 6), Cards.dp(this, 4), Cards.dp(this, 6));
+        // 三点更多菜单矢量图标 (⋮)
+        ImageView moreBtn = new ImageView(this);
+        moreBtn.setImageDrawable(new AgentLineIcon("more", 0xFFE6E2DA));
+        moreBtn.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        moreBtn.setPadding(smPad, smPad, smPad, smPad);
+        moreBtn.setBackgroundResource(borderlessRipple.resourceId);
         moreBtn.setOnClickListener(v -> showVoiceMoreMenu(r));
-        pillBar.addView(moreBtn);
+        LinearLayout.LayoutParams moreLp = new LinearLayout.LayoutParams(Cards.dp(this, 30), Cards.dp(this, 32));
+        moreLp.leftMargin = Cards.dp(this, 2);
+        pillBar.addView(moreBtn, moreLp);
 
-        LinearLayout.LayoutParams pillLp = new LinearLayout.LayoutParams(-1, Cards.dp(this, 54));
-        pillLp.bottomMargin = Cards.dp(this, 24);
+        LinearLayout.LayoutParams pillLp = new LinearLayout.LayoutParams(-1, Cards.dp(this, 46));
+        pillLp.bottomMargin = Cards.dp(this, 22);
         col.addView(pillBar, pillLp);
 
         // The location appears once above the photograph; the story follows the player.
@@ -741,7 +821,8 @@ public class DetailActivity extends AppCompatActivity {
         String dateFmt = (r.date != null ? r.date.replace('.', '-') : "");
         TextView tvCredit = Cards.text(this,
                 "Recorded on " + dateFmt + "  ·  " + srcTag,
-                13.5f, 0xFF8E8A82, AppFonts.regular());
+                13f, 0xFFA8A39A, AppFonts.regular());
+        tvCredit.setLetterSpacing(0.02f);
         tvCredit.setLineSpacing(0f, 1.35f);
         col.addView(tvCredit, new LinearLayout.LayoutParams(-1, -2));
     }
@@ -756,24 +837,91 @@ public class DetailActivity extends AppCompatActivity {
             try { synthTrack.setVolume(vol); } catch (Exception ignored) {}
         }
         if (activeSpeakerBtn != null) {
-            activeSpeakerBtn.setText(isVoiceMuted ? "🔇" : "🔊");
+            activeSpeakerBtn.setImageDrawable(new AgentLineIcon(
+                    isVoiceMuted ? "mute" : "volume",
+                    isVoiceMuted ? 0x7CE6E2DA : 0xFFE6E2DA));
         }
     }
 
     private void showVoiceMoreMenu(Record r) {
-        String[] items = {L10n.s(R.string.ui_075), L10n.s(R.string.ui_076), L10n.s(R.string.ui_077)};
-        new androidx.appcompat.app.AlertDialog.Builder(this)
-                .setTitle(r.title)
-                .setItems(items, (d, which) -> {
-                    if (which == 0) {
-                        audioPicker.launch(new String[]{"audio/*", "application/ogg", "*/*"});
-                    } else if (which == 1) {
-                        pickImage(Media.COVER);
-                    } else if (which == 2) {
-                        startActivity(new Intent(this, VoiceEditActivity.class));
-                    }
-                })
-                .show();
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        FrostedNavigation panel = new FrostedNavigation(this, null);
+        panel.setOrientation(LinearLayout.VERTICAL);
+        panel.setCornerRadiusDp(22);
+        panel.setGlassAppearance(0x661D2022, 0x3DFFFFFF, 215);
+        panel.enableRoundedShadow(16);
+        View backdrop = findViewById(android.R.id.content);
+        if (backdrop != null) panel.setBackdrop(backdrop, null);
+
+        int padH = Cards.dp(this, 16);
+        panel.setPadding(padH, Cards.dp(this, 14), padH, Cards.dp(this, 10));
+
+        TextView title = Cards.text(this, r.title != null ? r.title : "", 13.5f, 0xFFD4D0C8, AppFonts.regular());
+        title.setIncludeFontPadding(false);
+        title.setMaxLines(2);
+        title.setEllipsize(TextUtils.TruncateAt.END);
+        title.setPadding(Cards.dp(this, 4), 0, Cards.dp(this, 4), Cards.dp(this, 10));
+        panel.addView(title);
+
+        View divider = new View(this);
+        divider.setBackgroundColor(0x1EFFFFFF);
+        LinearLayout.LayoutParams divLp = new LinearLayout.LayoutParams(-1, Math.max(1, Cards.dp(this, 1) / 2));
+        divLp.bottomMargin = Cards.dp(this, 6);
+        panel.addView(divider, divLp);
+
+        String[] rawLabels = {L10n.s(R.string.ui_075), L10n.s(R.string.ui_076), L10n.s(R.string.ui_077)};
+        String[] iconKinds = {"audio_file", "photo_frame", "mic"};
+        android.util.TypedValue selectable = new android.util.TypedValue();
+        getTheme().resolveAttribute(android.R.attr.selectableItemBackground, selectable, true);
+
+        for (int i = 0; i < rawLabels.length; i++) {
+            final int which = i;
+            String cleanLabel = rawLabels[i].replaceFirst("^[\\p{So}\\uFE0F\\s]+", "").trim();
+
+            LinearLayout row = new LinearLayout(this);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setGravity(Gravity.CENTER_VERTICAL);
+            row.setMinimumHeight(Cards.dp(this, 46));
+            row.setPadding(Cards.dp(this, 8), Cards.dp(this, 8), Cards.dp(this, 8), Cards.dp(this, 8));
+            row.setBackgroundResource(selectable.resourceId);
+
+            ImageView icon = new ImageView(this);
+            icon.setImageDrawable(new AgentLineIcon(iconKinds[i], 0xFFE6E2DA));
+            icon.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            row.addView(icon, new LinearLayout.LayoutParams(Cards.dp(this, 20), Cards.dp(this, 20)));
+
+            TextView tv = Cards.text(this, cleanLabel, 14.5f, 0xFFF4F2EE, AppFonts.regular());
+            tv.setIncludeFontPadding(false);
+            LinearLayout.LayoutParams tvLp = new LinearLayout.LayoutParams(-1, -2);
+            tvLp.leftMargin = Cards.dp(this, 13);
+            row.addView(tv, tvLp);
+
+            row.setOnClickListener(v -> {
+                dialog.dismiss();
+                if (which == 0) {
+                    audioPicker.launch(new String[]{"audio/*", "application/ogg", "*/*"});
+                } else if (which == 1) {
+                    pickImage(Media.COVER);
+                } else {
+                    startActivity(new Intent(this, VoiceEditActivity.class));
+                }
+            });
+            panel.addView(row, new LinearLayout.LayoutParams(-1, -2));
+        }
+
+        int screenW = getResources().getDisplayMetrics().widthPixels;
+        int dialogW = Math.min(screenW - Cards.dp(this, 56), Cards.dp(this, 316));
+        dialog.setContentView(panel, new android.view.ViewGroup.LayoutParams(dialogW, android.view.ViewGroup.LayoutParams.WRAP_CONTENT));
+        Window w = dialog.getWindow();
+        if (w != null) {
+            w.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            w.setLayout(dialogW, WindowManager.LayoutParams.WRAP_CONTENT);
+            w.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            w.setDimAmount(0.45f);
+        }
+        dialog.show();
     }
 
     private void toggleVoicePlayback(Record r) {
@@ -795,7 +943,7 @@ public class DetailActivity extends AppCompatActivity {
                     voicePlayer.start();
                     isVoicePlaying = true;
                     if (activeTapeView != null) activeTapeView.setPlaying(true);
-                    if (activePlayBtn != null) activePlayBtn.setText("❚❚");
+                    if (activePlayBtn != null) activePlayBtn.setImageDrawable(new AgentLineIcon("pause", 0xFFF4F2EE));
                     handler.removeCallbacks(voiceTicker);
                     handler.post(voiceTicker);
                     return;
@@ -815,7 +963,7 @@ public class DetailActivity extends AppCompatActivity {
         synthStartMs = System.currentTimeMillis();
         isVoicePlaying = true;
         if (activeTapeView != null) activeTapeView.setPlaying(true);
-        if (activePlayBtn != null) activePlayBtn.setText("❚❚");
+        if (activePlayBtn != null) activePlayBtn.setImageDrawable(new AgentLineIcon("pause", 0xFFF4F2EE));
         handler.removeCallbacks(voiceTicker);
         handler.post(voiceTicker);
 
@@ -890,7 +1038,7 @@ public class DetailActivity extends AppCompatActivity {
             activeSeekBar.setProgress(0);
         }
         if (activePlayBtn != null) {
-            activePlayBtn.setText("▶");
+            activePlayBtn.setImageDrawable(new AgentLineIcon("play", 0xFFF4F2EE));
         }
     }
 
@@ -937,8 +1085,10 @@ public class DetailActivity extends AppCompatActivity {
         TextView place = Cards.text(this, r.title, 19, ink, Typeface.create(AppFonts.regular(), Typeface.BOLD));
         place.setPadding(0, Cards.dp(this, 12), 0, Cards.dp(this, 2));
         col.addView(place);
-        TextView meta = Cards.text(this, r.sub + "  ·  " + r.date + L10n.s(R.string.ui_080),
-                12, sub, AppFonts.regular());
+        String fpSub = (r.sub != null && !r.sub.trim().isEmpty()) ? (r.sub.trim() + "  ·  ") : "";
+        TextView meta = Cards.text(this, fpSub + r.date + L10n.s(R.string.ui_080),
+                12, 0xFFB2ADA4, AppFonts.regular());
+        meta.setLetterSpacing(0.03f);
         meta.setPadding(0, 0, 0, Cards.dp(this, 18));
         col.addView(meta);
 

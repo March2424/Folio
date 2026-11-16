@@ -163,33 +163,17 @@ public class VoiceEditActivity extends AppCompatActivity {
 
         LinearLayout col = new LinearLayout(this);
         col.setOrientation(LinearLayout.VERTICAL);
-        int pad = Cards.dp(this, 22);
-        col.setPadding(pad, Cards.dp(this, 16), pad, Cards.dp(this, 160));
+        int pad = Cards.dp(this, 20);
+        col.setPadding(pad, Cards.dp(this, 2), pad, Cards.dp(this, 160));
         sv.addView(col, new FrameLayout.LayoutParams(-1, -2));
         root.addView(sv, new FrameLayout.LayoutParams(-1, -1));
 
         // 1. 顶部导航栏
-        LinearLayout top = new LinearLayout(this);
-        top.setGravity(Gravity.CENTER_VERTICAL);
-        top.setPadding(0, 0, 0, Cards.dp(this, 14));
-        ImageView cancel=new ImageView(this);
-        cancel.setImageDrawable(new AgentLineIcon("close",0xFFE8E4DC));
-        cancel.setPadding(Cards.dp(this,12),Cards.dp(this,12),Cards.dp(this,12),Cards.dp(this,12));
-        cancel.setContentDescription(L10n.s(R.string.ui_060));
-        cancel.setOnClickListener(v -> finish());
-        HomeNavigation.bind(cancel);
-        top.addView(cancel,new LinearLayout.LayoutParams(Cards.dp(this,44),Cards.dp(this,44)));
-
-        TextView head = Cards.text(this, L10n.s(R.string.ui_180), 15, 0xFFF4F2EE,
-                Typeface.create(AppFonts.regular(), Typeface.BOLD));
-        head.setGravity(Gravity.CENTER);
-        top.addView(head, new LinearLayout.LayoutParams(0, -2, 1f));
-
-        tvDate = Cards.text(this, dateStr.replace('.', '-'), 12.5f, 0xFFA5A19A, AppFonts.regular());
-        tvDate.setOnClickListener(v -> pickDate());
-        top.addView(tvDate);
-        col.addView(top);
-        FloatingHeader.pin(top);
+        EditorUi.TopBar bar = EditorUi.topBar(this, L10n.s(R.string.ui_180), dateStr, false,
+                this::finish, this::pickDate);
+        tvDate = bar.pill;
+        col.addView(bar.root);
+        FloatingHeader.pin(bar.root);
 
         // 2. 场景照片预览框 (仿 voiceexp1.jpg / voiceexp2.jpg 顶部大图)
         buildCoverBox(col);

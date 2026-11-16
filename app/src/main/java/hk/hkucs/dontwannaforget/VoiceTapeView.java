@@ -250,25 +250,29 @@ public class VoiceTapeView extends View {
 
         cv.restore();
 
-        // 2. 图片下方: 浅灰日期 + 白色粗体标题 (还原 IMG_3860.jpg 底部排版)
+        // 2. 图片下方: 金色细线 + 浅灰日期 + 白色粗体标题 (与全站画廊题签统一)
         float dateY = imgH + (compact ? 18f : 24f) * d;
+        float ruleW = (compact ? 10f : 13f) * d;
+        float ruleGap = (compact ? 5f : 6.5f) * d;
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(0xFF7D807F);
-        paint.setTypeface(AppFonts.regular());
-        paint.setTextSize((compact ? 10f : 12f) * d);
-        paint.setTextAlign(Paint.Align.LEFT);
-        cv.drawText(dateText, 2f * d, dateY, paint);
+        paint.setColor(0x77D8C690);
+        cv.drawRect(2f * d, dateY - (compact ? 4.0f : 4.6f) * d,
+                2f * d + ruleW, dateY - (compact ? 2.8f : 3.4f) * d, paint);
 
-        float titleY = dateY + (compact ? 19f : 26f) * d;
-        paint.setColor(0xFFF4F2EE);
+        paint.setColor(0xFFA8A296);
+        paint.setTypeface(AppFonts.regular());
+        paint.setTextSize((compact ? 9.5f : 10.5f) * d);
+        paint.setTextAlign(Paint.Align.LEFT);
+        cv.drawText(dateText, 2f * d + ruleW + ruleGap, dateY, paint);
+
+        float titleY = dateY + (compact ? 18f : 24f) * d;
+        paint.setColor(0xFFF2EFE9);
         paint.setTypeface(Typeface.create(AppFonts.regular(), Typeface.BOLD));
-        paint.setTextSize((compact ? 13.5f : 17f) * d);
-        String maxTitle = title;
-        int limit = compact ? 10 : 14;
-        if (maxTitle.length() > limit) {
-            maxTitle = maxTitle.substring(0, limit - 1) + "…";
-        }
-        cv.drawText(maxTitle, 2f * d, titleY, paint);
+        paint.setTextSize((compact ? 13.5f : 15.5f) * d);
+        String fittedTitle = android.text.TextUtils.ellipsize(
+                title, new android.text.TextPaint(paint), Math.max(20f * d, w - 4f * d),
+                android.text.TextUtils.TruncateAt.END).toString();
+        cv.drawText(fittedTitle, 2f * d, titleY, paint);
     }
 
     /**

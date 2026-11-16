@@ -41,7 +41,7 @@
 <string name="ui_039" formatted="false">"Could not save. Check your photos and retry."</string>
 <string name="ui_040" formatted="false">"Travel note saved"</string>
 <string name="ui_041" formatted="false">"Moments worth keeping,\nresting quietly here."</string>
-<string name="ui_042" formatted="false">"Along the way"</string>
+<string name="ui_042" formatted="false">"Trails"</string>
 <string name="ui_043" formatted="false">"HH:mm|Text"</string>
 <string name="ui_044" formatted="false">"Keep the wind and light along the way."</string>
 <string name="ui_045" formatted="false">"Tap to write..."</string>
@@ -60,9 +60,9 @@
 <string name="ui_058" formatted="false">"Imported recording"</string>
 <string name="ui_059" formatted="false">"Recording updated"</string>
 <string name="ui_060" formatted="false">"‹ Back"</string>
-<string name="ui_061" formatted="false">"+ Scan / Upload  "</string>
+<string name="ui_061" formatted="false">"+ Ticket  "</string>
 <string name="ui_062" formatted="false">"✎ Edit note &amp; ticket"</string>
-<string name="ui_063" formatted="false">"+ Change cover"</string>
+<string name="ui_063" formatted="false">"+ Cover"</string>
 <string name="ui_064" formatted="false">"Tap to flip: note / poster ⇄ ticket"</string>
 <string name="ui_065" formatted="false">"Original ticket (tap to enlarge)"</string>
 <string name="ui_066" formatted="false">"Original photo (tap to enlarge)"</string>
@@ -70,8 +70,8 @@
 <string name="ui_068" formatted="false">"Edit melody &amp; card style"</string>
 <string name="ui_069" formatted="false">"Listening notes / Mood"</string>
 <string name="ui_070" formatted="false">"View original cover / mood photo ›"</string>
-<string name="ui_071" formatted="false">"+ Change recording"</string>
-<string name="ui_072" formatted="false">"+ Change photo"</string>
+<string name="ui_071" formatted="false">"+ Audio"</string>
+<string name="ui_072" formatted="false">"+ Photo"</string>
 <string name="ui_073" formatted="false">"“Some sounds are worth remembering.”"</string>
 <string name="ui_074" formatted="false">"Field recording"</string>
 <string name="ui_075" formatted="false">"📁 Import / replace audio"</string>
@@ -82,23 +82,23 @@
 <string name="ui_080" formatted="false">"  (Tap a page to edit text and photos)"</string>
 <string name="ui_081" formatted="false">"Travel page "</string>
 <string name="ui_082" formatted="false">"All"</string>
-<string name="ui_083" formatted="false">"Tickets"</string>
-<string name="ui_084" formatted="false">"Everyday sounds"</string>
-<string name="ui_085" formatted="false">"Reading notes"</string>
+<string name="ui_083" formatted="false">"Cinema"</string>
+<string name="ui_084" formatted="false">"Sounds"</string>
+<string name="ui_085" formatted="false">"Reading"</string>
 <string name="ui_086" formatted="false">"Melodies"</string>
-<string name="ui_087" formatted="false">"Write a letter"</string>
-<string name="ui_088" formatted="false">"Memory album"</string>
-<string name="ui_089" formatted="false">"Create"</string>
-<string name="ui_090" formatted="false">"Film ticket (note, poster &amp; scanned ticket)"</string>
-<string name="ui_091" formatted="false">"Everyday sounds (record or import audio)"</string>
-<string name="ui_092" formatted="false">"Reading notes (excerpts &amp; photos)"</string>
+<string name="ui_087" formatted="false">"Letters"</string>
+<string name="ui_088" formatted="false">"Archive"</string>
+<string name="ui_089" formatted="false">"Write"</string>
+<string name="ui_090" formatted="false">"Cinema (note, poster &amp; ticket)"</string>
+<string name="ui_091" formatted="false">"Sounds (record or import audio)"</string>
+<string name="ui_092" formatted="false">"Reading (excerpts &amp; photos)"</string>
 <string name="ui_093" formatted="false">"Melodies (lyrics card)"</string>
-<string name="ui_094" formatted="false">"Along the way (paper journal)"</string>
-<string name="ui_095" formatted="false">"Write a letter (typewriter &amp; envelope)"</string>
-<string name="ui_096" formatted="false">"Create a memory"</string>
-<string name="ui_097" formatted="false">"Explore"</string>
-<string name="ui_098" formatted="false">"Talk to memories"</string>
-<string name="ui_099" formatted="false">"Seal in envelope ›"</string>
+<string name="ui_094" formatted="false">"Trails (paper journal)"</string>
+<string name="ui_095" formatted="false">"Letters (typewriter &amp; envelope)"</string>
+<string name="ui_096" formatted="false">"New memory"</string>
+<string name="ui_097" formatted="false">"Index"</string>
+<string name="ui_098" formatted="false">"Memory Chat"</string>
+<string name="ui_099" formatted="false">"Envelope ›"</string>
 <string name="ui_100" formatted="false">"Medium"</string>
 <string name="ui_101" formatted="false">"Light"</string>
 <string name="ui_102" formatted="false">"Low"</string>
@@ -122,9 +122,9 @@
 <string name="ui_120" formatted="false">" memories"</string>
 <string name="ui_121" formatted="false">"All memories"</string>
 <string name="ui_122" formatted="false">" · Open module"</string>
-<string name="ui_123" formatted="false">"Talk to memories  ↗"</string>
+<string name="ui_123" formatted="false">"Memory Chat  ↗"</string>
 <string name="ui_124" formatted="false">"No memories yet. Open All memories to begin."</string>
-<string name="ui_125" formatted="false">"Talk to memories"</string>
+<string name="ui_125" formatted="false">"Memory Chat"</string>
 <string name="ui_126" formatted="false">"Cover selected (tap to change)"</string>
 <string name="ui_127" formatted="false">"Tap to change photo"</string>
 <string name="ui_128" formatted="false">"Up to 9 photos"</string>
@@ -133,7 +133,7 @@
 <string name="ui_131" formatted="false">"Cancel"</string>
 <string name="ui_132" formatted="false">"Write a reading note"</string>
 <string name="ui_133" formatted="false">"Keep a melody"</string>
-<string name="ui_134" formatted="false">"Record a moment along the way"</string>
+<string name="ui_134" formatted="false">"New trail journal"</string>
 <string name="ui_135" formatted="false">"+ Add book cover (optional)"</string>
 <string name="ui_136" formatted="false">"+ Add song / album cover"</string>
 <string name="ui_137" formatted="false">"Book title"</string>
@@ -209,14 +209,14 @@
 <string name="ui_207" formatted="false">"Could not save. Check the audio file and retry."</string>
 <string name="ui_208" formatted="false">"Sound saved to album"</string>
 <string name="ui_209" formatted="false">"Chat"</string>
-<string name="ui_210" formatted="false">"Materials"</string>
+<string name="ui_210" formatted="false">"Notes"</string>
 <string name="ui_211" formatted="false">"Backing up memories and attachments…"</string>
 <string name="ui_212" formatted="false">"Cannot write backup"</string>
 <string name="ui_213" formatted="false">"Backup saved. Model keys are excluded."</string>
 <string name="ui_214" formatted="false">"Checking backup…"</string>
 <string name="ui_215" formatted="false">"Cannot open backup"</string>
 <string name="ui_216" formatted="false">"Model"</string>
-<string name="ui_217" formatted="false">"About me"</string>
+<string name="ui_217" formatted="false">"Profile"</string>
 <string name="ui_218" formatted="false">"Reflections"</string>
 <string name="ui_219" formatted="false">"Manage"</string>
 <string name="ui_220" formatted="false">"Back to album"</string>
@@ -235,7 +235,7 @@
 <string name="ui_233" formatted="false">"Leave some new words"</string>
 <string name="ui_234" formatted="false">"Write a text"</string>
 <string name="ui_235" formatted="false">"Write about myself"</string>
-<string name="ui_236" formatted="false">"Say something. Let memory answer…"</string>
+<string name="ui_236" formatted="false">"Ask your memories…"</string>
 <string name="ui_237" formatted="false">"Message input"</string>
 <string name="ui_238" formatted="false">"Send"</string>
 <string name="ui_239" formatted="false">"Send message"</string>
@@ -626,7 +626,7 @@
 <string name="ui_624" formatted="false">"Enter a song title."</string>
 <string name="ui_625" formatted="false">"Enter the lyrics you want to keep."</string>
 <string name="ui_626" formatted="false">"Lyrics card saved"</string>
-<string name="ui_back_home">‹ Home</string><string name="ui_home">Home</string><string name="welcome_description">Welcome to your memory</string><string name="welcome_quote">Time drifts away, but the moments we remember keep shining.</string><string name="welcome_enter">TAP TO ENTER</string><string name="home_zoom_in">Zoom in</string>
+<string name="ui_back_home">‹ Desk</string><string name="ui_home">Desk</string><string name="welcome_description">Welcome to your memory</string><string name="welcome_quote">Time drifts away, but the moments we remember keep shining.</string><string name="welcome_enter">TAP TO ENTER</string><string name="home_zoom_in">Zoom in</string>
 <string name="home_zoom_out">Zoom out</string>
 <string name="home_canvas_map">Canvas map. Tap or drag to move the viewport.</string>
 <string name="letter_fold">Fold letter back into envelope</string>
